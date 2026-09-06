@@ -1,7 +1,4 @@
-import {
-  useGetUserMutation,
-  useLazyGoogleCallbackQuery,
-} from "@entities/user";
+import { useGetUserMutation, useLazyGoogleCallbackQuery } from "@entities/user";
 import { useHandleAuth } from "@features/useHandleAuth";
 import { getGoogleAuthErrorKey } from "@features/google-auth/getGoogleAuthErrorKey";
 import { useAppSelector } from "@shared/hooks";
@@ -42,8 +39,7 @@ export const useGoogleAuthCallback = () => {
     const state = params.get(queryParamKeys.state);
     const googleAuth = params.get(queryParamKeys.googleAuth);
 
-    const hasOAuthParams =
-      !!error || (!!code && !!state) || googleAuth === "1";
+    const hasOAuthParams = !!error || (!!code && !!state) || googleAuth === "1";
 
     if (!hasOAuthParams) {
       navigate(ENUM_PATHS.LOGIN, { replace: true });

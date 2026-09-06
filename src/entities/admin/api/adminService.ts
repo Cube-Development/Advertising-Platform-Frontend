@@ -11,13 +11,16 @@ import {
   ADMIN_ACCOUNTING_TYPE,
   ADMIN_COMPLAINT_STATUS,
   ADMIN_REVIEW_STATUS,
+  ExecutorType,
 } from "../config";
+import { buildManageProjectsBody } from "../lib";
 import {
   IAdminAccounting,
   IAdminAccountingDepositAccept,
   IAdminComplaintInfoData,
   IAdminComplaints,
   IAdminReviews,
+  IAdminOrdersPayoutReq,
   ICommonObserveReq,
   ICommonObserveResponse,
 } from "../types";
@@ -72,6 +75,57 @@ export interface adminSwapChannelOwnerReq {
   channel_id: string;
   owner_email: string;
   new_owner_email: string;
+}
+
+export interface adminUpdateOrderReq {
+  order_ident: string;
+  amount?: number;
+  executor?: string;
+  channel_id?: string;
+}
+
+export interface adminPublishOrderReq {
+  order_id: string;
+  url: string;
+}
+
+export interface adminCompleteProjectReq {
+  project_id: string;
+}
+
+export interface IAdminManageProjectOrder {
+  order_id: string;
+  url: string;
+  order_date: string | { date_from: string; date_to: string };
+  order_time: {
+    time_from: string;
+    time_to: string;
+  };
+  order_completed_count: number;
+  order_total_count: number;
+  price: {
+    without_vat: number;
+    with_vat: number;
+    blogger_commission: number;
+    catalog_commission: number;
+  };
+  status: number;
+}
+
+export interface IAdminManageProjectsReq {
+  page: number;
+  elements_on_page: number;
+  status: number[];
+  project_id?: string;
+  url?: string;
+  executor_type?: ExecutorType;
+}
+
+export interface IAdminManageProjects {
+  page: number;
+  elements: number;
+  orders: IAdminManageProjectOrder[];
+  isLast?: boolean;
 }
 
 export const adminAPI = authApi.injectEndpoints({
@@ -339,6 +393,81 @@ export const adminAPI = authApi.injectEndpoints({
         params,
       }),
     }),
+    adminUpdateOrder: build.mutation<{ success: boolean }, adminUpdateOrderReq>(
+      {
+        query: (body) => ({
+          url: `/adv-admin/order/update`,
+          method: "POST",
+          body,
+        }),
+      },
+    ),
+    adminPublishOrder: build.mutation<
+      { success: boolean },
+      adminPublishOrderReq
+    >({
+      query: (body) => ({
+        url: `/adv-admin/order/publish`,
+        method: "POST",
+        body,
+      }),
+    }),
+    adminCompleteProject: build.mutation<
+      { success: boolean },
+      adminCompleteProjectReq
+    >({
+      query: (params) => ({
+        url: `/adv-admin/project/complete`,
+        method: "POST",
+        params,
+      }),
+    }),
+    getAdminManageProjects: build.query<
+      IAdminManageProjects,
+      IAdminManageProjectsReq
+    >({
+      query: (body) => ({
+        url: `/manage/projects`,
+        method: "POST",
+        body: buildManageProjectsBody(body),
+      }),
+      transformResponse: (response: IAdminManageProjects, _meta, arg) => {
+        const pageSize =
+          arg?.elements_on_page ?? INTERSECTION_ELEMENTS.ADMIN_MANAGE_PROJECTS;
+        const batchLength = response?.orders?.length ?? 0;
+        const accumulated = batchLength + (response?.page - 1) * pageSize;
+
+        return {
+          ...response,
+          isLast:
+            batchLength < pageSize || accumulated >= (response?.elements ?? 0),
+        };
+      },
+      serializeQueryArgs: ({ endpointName, queryArgs }) => {
+        const { page: _page, ...filters } = queryArgs;
+        return `${endpointName}-${JSON.stringify(filters)}`;
+      },
+      merge: (currentCache, newItems, arg) => {
+        if (arg.arg.page === 1) return newItems;
+
+        const getKey = (order: IAdminManageProjectOrder) =>
+          order.order_id ||
+          `${order.url}|${JSON.stringify(order.order_date)}|${order.order_time.time_from}|${order.order_time.time_to}|${order.status}`;
+
+        const map = new Map(
+          currentCache?.orders?.map((order) => [getKey(order), order]),
+        );
+        newItems.orders?.forEach((order) => map.set(getKey(order), order));
+
+        return {
+          ...newItems,
+          orders: Array.from(map.values()),
+        };
+      },
+      forceRefetch({ currentArg, previousArg }) {
+        return currentArg !== previousArg;
+      },
+    }),
     adminDeleteOrganization: build.mutation<
       { success: boolean },
       { email: string }
@@ -366,6 +495,15 @@ export const adminAPI = authApi.injectEndpoints({
         },
       }),
     }),
+    getAdminOrdersPayout: build.query<Blob, IAdminOrdersPayoutReq>({
+      query: ({ date_from, date_to }) => ({
+        url: `/adv-admin/orders/admin-payout`,
+        method: "GET",
+        params: { date_from, date_to },
+        responseHandler: (response) => response.blob(),
+        cache: "no-cache",
+      }),
+    }),
   }),
 });
 
@@ -386,6 +524,11 @@ export const {
   useAdminUpdateOrderDateMutation,
   useAdminSendMailingMutation,
   useAdminSwapChannelOwnerMutation,
+  useAdminUpdateOrderMutation,
+  useAdminPublishOrderMutation,
+  useAdminCompleteProjectMutation,
+  useGetAdminManageProjectsQuery,
   useAdminDeleteOrganizationMutation,
   useGetCommonObserveQuery,
+  useLazyGetAdminOrdersPayoutQuery,
 } = adminAPI;

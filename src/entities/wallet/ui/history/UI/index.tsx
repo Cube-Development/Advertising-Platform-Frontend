@@ -1,4 +1,5 @@
 import { IWalletHistory } from "@entities/wallet";
+import { OfdCheckLink } from "@features/wallet";
 import { MoreIcon } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
 import { FC } from "react";
@@ -58,7 +59,10 @@ export const HistoryCard: FC<HistoryCardProps> = ({ card }) => {
             {card?.amount?.toLocaleString()}
           </div>
           <div className={styles.status}>
-            <p>{card?.status}</p>
+            <div className={styles.status__content}>
+              <p>{card?.status}</p>
+              <OfdCheckLink url={card?.qr_code_url} />
+            </div>
             <MoreIcon />
           </div>
         </div>
@@ -90,6 +94,12 @@ export const HistoryCard: FC<HistoryCardProps> = ({ card }) => {
               <p>{t("wallet_history.tab.status")}:</p>
               <span>{card?.status}</span>
             </div>
+            {card?.qr_code_url?.trim() && (
+              <div className={styles.info__row}>
+                <p>{t("wallet_history.tab.ofd_check")}:</p>
+                <OfdCheckLink url={card?.qr_code_url} />
+              </div>
+            )}
           </div>
         </div>
       )}

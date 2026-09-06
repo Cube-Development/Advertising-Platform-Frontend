@@ -6,12 +6,16 @@ import {
   Building2,
   Calculator,
   CalendarClock,
+  CircleCheck,
   CircleDollarSign,
   ClipboardList,
   FileText,
+  FolderKanban,
   LayoutDashboard,
   MessageSquareText,
   OctagonAlert,
+  Pencil,
+  Send,
   Tv,
   Users,
   Mail,
@@ -93,6 +97,34 @@ export const ADMIN_MENU: IMenuItem[] = [
       title: "Передача канала",
       path: ENUM_PATHS.ADMIN_CHANNEL_OWNER_SWAP,
       icon: ArrowRightLeft,
+    },
+  },
+  {
+    item: {
+      title: "Изменение ордера",
+      path: ENUM_PATHS.ADMIN_ORDER_UPDATE,
+      icon: Pencil,
+    },
+  },
+  {
+    item: {
+      title: "Публикация поста",
+      path: ENUM_PATHS.ADMIN_ORDER_PUBLISH,
+      icon: Send,
+    },
+  },
+  {
+    item: {
+      title: "Завершение проекта",
+      path: ENUM_PATHS.ADMIN_PROJECT_COMPLETE,
+      icon: CircleCheck,
+    },
+  },
+  {
+    item: {
+      title: "Проекты",
+      path: ENUM_PATHS.ADMIN_MANAGE_PROJECTS,
+      icon: FolderKanban,
     },
   },
   {

@@ -148,6 +148,47 @@ export function useHeroAnimation(
     const ro = new ResizeObserver(resize);
     ro.observe(container);
 
+    // --- Пауза, когда секцию не видно ---
+    // Цикл ниже рисует canvas и переписывает transform каждой карточке каждый
+    // кадр. Без остановки он продолжает считать анимацию, когда секция ушла за
+    // экран или вкладка свёрнута — на слабых телефонах это заметная часть кадра
+    // и разряд батареи впустую.
+    let running = false;
+
+    const start = () => {
+      if (running) return;
+      running = true;
+      // Иначе первый dt после паузы равен всему времени простоя.
+      stateRef.current.lastTime = performance.now();
+      animId = requestAnimationFrame(draw);
+    };
+
+    const stop = () => {
+      if (!running) return;
+      running = false;
+      cancelAnimationFrame(animId);
+      animId = 0;
+    };
+
+    const visibility = { inViewport: true, pageVisible: !document.hidden };
+    const sync = () =>
+      visibility.inViewport && visibility.pageVisible ? start() : stop();
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        visibility.inViewport = entry.isIntersecting;
+        sync();
+      },
+      { rootMargin: "200px" },
+    );
+    io.observe(container);
+
+    const onVisibilityChange = () => {
+      visibility.pageVisible = !document.hidden;
+      sync();
+    };
+    document.addEventListener("visibilitychange", onVisibilityChange);
+
     // --- Главный цикл ---
     function draw(ts: number) {
       animId = requestAnimationFrame(draw);
@@ -302,10 +343,12 @@ export function useHeroAnimation(
       s.domInitialized = true;
     }
 
-    animId = requestAnimationFrame(draw);
+    sync();
 
     return () => {
-      cancelAnimationFrame(animId);
+      stop();
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+      io.disconnect();
       canvas.removeEventListener("mousedown", onMouseDown);
       canvas.removeEventListener("mousemove", onMouseMove);
       canvas.removeEventListener("mouseup", onMouseUp);

@@ -1,0 +1,75 @@
+// The plugin styles the <adras-action> host itself:
+//   position: fixed; display: grid; place-items: safe center;
+//   overflow-y: auto; box-sizing: border-box; z-index: 10000;
+// plus an explicit pixel width and (in the final pass) an explicit height.
+//
+// `place-items: safe center` means a grid item does NOT stretch, so both
+// children below claim the same cell and opt back into stretching.
+
+// Deterministic height source for the plugin's INLINE measurement pass.
+//
+// That pass sets `height: auto; max-height: <cap>` on the host, waits one
+// animation frame, then latches `min(max(child rect height), cap)` — for good.
+// If it measured our React content the result would depend on whether React had
+// committed yet, and a late commit latches the panel at the skeleton's height.
+// This element is rendered even while the action is closed, so the measurement
+// is always the same and always exceeds the cap.
+//
+// It is `position: absolute` on purpose: out-of-flow boxes do not size grid
+// rows, so it cannot stretch the stage — but `getBoundingClientRect()`, which
+// is what the plugin reads, still reports its full height. (An in-flow sizer
+// with `max-height: 100%` does NOT work: a percentage max-height resolves
+// against the grid area, which is indefinite while the row is being sized, so
+// it computes to `none` and the row grows to the sizer.)
+//
+// `ChatAction` collapses it to 0 once the plugin has written a definite pixel
+// height onto the host, so it cannot leave the host scrollable into blank space.
+.sizer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.stage {
+  grid-area: 1 / 1;
+  place-self: stretch;
+  min-width: 0;
+  min-height: 0;
+  box-sizing: border-box;
+  position: relative;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  // The host is background:transparent / border:none — the panel chrome is ours.
+  background: #fff;
+  border-radius: 11px;
+  text-align: start;
+
+  // Query container for the compact action components, so they respond to the
+  // panel rather than to the viewport. (The host is already `inline-size`, but
+  // naming our own container keeps `@container chat-stage (...)` unambiguous.)
+  container-type: inline-size;
+  container-name: chat-stage;
+
+  // Keep any inner z-index inside the panel instead of fighting the app's.
+  isolation: isolate;
+  contain: layout paint;
+}
+
+// Overlays portalled here paint inside the popover's top-layer subtree.
+// Anything portalled to document.body would render *behind* the panel.
+.portalHost {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+
+  > * {
+    pointer-events: auto;
+  }
+}

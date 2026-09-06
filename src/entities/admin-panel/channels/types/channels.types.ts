@@ -1,3 +1,4 @@
+import type { ExecutorType } from "@entities/admin/config/executorType";
 import { platformTypesNum } from "@entities/platform";
 import { IFormat } from "@entities/project";
 import { IOption } from "@shared/types";
@@ -7,6 +8,8 @@ export interface IAdminChannels {
   page: number;
   elements: number;
   status: ADMIN_CHANNEL_STATUS;
+  executor_type?: ExecutorType;
+  search_string?: string | null;
   channels: IAdminChannelData[];
   isLast?: boolean;
 }
@@ -16,6 +19,8 @@ export interface IAdminChannelData {
   owner_id: number;
   created: string;
   status: number;
+  user_id?: string | null;
+  email?: string | null;
 }
 
 interface IChannel {
@@ -36,7 +41,7 @@ export interface IAdminChannelInfo {
   age: IOption[];
   region: IOption[];
   format: IFormat[];
-  rate: number;
+  grade: number;
   complete: number;
   complaints: number;
   on_hold: number;
@@ -44,6 +49,8 @@ export interface IAdminChannelInfo {
   not_complete: number;
   in_progress: number;
   tags: string[];
+  user_id?: string | null;
+  email?: string | null;
 }
 
 export interface IAdminEditChannelData {
@@ -69,6 +76,7 @@ export interface IGetAdminChannelsReq {
   status: ADMIN_CHANNEL_STATUS;
   elements_on_page: number;
   search_string?: string | null;
+  executor_type?: ExecutorType;
 }
 
 export interface IAdminRejectChannelReq {

@@ -1,6 +1,6 @@
 import { Outlet, ScrollRestoration } from "react-router-dom";
 import { LanguageDetector } from "@entities/user";
-import { ChatPlugin, Toaster } from "@shared/ui";
+import { AdrasPlugin, Toaster } from "@shared/ui";
 import { MainLayout } from "./main-layout";
 
 export const RootLayout = () => {
@@ -10,7 +10,7 @@ export const RootLayout = () => {
       <Toaster />
       <LanguageDetector />
       <ScrollRestoration />
-      <ChatPlugin />
+      <AdrasPlugin />
     </MainLayout>
   );
 };

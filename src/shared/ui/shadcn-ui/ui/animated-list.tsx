@@ -1,10 +1,12 @@
 import React, {
   useEffect,
   useMemo,
+  useRef,
   useState,
   type ComponentPropsWithoutRef,
 } from "react";
 import { AnimatePresence, motion, type MotionProps } from "motion/react";
+import { useInViewport } from "@shared/lib/use-in-viewport";
 import { cn } from "../lib/utils";
 
 export function AnimatedListItem({ children }: { children: React.ReactNode }) {
@@ -29,19 +31,27 @@ export interface AnimatedListProps extends ComponentPropsWithoutRef<"div"> {
 
 export const AnimatedList = React.memo(
   ({ children, className, delay = 1000, ...props }: AnimatedListProps) => {
+    const containerRef = useRef<HTMLDivElement>(null);
     const [index, setIndex] = useState(0);
     const childrenArray = useMemo(
       () => React.Children.toArray(children),
       [children],
     );
 
+    // Список крутится бесконечной цепочкой setTimeout, и каждый шаг запускает
+    // layout-анимации motion у всех видимых элементов. За пределами экрана это
+    // работа впустую, поэтому цепочка не заводится, пока список не виден.
+    const isActive = useInViewport(containerRef);
+
     useEffect(() => {
+      if (!isActive) return;
+
       const timeout = setTimeout(() => {
         setIndex((prevIndex) => prevIndex + 1);
       }, delay);
 
       return () => clearTimeout(timeout);
-    }, [index, delay]);
+    }, [index, delay, isActive]);
 
     const itemsToShow = useMemo(() => {
       const maxVisible = Math.min(childrenArray.length, 15); // prevent infinite DOM growth
@@ -60,6 +70,7 @@ export const AnimatedList = React.memo(
 
     return (
       <div
+        ref={containerRef}
         className={cn(`flex flex-col items-center gap-4`, className)}
         {...props}
       >

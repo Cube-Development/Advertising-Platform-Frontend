@@ -111,22 +111,25 @@ export const ProjectCardSkeleton: FC<ProjectCardSkeletonProps> = ({
                 <Skeleton className="w-full h-full rounded-[8px]" />
               </div>
             ) : (
-              <div className={styles.card__info__icons}>
-                <Skeleton
-                  className={`w-full h-full rounded-[10px] ${styles.item__full}`}
-                />
-                <Skeleton
-                  className={`w-full h-full rounded-[10px] ${styles.item__left}`}
-                />
-                <Skeleton
-                  className={`w-full h-full rounded-[10px] ${styles.item__right}`}
-                />
-                <Skeleton
-                  className={`w-full h-full rounded-[10px] ${styles.item__left}`}
-                />
-                <Skeleton
-                  className={`w-full h-full rounded-[10px] ${styles.item__right}`}
-                />
+              <div className={styles.card__info__icons_completed}>
+                <div className={styles.card__info__icons}>
+                  <Skeleton
+                    className={`w-full h-full rounded-[10px] ${styles.item__left}`}
+                  />
+                  <Skeleton
+                    className={`w-full h-full rounded-[10px] ${styles.item__right}`}
+                  />
+                  <Skeleton
+                    className={`w-full h-full rounded-[10px] ${styles.item__left}`}
+                  />
+                  <Skeleton
+                    className={`w-full h-full rounded-[10px] ${styles.item__right}`}
+                  />
+                  {/* <Skeleton
+                    className={`w-full h-full rounded-[10px] ${styles.item__right}`}
+                  /> */}
+                </div>
+                <Skeleton className="w-full h-full rounded-[8px]" />
               </div>
             )}
           </div>

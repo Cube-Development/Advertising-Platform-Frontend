@@ -2,9 +2,13 @@
 <html>
 
 <head>
-  <!-- Aidirekt Chat Plugin -->
-  <script defer src="https://plugin.aidirekt.uz/chat-plugin.js"></script>
-  <!-- End Aidirekt Chat Plugin -->
+  <!-- Adras AI chat plugin. No data-* attributes on purpose: the loader stub
+       only auto-inserts an <adras-plugin> of its own when data-org or
+       data-api-token is present. React owns the element instead
+       (src/shared/ui/adras-plugin), which is what keeps the widget off /admin
+       and off the maintenance page. -->
+  <script defer src="https://plugin.adras.ai/plugin.js"></script>
+  <!-- End Adras AI chat plugin -->
   <script>(function (w, d, s, l, i) {
       w[l] = w[l] || []; w[l].push({
         'gtm.start':

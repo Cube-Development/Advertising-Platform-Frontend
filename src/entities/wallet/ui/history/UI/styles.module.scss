@@ -37,10 +37,18 @@
 
   .status {
     display: grid;
-    grid-auto-flow: column;
-    align-items: center;
+    grid-template-columns: 1fr auto;
+    align-items: start;
     justify-content: space-between;
     column-gap: 10px;
+
+    &__content {
+      display: grid;
+      grid-auto-flow: row;
+      row-gap: 4px;
+      justify-items: start;
+      min-width: 0;
+    }
   }
 }
 
@@ -113,6 +121,10 @@
         font-style: normal;
         font-weight: 500;
         line-height: 1;
+      }
+
+      a {
+        text-align: end;
       }
     }
   }

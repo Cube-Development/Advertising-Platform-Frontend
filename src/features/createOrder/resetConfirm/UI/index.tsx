@@ -28,7 +28,11 @@ export const ResetConfirmButton: FC<ResetConfirmButtonProps> = ({
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <MyButton type="button" buttons_type="button__white" className="!w-auto">
+        <MyButton
+          type="button"
+          buttons_type="button__white"
+          className="!w-auto"
+        >
           {label}
         </MyButton>
       </AlertDialogTrigger>
@@ -41,15 +45,20 @@ export const ResetConfirmButton: FC<ResetConfirmButtonProps> = ({
         </AlertDialogDescription>
         <AlertDialogFooter className="grid grid-cols-2 gap-3 w-full sm:grid">
           <AlertDialogCancel asChild>
-            <MyButton type="button" buttons_type="button__white" className="!w-auto">
+            <MyButton
+              type="button"
+              buttons_type="button__white"
+              className="!w-auto"
+            >
               {t("create_order.datetime.cancel")}
             </MyButton>
           </AlertDialogCancel>
-          <AlertDialogCancel
-            onClick={onConfirm}
-            asChild
-          >
-            <MyButton type="button" buttons_type="button__blue" className="!w-auto">
+          <AlertDialogCancel onClick={onConfirm} asChild>
+            <MyButton
+              type="button"
+              buttons_type="button__blue"
+              className="!w-auto"
+            >
               {t("create_order.datetime.confirm_reset")}
             </MyButton>
           </AlertDialogCancel>

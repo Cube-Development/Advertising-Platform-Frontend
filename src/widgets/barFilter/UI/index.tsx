@@ -162,7 +162,7 @@ export const BarFilter: FC<BarFilterProps> = ({
           />
           {typeFilter === ENUM_PROJECT_TYPES.SAVED_PROJECT || (
             <BarStatusFilter
-              changeStatus={changeStatus}
+              changeStatus={(v) => changeStatus(String(v))}
               statusFilter={statusFilter}
               projectStatus={projectStatus}
               badge={badgeStatus}
@@ -171,7 +171,7 @@ export const BarFilter: FC<BarFilterProps> = ({
         </>
       ) : (
         <BarStatusFilter
-          changeStatus={changeStatus}
+          changeStatus={(v) => changeStatus(String(v))}
           statusFilter={statusFilter}
           projectStatus={projectStatus}
           badge={badgeStatus}

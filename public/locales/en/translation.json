@@ -1389,6 +1389,21 @@
     "title": "Order Tracking",
     "empty": "No orders at the moment",
     "open_post": "Open post",
+    "open_bot": "Open in bot",
+    "date_from": "Date from",
+    "date_to": "Date to",
+    "download_payout_report": "Download report",
+    "download_error": "Failed to download file",
+    "executor_type": {
+      "label": "Executor type",
+      "self_connect": "Self-connect",
+      "agency": "Agency",
+      "all": "All"
+    },
+    "org_type": {
+      "legal": "Legal entity",
+      "individual": "Individual"
+    },
     "status_filter": {
       "wait": "Awaiting acceptance",
       "in_progress": "In progress",
@@ -1407,7 +1422,9 @@
       "catalog_commission": "Catalog commission",
       "executor": "Executor",
       "customer": "Customer",
-      "owner": "Owner"
+      "owner": "Owner",
+      "format_small": "Format (small)",
+      "format_big": "Format (big)"
     }
   },
   "add_platform": {
@@ -2350,6 +2367,10 @@
     "withdraw": {
       "title": "Withdraw Funds",
       "offer": "Withdrawal Request",
+      "holiday_notice": {
+        "title": "Request processing during the holidays",
+        "description": "From August 29 to September 1, Uzbekistan observes public holidays for Independence Day. Banks are closed on these days, so all withdrawal requests submitted during this period will be processed on September 2 — the first banking business day."
+      },
       "amount": {
         "title": "Withdrawal Amount",
         "default_value": "50 000",
@@ -2518,7 +2539,8 @@
       "purpose": "Purpose",
       "method": "Method",
       "ammount": "Amount",
-      "status": "Status"
+      "status": "Status",
+      "ofd_check": "OFD receipt"
     }
   },
   "create_order": {
@@ -3071,6 +3093,12 @@
     "postLink": {
       "label": "Post link:"
     },
+    "ofd": {
+      "title": "OFD receipts",
+      "sale_check": "Sale receipt",
+      "refund_sale_check": "Refund receipt",
+      "open": "Open"
+    },
     "seePost": "View post",
     "seeComment": "View comment",
     "channel": {
@@ -3473,7 +3501,6 @@
       "auth_error": "Authorization error",
       "google_error": "Google sign-in error",
       "oauth_user_already_exists": "This account was already registered with email and password. Please sign in that way.",
-      "oauth_user_already_exists": "This account was already registered with email and password. Please sign in that way.",
       "auth_success": "Successfully authorized",
       "account_exist": "An account with this email already exists",
       "registration_error": "Registration error"
@@ -3517,7 +3544,17 @@
       "moderation": "Moderation",
       "complaints": "Complaints",
       "reviews": "Reviews",
-      "common_observe": "General statistics"
+      "common_observe": "General statistics",
+      "manage_projects": "Projects"
+    },
+    "manage_projects": {
+      "project_id": "Project ID",
+      "url": "Channel URL",
+      "statuses": "Statuses",
+      "statuses_placeholder": "Select statuses",
+      "apply": "Apply",
+      "empty": "No orders found",
+      "completed": "Completed"
     },
     "common_observe": {
       "period": {
@@ -3574,6 +3611,7 @@
       "description": "Here you can manage users, channels, and platform content."
     },
     "channels": {
+      "empty": "No channels found",
       "bar": {
         "id": "Name & ID",
         "owner": "Owner",
@@ -3651,12 +3689,16 @@
       }
     },
     "users": {
+      "empty": "No users",
       "bar": {
         "id": "User ID",
         "name": "Username",
         "email": "Email",
         "date": "Registration Date",
         "status": "Status"
+      },
+      "filter": {
+        "all": "All"
       },
       "card": {
         "status": {
@@ -3694,7 +3736,23 @@
         "email": "Email",
         "phone": "Phone",
         "language": "Language",
-        "location": "Location"
+        "location": "Location",
+        "created": "Registration date"
+      },
+      "org": {
+        "title": "Organization",
+        "tin": "TIN",
+        "pinfl": "PINFL",
+        "type": "Type",
+        "status": "Status",
+        "empty": "No organization"
+      },
+      "channels": {
+        "title": "Channels",
+        "completed": "Completed",
+        "empty": "No channels",
+        "search": "Search by name, URL or UUID",
+        "search_empty": "Nothing found"
       }
     },
     "transactions": {
@@ -4060,6 +4118,187 @@
     "complaints": {
       "title": "Complaints",
       "text": "Review user complaints, respond to issues, and ensure a fair platform."
+    }
+  },
+  "chat_actions": {
+    "empty": {
+      "title": "Nothing here yet"
+    },
+    "error": {
+      "title": "Could not load",
+      "text": "Please try again",
+      "retry": "Retry"
+    },
+    "cta": {
+      "open": "Open full page"
+    },
+    "gate": {
+      "auth": {
+        "title": "Sign in required",
+        "text": "Sign in to see this data",
+        "cta": "Sign in"
+      },
+      "authed": {
+        "title": "You are already signed in",
+        "text": "This section is only for signed-out users",
+        "cta": "Go to profile"
+      },
+      "role": {
+        "title": "Different working mode",
+        "text": "Available in mode: {{roles}}",
+        "cta": "Switch mode"
+      }
+    },
+    "auth_login": {
+      "title": "Sign in",
+      "subtitle": "Email and password, or Google"
+    },
+    "auth_register": {
+      "title": "Sign up",
+      "subtitle": "Pick a role and create an account"
+    },
+    "faq_guides": {
+      "title": "Guides and manuals",
+      "subtitle": "Step-by-step guides to the platform",
+      "cta": "All guides and FAQ"
+    },
+    "support": {
+      "title": "Blogix support",
+      "subtitle": "We are online around the clock",
+      "cta": "Frequent questions"
+    },
+    "role_switch": {
+      "title": "Working mode",
+      "subtitle": "You are currently in {{role}} mode",
+      "cta": "Switch to {{role}} mode",
+      "blogger_hint": "Your channels, incoming offers and earnings",
+      "advertiser_hint": "Channel catalog, cart and ad campaigns"
+    },
+    "service_rules": {
+      "title": "Service rules",
+      "subtitle": "Public offer and Blogix terms of use",
+      "b1": "Rights and duties of the parties",
+      "b2": "Payment and refund terms",
+      "b3": "Advertising placement rules"
+    },
+    "notifications": {
+      "title": "Notifications",
+      "subtitle": "Latest events on your account",
+      "empty": "No new notifications"
+    },
+    "catalog": {
+      "title": "Find channels",
+      "subtitle": "Telegram, Instagram and YouTube for ads",
+      "empty": "Nothing found — try a different query",
+      "cta": "Full catalog",
+      "found": "Found: {{count}}",
+      "search_placeholder": "Channel name or topic",
+      "all": "All"
+    },
+    "catalog_full": {
+      "title": "Full channel catalog",
+      "subtitle": "All filters, comparison and saved selections",
+      "b1": "Filters by topic, reach and price",
+      "b2": "Compare channels and add to cart",
+      "b3": "Saved channel selections"
+    },
+    "cart": {
+      "title": "Cart",
+      "subtitle": "Channels selected for placement",
+      "empty": "Your cart is empty — add channels from the catalog",
+      "count": "Channels",
+      "amount": "Total",
+      "coverage": "Reach",
+      "subscribers": "Subscribers"
+    },
+    "create_order": {
+      "title": "Create campaign",
+      "subtitle": "Dates, budget and the ad post",
+      "b1": "Ad post: text, media, links",
+      "b2": "Publication dates and times per channel",
+      "b3": "Budget check and payment",
+      "cta": "Create campaign"
+    },
+    "my_campaigns": {
+      "title": "My campaigns",
+      "subtitle": "Placement statuses and budgets",
+      "empty": "No campaigns yet",
+      "channels": "Channels: {{count}}"
+    },
+    "post_templates": {
+      "title": "Post templates",
+      "subtitle": "Saved ad posts",
+      "empty": "No templates yet — create your first"
+    },
+    "add_channel": {
+      "title": "Add a channel",
+      "subtitle": "Telegram, Instagram or YouTube — 4 steps",
+      "b1": "Verify ownership of the channel",
+      "b2": "Description, topic and audience",
+      "b3": "Placement formats and prices",
+      "b4": "Submit for moderation",
+      "cta": "Add a channel"
+    },
+    "my_channels": {
+      "title": "My channels",
+      "subtitle": "Moderation status and activity",
+      "empty": "No channels in this status"
+    },
+    "my_offers": {
+      "title": "My orders",
+      "subtitle": "Ad placement offers",
+      "empty": "No orders in this status"
+    },
+    "blogger_income": {
+      "title": "Income calculator",
+      "subtitle": "Estimate what ads in your channel can earn",
+      "cta": "Add a channel"
+    },
+    "channel_prices": {
+      "title": "Placement prices",
+      "subtitle": "Pick a channel to change formats and prices",
+      "empty": "No active channels yet"
+    },
+    "wallet": {
+      "deposit": "Deposit",
+      "profit": "Earned",
+      "spending": "Spending",
+      "prepayment": "Prepayment"
+    },
+    "wallet_balance": {
+      "title": "Wallet balance",
+      "subtitle": "Funds across your accounts",
+      "empty": "No wallets found",
+      "cta": "Transaction history"
+    },
+    "wallet_topup": {
+      "title": "Top up balance",
+      "subtitle": "Card payment",
+      "cta": "Pay by invoice"
+    },
+    "wallet_withdraw": {
+      "title": "Withdraw funds",
+      "subtitle": "To a card or bank account",
+      "b1": "Choose a wallet and amount",
+      "b2": "Transfer details",
+      "b3": "Sign documents with a digital signature",
+      "cta": "Withdraw funds"
+    },
+    "wallet_history": {
+      "title": "Transaction history",
+      "subtitle": "Latest wallet transactions",
+      "empty": "No transactions yet"
+    },
+    "profile": {
+      "title": "Profile settings",
+      "subtitle": "Personal data, password and notifications",
+      "tab_data": "Data",
+      "tab_password": "Password",
+      "tab_notifications": "Notifications"
+    },
+    "organization": {
+      "title": "Organization details",
+      "subtitle": "Details used on invoices and documents"
     }
   }
 }

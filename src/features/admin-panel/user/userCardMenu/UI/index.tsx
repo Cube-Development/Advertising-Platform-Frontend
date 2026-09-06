@@ -37,9 +37,14 @@ export const UserCardMenu: FC<UserCardMenuProps> = ({ card }) => {
         align="end"
       >
         <DropdownMenuGroup className="grid">
-          <DropdownMenuItem className="flex items-center gap-2 px-3 py-2 text-xs cursor-pointer">
-            <BookOpenCheck size={12} />
-            <span>{t("admin_panel.users.card.menu.details")}</span>
+          <DropdownMenuItem asChild>
+            <Link
+              className="flex items-center gap-2 px-3 py-2 text-xs cursor-pointer"
+              to={`${ENUM_PATHS.ADMIN_USER_INFO.replace(":id", card?.user_id)}`}
+            >
+              <BookOpenCheck size={12} />
+              <span>{t("admin_panel.users.card.menu.details")}</span>
+            </Link>
           </DropdownMenuItem>
           <DropdownMenuItem className="flex items-center gap-2 px-3 py-2 text-xs cursor-pointer">
             <MessageSquareMore size={12} />

@@ -205,27 +205,30 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
               <DownloadReport project_id={card?.id} />
             </div>
           ) : (
-            <div className={styles.card__info__icons}>
-              <div className={styles.item__full}>
-                <RocketIcon />
-                <p>{card?.in_progress?.toLocaleString()}</p>
+            <div className={styles.card__info__icons_completed}>
+              <div className={styles.card__info__icons}>
+                <div className={styles.item__left}>
+                  <RocketIcon />
+                  <p>{card?.in_progress?.toLocaleString()}</p>
+                </div>
+                <div className={styles.item__right}>
+                  <CompleteIcon />
+                  <p>{card?.completed?.toLocaleString()}</p>
+                </div>
+                <div className={styles.item__left}>
+                  <CancelIcon />
+                  <p>{card?.canceled_rejected?.toLocaleString()}</p>
+                </div>
+                <div className={styles.item__right}>
+                  <WaitIcon />
+                  <p>{card?.wait?.toLocaleString()}</p>
+                </div>
+                {/* <div className={styles.item__right}>
+                  <SearchIcon />
+                  <p>{card?.moderation?.toLocaleString()}</p>
+                </div> */}
               </div>
-              <div className={styles.item__left}>
-                <CompleteIcon />
-                <p>{card?.completed?.toLocaleString()}</p>
-              </div>
-              <div className={styles.item__right}>
-                <CancelIcon />
-                <p>{card?.canceled_rejected?.toLocaleString()}</p>
-              </div>
-              <div className={styles.item__left}>
-                <WaitIcon />
-                <p>{card?.wait?.toLocaleString()}</p>
-              </div>
-              <div className={styles.item__right}>
-                <SearchIcon />
-                <p>{card?.moderation?.toLocaleString()}</p>
-              </div>
+              <DownloadReport project_id={card?.id} />
             </div>
           )}
         </>

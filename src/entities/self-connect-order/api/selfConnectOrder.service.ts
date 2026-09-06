@@ -1,15 +1,16 @@
+import { ExecutorType, MANAGE_EXECUTOR_TYPE_DEFAULT } from "@entities/admin";
+import { ENUM_OFFER_STATUS } from "@entities/offer";
 import { authApi } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
-import {
-  ENUM_OFFER_STATUS,
-  SELF_CONNECT_ORDER_STATUS_API,
-} from "@entities/offer";
+import { buildSelfConnectOrdersBody } from "../lib";
 import { ISelfConnectOrdersResponse } from "../types";
 
 export interface getSelfConnectOrdersReq {
   page: number;
   elements_on_page?: number;
   status: ENUM_OFFER_STATUS | string;
+  search?: string | null;
+  executor_type?: ExecutorType;
 }
 
 const getIsLast = (
@@ -17,8 +18,7 @@ const getIsLast = (
   batchLength: number,
   pageSize: number,
   totalElements: number,
-) =>
-  batchLength < pageSize || ordersLength >= totalElements;
+) => batchLength < pageSize || ordersLength >= totalElements;
 
 export const selfConnectOrderAPI = authApi.injectEndpoints({
   endpoints: (build) => ({
@@ -26,39 +26,29 @@ export const selfConnectOrderAPI = authApi.injectEndpoints({
       ISelfConnectOrdersResponse,
       getSelfConnectOrdersReq
     >({
-      query: ({ status, page, elements_on_page }) => ({
+      query: (req) => ({
         url: "/manage/self-connect-orders",
         method: "POST",
-        body: {
-          page,
-          elements_on_page,
-          status:
-            SELF_CONNECT_ORDER_STATUS_API[
-              status as keyof typeof SELF_CONNECT_ORDER_STATUS_API
-            ],
-        },
+        body: buildSelfConnectOrdersBody(req),
       }),
-      transformResponse: (
-        response: ISelfConnectOrdersResponse,
-        _meta,
-        arg,
-      ) => {
+      transformResponse: (response: ISelfConnectOrdersResponse, _meta, arg) => {
         const pageSize =
           arg?.elements_on_page ?? INTERSECTION_ELEMENTS.SELF_CONNECT_ORDERS;
         const batchLength = response?.orders?.length ?? 0;
-        const accumulated =
-          batchLength + (response?.page - 1) * pageSize;
+        const accumulated = batchLength + (response?.page - 1) * pageSize;
 
         return {
           ...response,
           status: arg?.status,
+          executor_type: arg?.executor_type ?? MANAGE_EXECUTOR_TYPE_DEFAULT,
+          search: arg?.search ?? null,
           isLast:
             batchLength < pageSize || accumulated >= (response?.elements ?? 0),
         };
       },
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
-        const { status } = queryArgs;
-        return `${endpointName}/${status}/`;
+        const { status, search, executor_type } = queryArgs;
+        return `${endpointName}/${status}/${executor_type ?? MANAGE_EXECUTOR_TYPE_DEFAULT}/${search?.trim() ?? ""}/`;
       },
       merge: (currentCache, newItems, arg) => {
         const pageSize =
