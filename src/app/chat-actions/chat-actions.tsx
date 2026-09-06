@@ -1,4 +1,5 @@
 import { useAppSelector } from "@shared/hooks";
+import { useIsChatRoute } from "@shared/lib/chat-route";
 import { Fragment, useMemo } from "react";
 import { ChatAction } from "./chat-action";
 import { ChatActionsDevtools } from "./dev/chat-actions-devtools";
@@ -7,8 +8,12 @@ import { isChatActionVisible } from "./model/action-visibility";
 import { ActionGate } from "./ui";
 
 /**
- * Registry of AI chat actions, mounted once for every non-admin page so the AI
- * can surface any of them from anywhere.
+ * Registry of AI chat actions.
+ *
+ * Rendered only on the two pages that carry the chat widget itself (see
+ * `useIsChatRoute`). Registering actions where no <adras-plugin> is mounted
+ * would be pointless — nothing reads the registry — and it would leave the
+ * hidden custom elements in the DOM of every page.
  *
  * Only the actions the current user can actually use are rendered. That is not
  * cosmetic: `<adras-action>` registers itself on `connectedCallback` and
@@ -26,6 +31,7 @@ import { ActionGate } from "./ui";
  */
 export const ChatActions = () => {
   const { isAuth, role } = useAppSelector((state) => state.user);
+  const isChatRoute = useIsChatRoute();
 
   const actions = useMemo(
     () =>
@@ -34,6 +40,9 @@ export const ChatActions = () => {
       ),
     [isAuth, role],
   );
+
+  // Ранний выход только после всех хуков — порядок вызовов должен быть стабилен.
+  if (!isChatRoute) return null;
 
   return (
     <Fragment key={`${role}:${isAuth}`}>
