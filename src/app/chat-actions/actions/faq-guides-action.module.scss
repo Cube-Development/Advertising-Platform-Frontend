@@ -1,0 +1,15 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+
+  // Two columns only when the PANEL is wide enough — the viewport is irrelevant
+  // here, a 340px panel can sit on a 1920px screen.
+  @container chat-stage (min-width: 520px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @container chat-stage (min-width: 800px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

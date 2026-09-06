@@ -1,0 +1,59 @@
+.shell {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.header {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px 10px;
+  border-bottom: 1px solid rgb(229 231 235);
+}
+
+// Filters live here rather than in the scrolling body: they must stay usable
+// when the body is showing a loading, error or empty state, otherwise a filter
+// that returns nothing cannot be changed back.
+.toolbar {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 12px 0;
+}
+
+// The stage — not the plugin's host element — owns the scroll, so a sticky
+// header and footer stay put while the body scrolls. `overscroll-behavior`
+// stops a bottomed-out panel from scrolling the page underneath it.
+.body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.footer {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 16px 14px;
+  border-top: 1px solid rgb(229 231 235);
+}
+
+// Comfortable inner padding scales with the panel, not the screen: the host
+// element is a `container-type: inline-size` container, so this responds to the
+// ~320px INLINE panel and the ~900px SIDE panel independently of the viewport.
+.content {
+  padding: 12px;
+
+  @container chat-stage (min-width: 560px) {
+    padding: 16px;
+  }
+}

@@ -1,0 +1,47 @@
+// Global overrides that apply ONLY inside an open chat action panel.
+//
+// Every selector is scoped under `[data-chat-stage]`, so this file is inert on
+// every regular page. It exists because the app's global layout CSS keys off
+// the viewport, and inside a panel the viewport says nothing about the space
+// actually available (a ~400px panel can sit on a 1920px screen).
+//
+// Imported once from `src/app/chat-actions/index.ts`.
+
+[data-chat-stage] {
+  // `.container` (global.scss) keeps `padding: 0 70px` because its @media steps
+  // watch the viewport — that alone eats ~140px of a 400px panel.
+  .container {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  // Viewport-based `display: none !important` utilities. Inside a panel they
+  // hide and show exactly the wrong things, so hand control back to whatever
+  // the element's own rules say. `revert` rather than a fixed display value, so
+  // we don't force a display mode onto arbitrary elements.
+  .display__hide__max__lg,
+  .display__hide__max__md,
+  .display__hide__max__sm,
+  .display__hide__max__xs,
+  .display__hide__min__lg,
+  .display__hide__min__md,
+  .display__hide__min__sm,
+  .display__hide__min__xs {
+    display: revert !important;
+  }
+
+  // A desktop grid inside a 400px box overflows horizontally by default;
+  // min-width:0 lets flex/grid children actually shrink.
+  * {
+    min-width: 0;
+  }
+
+  img,
+  svg,
+  video,
+  canvas,
+  table {
+    max-width: 100%;
+  }
+}

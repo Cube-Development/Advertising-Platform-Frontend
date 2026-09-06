@@ -11,6 +11,15 @@ import { MIN_BUDGET, MAX_BUDGET } from "./constants";
 import { CATEGORY_ICON_MAPPER, DEFAULT_CATEGORY_ICON } from "./categoryIcons";
 import type { ConfiguratorFormValues, Category } from "./types";
 
+/**
+ * Стабильная ссылка для пустых справочников.
+ *
+ * `?? []` создавал бы новый массив на каждом рендере, он уходит в пропсы
+ * `SettingsAccordion`, обёрнутого в `memo`, — и сравнение пропсов проваливалось
+ * бы всегда, то есть мемоизация не работала.
+ */
+const EMPTY_OPTIONS: [] = [];
+
 const DEFAULTS: ConfiguratorFormValues = {
   categoryIdx: null,
   budget: 5_000_000,
@@ -125,8 +134,8 @@ export function useConfigurator() {
   return {
     setValue,
     formState,
-    regionsData: regionsData?.contents ?? [],
-    languagesData: languagesData?.contents ?? [],
+    regionsData: regionsData?.contents ?? EMPTY_OPTIONS,
+    languagesData: languagesData?.contents ?? EMPTY_OPTIONS,
     accordionOpen,
     setAccordionOpen,
     search,

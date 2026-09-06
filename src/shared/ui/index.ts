@@ -1,4 +1,5 @@
 export * from "./MyBtn";
+export * from "./adras-plugin";
 export * from "./MyInput";
 export * from "./MyModal";
 export * from "./MyPagination";

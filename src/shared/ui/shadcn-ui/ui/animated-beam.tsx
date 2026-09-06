@@ -1,6 +1,7 @@
-import { useEffect, useId, useState, type RefObject } from "react";
+import { useEffect, useId, useRef, useState, type RefObject } from "react";
 import { motion } from "motion/react";
 
+import { useInViewport } from "@shared/lib/use-in-viewport";
 import { cn } from "../lib/utils";
 
 export interface AnimatedBeamProps {
@@ -47,8 +48,15 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
   endYOffset = 0,
 }) => {
   const id = useId();
+  const svgRef = useRef<SVGSVGElement>(null);
   const [pathD, setPathD] = useState("");
   const [svgDimensions, setSvgDimensions] = useState({ width: 0, height: 0 });
+
+  // Луч анимируется бесконечно (repeat: Infinity) и пишет x1/x2/y1/y2 градиента
+  // каждый кадр — четыре атрибута SVG на каждый экземпляр. Пока секция за
+  // пределами экрана или вкладка свёрнута, это чистая трата: держим градиент в
+  // статическом состоянии.
+  const isActive = useInViewport(svgRef);
 
   // Calculate the gradient coordinates based on the reverse prop
   const gradientCoordinates = reverse
@@ -123,6 +131,7 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
 
   return (
     <svg
+      ref={svgRef}
       fill="none"
       width={svgDimensions.width}
       height={svgDimensions.height}
@@ -158,19 +167,29 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
             y1: "0%",
             y2: "0%",
           }}
-          animate={{
-            x1: gradientCoordinates.x1,
-            x2: gradientCoordinates.x2,
-            y1: gradientCoordinates.y1,
-            y2: gradientCoordinates.y2,
-          }}
-          transition={{
-            delay,
-            duration,
-            ease: [0.16, 1, 0.3, 1], // https://easings.net/#easeOutExpo
-            repeat,
-            repeatDelay,
-          }}
+          animate={
+            isActive
+              ? {
+                  x1: gradientCoordinates.x1,
+                  x2: gradientCoordinates.x2,
+                  y1: gradientCoordinates.y1,
+                  y2: gradientCoordinates.y2,
+                }
+              : { x1: "0%", x2: "0%", y1: "0%", y2: "0%" }
+          }
+          transition={
+            isActive
+              ? {
+                  delay,
+                  duration,
+                  ease: [0.16, 1, 0.3, 1], // https://easings.net/#easeOutExpo
+                  repeat,
+                  repeatDelay,
+                }
+              : // Без duration: 0 остановка сама была бы анимацией на `duration`
+                // секунд — луч ещё пять секунд писал бы атрибуты уже за экраном.
+                { duration: 0 }
+          }
         >
           <stop stopColor={gradientStartColor} stopOpacity="0"></stop>
           <stop stopColor={gradientStartColor}></stop>

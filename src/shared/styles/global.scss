@@ -872,3 +872,12 @@ body::-webkit-scrollbar-corner {
 .post_pasted_link {
   @include post-content.post-content-base;
 }
+
+// Adras AI chat plugin normally injects its own `adras-action{display:none}`
+// stylesheet. If plugin.adras.ai is unreachable that never lands, adras-action
+// stays an unknown inline element and every action's DOM would dump into the
+// page flow. Deliberately NOT `!important`: the plugin sets `display:grid`
+// inline when it opens a panel, and an !important author rule would beat it.
+adras-action {
+  display: none;
+}

@@ -2267,7 +2267,6 @@
         "balance": "Balansni to'ldirish"
       }
     },
-
     "category": {
       "title": "Biznes kategoriyasi:",
       "text": "",
@@ -4119,6 +4118,187 @@
     "complaints": {
       "title": "Shikoyatlar",
       "text": "Foydalanuvchi shikoyatlarini ko'rib chiqing, muammolarga javob bering va adolatli platformani ta'minlang."
+    }
+  },
+  "chat_actions": {
+    "empty": {
+      "title": "Hozircha bo'sh"
+    },
+    "error": {
+      "title": "Yuklab bo'lmadi",
+      "text": "Yana urinib ko'ring",
+      "retry": "Qayta urinish"
+    },
+    "cta": {
+      "open": "To'liq ochish"
+    },
+    "gate": {
+      "auth": {
+        "title": "Hisobga kirish kerak",
+        "text": "Ushbu ma'lumotlarni ko'rish uchun tizimga kiring",
+        "cta": "Kirish"
+      },
+      "authed": {
+        "title": "Siz allaqachon kirgansiz",
+        "text": "Bu bo'lim faqat tizimga kirmagan foydalanuvchilar uchun",
+        "cta": "Profilga"
+      },
+      "role": {
+        "title": "Boshqa ish rejimi",
+        "text": "Bo'lim quyidagi rejimda mavjud: {{roles}}",
+        "cta": "Rejimni almashtirish"
+      }
+    },
+    "auth_login": {
+      "title": "Hisobga kirish",
+      "subtitle": "Email va parol yoki Google"
+    },
+    "auth_register": {
+      "title": "Ro'yxatdan o'tish",
+      "subtitle": "Rolni tanlang va hisob yarating"
+    },
+    "faq_guides": {
+      "title": "Qo'llanmalar va yo'riqnomalar",
+      "subtitle": "Platformada ishlash bo'yicha bosqichma-bosqich qo'llanmalar",
+      "cta": "Barcha qo'llanmalar va FAQ"
+    },
+    "support": {
+      "title": "Blogix qo'llab-quvvatlash",
+      "subtitle": "Biz kunu tun aloqadamiz",
+      "cta": "Ko'p so'raladigan savollar"
+    },
+    "role_switch": {
+      "title": "Ish rejimi",
+      "subtitle": "Hozir siz {{role}} rejimidasiz",
+      "cta": "{{role}} rejimiga o'tish",
+      "blogger_hint": "O'z kanallaringiz, kiruvchi takliflar va daromad",
+      "advertiser_hint": "Kanallar katalogi, savat va reklama kampaniyalari"
+    },
+    "service_rules": {
+      "title": "Xizmat qoidalari",
+      "subtitle": "Ommaviy oferta va Blogix'dan foydalanish shartlari",
+      "b1": "Tomonlarning huquq va majburiyatlari",
+      "b2": "To'lov va mablag'ni qaytarish shartlari",
+      "b3": "Reklama joylashtirish qoidalari"
+    },
+    "notifications": {
+      "title": "Bildirishnomalar",
+      "subtitle": "Hisobingiz bo'yicha so'nggi hodisalar",
+      "empty": "Yangi bildirishnomalar yo'q"
+    },
+    "catalog": {
+      "title": "Kanallarni tanlash",
+      "subtitle": "Reklama uchun Telegram, Instagram va YouTube",
+      "empty": "Hech narsa topilmadi — so'rovni o'zgartirib ko'ring",
+      "cta": "Butun katalog",
+      "found": "Topildi: {{count}}",
+      "search_placeholder": "Kanal nomi yoki mavzusi",
+      "all": "Barchasi"
+    },
+    "catalog_full": {
+      "title": "Kanallarning to'liq katalogi",
+      "subtitle": "Barcha filtrlar, taqqoslash va saqlangan to'plamlar",
+      "b1": "Mavzu, qamrov va narx bo'yicha filtrlar",
+      "b2": "Kanallarni taqqoslash va savatga qo'shish",
+      "b3": "Saqlangan kanal to'plamlari"
+    },
+    "cart": {
+      "title": "Savat",
+      "subtitle": "Joylashtirish uchun tanlangan kanallar",
+      "empty": "Savatda hali kanallar yo'q — ularni katalogdan qo'shing",
+      "count": "Kanallar",
+      "amount": "Summa",
+      "coverage": "Qamrov",
+      "subscribers": "Obunachilar"
+    },
+    "create_order": {
+      "title": "Kampaniyani rasmiylashtirish",
+      "subtitle": "Sanalar, byudjet va reklama posti",
+      "b1": "Reklama posti: matn, media, havolalar",
+      "b2": "Kanallar bo'yicha e'lon sanasi va vaqti",
+      "b3": "Byudjetni tekshirish va to'lov",
+      "cta": "Kampaniyani rasmiylashtirish"
+    },
+    "my_campaigns": {
+      "title": "Mening kampaniyalarim",
+      "subtitle": "Joylashtirish holatlari va byudjetlar",
+      "empty": "Hozircha kampaniyalar yo'q",
+      "channels": "Kanallar: {{count}}"
+    },
+    "post_templates": {
+      "title": "Post shablonlari",
+      "subtitle": "Saqlangan reklama postlari",
+      "empty": "Hozircha shablonlar yo'q — birinchisini yarating"
+    },
+    "add_channel": {
+      "title": "Kanal qo'shish",
+      "subtitle": "Telegram, Instagram yoki YouTube — 4 bosqich",
+      "b1": "Kanalga huquqni tasdiqlash",
+      "b2": "Tavsif, mavzu va auditoriya",
+      "b3": "Joylashtirish formatlari va narxlar",
+      "b4": "Moderatsiyaga yuborish",
+      "cta": "Kanal qo'shish"
+    },
+    "my_channels": {
+      "title": "Mening kanallarim",
+      "subtitle": "Moderatsiya holati va faollik",
+      "empty": "Bu holatda kanallar yo'q"
+    },
+    "my_offers": {
+      "title": "Mening buyurtmalarim",
+      "subtitle": "Reklama joylashtirish takliflari",
+      "empty": "Bu holatda buyurtmalar yo'q"
+    },
+    "blogger_income": {
+      "title": "Daromad kalkulyatori",
+      "subtitle": "O'z kanalingizdagi reklamadan daromadni baholang",
+      "cta": "Kanal qo'shish"
+    },
+    "channel_prices": {
+      "title": "Joylashtirish narxlari",
+      "subtitle": "Formatlar va narxlarni o'zgartirish uchun kanalni tanlang",
+      "empty": "Hozircha faol kanallar yo'q"
+    },
+    "wallet": {
+      "deposit": "Depozit",
+      "profit": "Ishlab topilgan",
+      "spending": "Xarajatlar",
+      "prepayment": "Avans"
+    },
+    "wallet_balance": {
+      "title": "Hamyon balansi",
+      "subtitle": "Hisoblardagi mablag'lar",
+      "empty": "Hamyonlar topilmadi",
+      "cta": "Amallar tarixi"
+    },
+    "wallet_topup": {
+      "title": "Balansni to'ldirish",
+      "subtitle": "Karta orqali to'lov",
+      "cta": "Hisob orqali to'lov"
+    },
+    "wallet_withdraw": {
+      "title": "Mablag'ni yechish",
+      "subtitle": "Kartaga yoki hisob raqamiga",
+      "b1": "Hamyon va summani tanlash",
+      "b2": "O'tkazma rekvizitlari",
+      "b3": "ERI orqali hujjatlarni imzolash",
+      "cta": "Mablag'ni yechish"
+    },
+    "wallet_history": {
+      "title": "Amallar tarixi",
+      "subtitle": "Hamyon bo'yicha so'nggi tranzaksiyalar",
+      "empty": "Hozircha amallar yo'q"
+    },
+    "profile": {
+      "title": "Profil sozlamalari",
+      "subtitle": "Shaxsiy ma'lumotlar, parol va bildirishnomalar",
+      "tab_data": "Ma'lumotlar",
+      "tab_password": "Parol",
+      "tab_notifications": "Bildirishnomalar"
+    },
+    "organization": {
+      "title": "Tashkilot ma'lumotlari",
+      "subtitle": "Hisob-fakturalar va hujjatlar uchun rekvizitlar"
     }
   }
 }

@@ -29,6 +29,7 @@ export const ConfiguratorForm = memo(function ConfiguratorForm() {
     search,
     setSearch,
     filteredCategories,
+    activeCategory,
     forecastMln,
     forecastBonus,
   } = useConfigurator();
@@ -53,9 +54,12 @@ export const ConfiguratorForm = memo(function ConfiguratorForm() {
     try {
       if (isLoading) return;
       await createCartLite({
-        category_ids: formState.categoryIdx
-          ? [Number(formState.categoryIdx)]
-          : [],
+        // Именно id категории, а не её позиция в списке: `categoryIdx` — это
+        // индекс в массиве (с нуля), а id с бэкенда начинаются с единицы, так
+        // что раньше в корзину уходила предыдущая категория. И проверка была
+        // на truthy, из-за чего самая первая категория (индекс 0) молча
+        // отбрасывалась вместе с фильтром.
+        category_ids: activeCategory ? [Number(activeCategory.id)] : [],
         budget: formState.budget,
         regions: formState.region,
         language_ids: formState.language,
