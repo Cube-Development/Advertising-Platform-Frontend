@@ -2,9 +2,18 @@ FROM node:18-alpine3.17 AS build
 
 WORKDIR /app
 
-COPY package.json /app/package.json
+# Ставим строго по package-lock.json.
+#
+# Раньше копировался только package.json и запускался `npm install` — то есть
+# дерево зависимостей резолвилось из реестра заново на каждой сборке, а
+# закоммиченный локфайл игнорировался. Сборка зависела от текущего состояния
+# npm-реестра и однажды упала на ровном месте:
+#   npm ERR! Cannot read properties of null (reading 'edgesOut')
+# при неизменном package.json. `npm ci` ставит ровно то, что записано в
+# локфайле: воспроизводимо и заметно быстрее.
+COPY package.json package-lock.json /app/
 
-RUN npm install 
+RUN npm ci
 
 # Получаем build args
 ARG VITE_BASE_URL
