@@ -77,6 +77,7 @@ export const useSignDocument = () => {
     data: ICreateDocumentEDORequest,
     type: ENUM_DOCUMENT_TYPE,
     oldKeyId?: string,
+    onSigned?: (documentId: string) => void,
   ): Promise<{ id: string; keyId?: string } | undefined> => {
     try {
       const response = await createDocument({ data, type }).unwrap();
@@ -89,7 +90,10 @@ export const useSignDocument = () => {
 
       if (!keyId) return;
 
-      return { id: response?._id?.toUpperCase(), keyId };
+      const id = response?._id?.toUpperCase();
+      if (id) onSigned?.(id);
+
+      return { id, keyId };
     } catch (err) {
       const errorMessage =
         err instanceof Error ? err.message : t("toasts.documents.create.error");
