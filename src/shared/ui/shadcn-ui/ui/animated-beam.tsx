@@ -1,5 +1,4 @@
 import { useEffect, useId, useRef, useState, type RefObject } from "react";
-import { motion } from "motion/react";
 
 import { useInViewport } from "@shared/lib/use-in-viewport";
 import { cn } from "../lib/utils";
@@ -19,6 +18,7 @@ export interface AnimatedBeamProps {
   delay?: number;
   duration?: number;
   repeat?: number;
+  /** Не поддерживается после перехода на SMIL; оставлено для совместимости. */
   repeatDelay?: number;
   startXOffset?: number;
   startYOffset?: number;
@@ -41,7 +41,6 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
   gradientStartColor = "#ffaa40",
   gradientStopColor = "#9c40ff",
   repeat = Infinity,
-  repeatDelay = 0,
   startXOffset = 0,
   startYOffset = 0,
   endXOffset = 0,
@@ -57,6 +56,10 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
   // пределами экрана или вкладка свёрнута, это чистая трата: держим градиент в
   // статическом состоянии.
   const isActive = useInViewport(svgRef);
+
+  // duration === 0 используется для статичных дорожек без свечения.
+  const isAnimated = isActive && duration > 0;
+  const animationKey = `${duration}-${delay}-${repeat}-${reverse}`;
 
   // Calculate the gradient coordinates based on the reverse prop
   const gradientCoordinates = reverse
@@ -157,40 +160,42 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
         strokeLinecap="round"
       />
       <defs>
-        <motion.linearGradient
-          className="transform-gpu"
+        {/*
+          Анимация градиента сделана нативным SMIL, а не motion.
+          Раньше motion писал x1/x2/y1/y2 из JS каждый кадр — четыре атрибута
+          SVG на каждый луч. На главной их полтора десятка, и в профиле это
+          оказалось единственной оставшейся нагрузкой на простое (10% CPU,
+          после удаления лучей — 0%). <animate> исполняет браузер: ни JS в
+          кадре, ни записей в DOM, а значит и Sentry Replay их не пишет.
+          Визуально то же самое: те же значения, та же длительность и та же
+          кривая easeOutExpo через calcMode="spline".
+        */}
+        <linearGradient
           id={id}
-          gradientUnits={"userSpaceOnUse"}
-          initial={{
-            x1: "0%",
-            x2: "0%",
-            y1: "0%",
-            y2: "0%",
-          }}
-          animate={
-            isActive
-              ? {
-                  x1: gradientCoordinates.x1,
-                  x2: gradientCoordinates.x2,
-                  y1: gradientCoordinates.y1,
-                  y2: gradientCoordinates.y2,
-                }
-              : { x1: "0%", x2: "0%", y1: "0%", y2: "0%" }
-          }
-          transition={
-            isActive
-              ? {
-                  delay,
-                  duration,
-                  ease: [0.16, 1, 0.3, 1], // https://easings.net/#easeOutExpo
-                  repeat,
-                  repeatDelay,
-                }
-              : // Без duration: 0 остановка сама была бы анимацией на `duration`
-                // секунд — луч ещё пять секунд писал бы атрибуты уже за экраном.
-                { duration: 0 }
-          }
+          gradientUnits="userSpaceOnUse"
+          x1="0%"
+          x2="0%"
+          y1="0%"
+          y2="0%"
         >
+          {isAnimated &&
+            (["x1", "x2", "y1", "y2"] as const).map((axis) => (
+              <animate
+                // Пересоздаём при смене параметров: SMIL не подхватывает
+                // изменения своих атрибутов на лету.
+                key={`${axis}-${animationKey}`}
+                attributeName={axis}
+                values={gradientCoordinates[axis].join(";")}
+                dur={`${duration}s`}
+                begin={`${delay}s`}
+                repeatCount={repeat === Infinity ? "indefinite" : repeat + 1}
+                fill="freeze"
+                calcMode="spline"
+                keyTimes="0;1"
+                keySplines="0.16 1 0.3 1"
+              />
+            ))}
+
           <stop stopColor={gradientStartColor} stopOpacity="0"></stop>
           <stop stopColor={gradientStartColor}></stop>
           <stop offset="32.5%" stopColor={gradientStopColor}></stop>
@@ -199,7 +204,7 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
             stopColor={gradientStopColor}
             stopOpacity="0"
           ></stop>
-        </motion.linearGradient>
+        </linearGradient>
       </defs>
     </svg>
   );

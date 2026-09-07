@@ -17,8 +17,16 @@ export function AnimatedListItem({ children }: { children: React.ReactNode }) {
     transition: { type: "spring", stiffness: 350, damping: 40 },
   };
 
+  // Без `layout` намеренно.
+  //
+  // Этот проп включает FLIP: motion замеряет позиции всех элементов списка до и
+  // после вставки нового и покадрово анимирует их трансформы. На главной список
+  // лежит поверх SVG-лучей, и каждый такой кадр заставлял перерисовывать их
+  // слои — в профиле это давало 9% CPU на простое, а без списка получался 0%.
+  // Новый элемент по-прежнему появляется через scale/opacity, остальные просто
+  // сразу занимают своё место.
   return (
-    <motion.div {...animations} layout className="mx-auto w-full">
+    <motion.div {...animations} className="mx-auto w-full">
       {children}
     </motion.div>
   );
