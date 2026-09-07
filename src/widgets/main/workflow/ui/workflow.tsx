@@ -1,3 +1,4 @@
+import { useInViewport } from "@shared/lib/use-in-viewport";
 import { AnimatedBeam, cn, CustomHeading } from "@shared/ui";
 import {
   ReactNode,
@@ -49,12 +50,19 @@ export function Workflow({ title, subtitle, steps }: WorkflowProps) {
   const [flyingSegments, setFlyingSegments] = useState(INITIAL_SEGMENTS);
   const [cycle, setCycle] = useState(0);
 
+  // Сценарий ниже — бесконечный while со setState и пересозданием лучей на
+  // каждом цикле. Без этой проверки он крутится, даже когда секция за экраном
+  // или вкладка свёрнута.
+  const isVisible = useInViewport(containerRef);
+
   const sleep = useCallback(
     (ms: number) => new Promise<void>((r) => setTimeout(r, ms)),
     [],
   );
 
   useEffect(() => {
+    if (!isVisible) return;
+
     let cancelled = false;
 
     const run = async () => {
@@ -107,7 +115,7 @@ export function Workflow({ title, subtitle, steps }: WorkflowProps) {
     return () => {
       cancelled = true;
     };
-  }, [sleep, stepRefs]);
+  }, [sleep, stepRefs, isVisible]);
 
   return (
     <section className="container relative w-full py-12 grid gap-4 lg:gap-10">

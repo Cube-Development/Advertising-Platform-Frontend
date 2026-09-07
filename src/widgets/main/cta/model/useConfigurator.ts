@@ -7,7 +7,7 @@ import {
   useGetCompanyCategoriesQuery,
 } from "@entities/channel";
 import { USER_LANGUAGES_LIST } from "@shared/languages";
-import { MIN_BUDGET, MAX_BUDGET } from "./constants";
+import { MIN_BUDGET, MAX_BUDGET, VISIBLE_CATEGORIES } from "./constants";
 import { CATEGORY_ICON_MAPPER, DEFAULT_CATEGORY_ICON } from "./categoryIcons";
 import type { ConfiguratorFormValues, Category } from "./types";
 
@@ -94,13 +94,16 @@ export function useConfigurator() {
   const budgetPercent =
     ((formState.budget - MIN_BUDGET) / (MAX_BUDGET - MIN_BUDGET)) * 100;
 
+  // `_idx` проставляется до фильтрации и среза: это позиция в полном списке
+  // `categories`, по ней считается activeCategory и id для корзины.
   const filteredCategories = useMemo(
     () =>
       categories
         .map((c, idx) => ({ ...c, _idx: idx }))
         .filter((c) =>
           c.name.toLowerCase().includes(search.toLowerCase().trim()),
-        ),
+        )
+        .slice(0, VISIBLE_CATEGORIES),
     [search, categories],
   );
 
