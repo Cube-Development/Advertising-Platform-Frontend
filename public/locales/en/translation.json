@@ -3123,6 +3123,7 @@
     },
     "sendReport": "Upload report",
     "downloadReport": "Detailed report",
+    "copyProject": "Copy project",
     "continue": "Continue",
     "is_upload_files": "Uploading files"
   },
@@ -3457,6 +3458,10 @@
           "success": "We have notified the manager about the need to replace the post",
           "error": "Error notifying the manager"
         }
+      },
+      "copy": {
+        "success": "Project copied successfully",
+        "error": "An error occurred while copying the project"
       }
     },
     "create_order": {

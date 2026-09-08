@@ -3123,6 +3123,7 @@
     },
     "sendReport": "Hisobot yuklash",
     "downloadReport": "Batafsil hisobot",
+    "copyProject": "Loyihani nusxalash",
     "continue": "Davom etish",
     "is_upload_files": "Fayllarni yuboryapmiz"
   },
@@ -3457,6 +3458,10 @@
           "success": "Biz menejerga post almashtirish zarurligi haqida xabar berdik",
           "error": "Menejerga xabar berish vaqtida xatolik yuz berdi"
         }
+      },
+      "copy": {
+        "success": "Loyiha muvaffaqiyatli nusxalandi",
+        "error": "Loyihani nusxalash vaqtida xatolik yuz berdi"
       }
     },
     "create_order": {
