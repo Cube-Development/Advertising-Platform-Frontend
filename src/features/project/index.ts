@@ -9,4 +9,5 @@ export * from "./zeroProject";
 export * from "./post-templates";
 export * from "./runSavedProject";
 export * from "./saveProject";
+export * from "./projectCardMenu";
 export * from "./clear-active-project";

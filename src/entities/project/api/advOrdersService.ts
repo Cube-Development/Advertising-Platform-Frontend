@@ -384,6 +384,17 @@ export const advProjectsAPI = authApi.injectEndpoints({
       ],
     }),
 
+    copyAdvProject: build.mutation<
+      { success: boolean },
+      { project_id: string }
+    >({
+      query: ({ project_id }) => ({
+        url: `/order/project/${project_id}/copy`,
+        method: "POST",
+      }),
+      invalidatesTags: [ADV_PROJECTS],
+    }),
+
     deleteSavedProject: build.mutation<
       { success: boolean },
       { project_id: string }
@@ -510,6 +521,7 @@ export const {
   useAcceptOrderMutation,
   useApproveAdvManagerProjectMutation,
   useSaveAdvProjectMutation,
+  useCopyAdvProjectMutation,
   useRejectOrderMutation,
   useGetAdvProjectsQuery,
   useGetAdvSavedProjectsQuery,

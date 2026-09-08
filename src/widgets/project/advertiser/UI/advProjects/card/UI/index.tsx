@@ -19,14 +19,16 @@ import {
   ReplacePost,
   SeePost,
 } from "@features/order";
-import { AcceptProject, DownloadReport } from "@features/project";
+import {
+  AcceptProject,
+  DownloadReport,
+  ProjectCardMenu,
+} from "@features/project";
 import {
   ArrowSmallVerticalIcon,
   CancelIcon,
   CompleteIcon,
-  MoreIcon,
   RocketIcon,
-  SearchIcon,
   WaitIcon,
 } from "@shared/assets";
 import { BREAKPOINT, ENUM_ACCORDION_TYPES } from "@shared/config";
@@ -235,9 +237,7 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
       </div>
       <div className={styles.card__more}>
         <div className={styles.more__btn}>
-          <button>
-            <MoreIcon />
-          </button>
+          <ProjectCardMenu project_id={card?.id} />
         </div>
         {typeFilter === ENUM_PROJECT_TYPES.MANAGER_PROJECT && (
           // statusFilter !== advManagerProjectStatusFilter.completed &&
