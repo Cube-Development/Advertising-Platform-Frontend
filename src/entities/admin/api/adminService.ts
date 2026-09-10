@@ -96,7 +96,7 @@ export interface adminCompleteProjectReq {
 export interface IAdminManageProjectOrder {
   order_id: string;
   url: string;
-  order_date: string | { date_from: string; date_to: string };
+  order_date: string | { date_from: string; date_to: string } | null;
   order_time: {
     time_from: string;
     time_to: string;

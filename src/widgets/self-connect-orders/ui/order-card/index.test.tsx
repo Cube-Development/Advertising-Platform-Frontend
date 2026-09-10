@@ -35,4 +35,18 @@ describe("SelfConnectOrderCard", () => {
     expect(screen.getByText(/5.?000/)).toBeTruthy();
     expect(screen.getByText(/7.?000/)).toBeTruthy();
   });
+
+  test("не падает при order_date: null", () => {
+    render(
+      <SelfConnectOrderCard
+        order={{ ...selfConnectOrderFixture, order_date: null }}
+      />,
+    );
+
+    expect(screen.getByText("#12345")).toBeTruthy();
+    expect(
+      screen.getByText("track_orders.card.date").nextElementSibling
+        ?.textContent,
+    ).toBe("—");
+  });
 });
