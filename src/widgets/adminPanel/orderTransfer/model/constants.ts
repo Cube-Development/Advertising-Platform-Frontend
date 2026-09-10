@@ -11,9 +11,9 @@ export type FieldConfig = {
 export const ORDER_MAIN_FIELDS: FieldConfig[] = [
   {
     id: "order_ident",
-    label: "Номер ордера",
-    type: "number",
-    placeholder: "380339986",
+    label: "ID ордера",
+    type: "text",
+    placeholder: "380339986 или uuid",
   },
   { id: "order_date", label: "Дата переноса", type: "date" },
 ];

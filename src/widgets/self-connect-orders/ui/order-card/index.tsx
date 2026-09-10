@@ -19,7 +19,8 @@ interface SelfConnectOrderCardProps {
   order: ISelfConnectOrder;
 }
 
-const formatOrderDate = (orderDate: string | IDatePeriod) => {
+const formatOrderDate = (orderDate: string | IDatePeriod | null) => {
+  if (!orderDate) return "—";
   if (typeof orderDate === "object") {
     return `${orderDate.date_from} – ${orderDate.date_to}`;
   }

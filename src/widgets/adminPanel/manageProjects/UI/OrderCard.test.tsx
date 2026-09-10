@@ -23,4 +23,16 @@ describe("ManageProjects OrderCard", () => {
     expect(screen.getByText("10.03.2026 – 12.03.2026")).toBeTruthy();
     expect(screen.getByText("https://t.me/manage_channel")).toBeTruthy();
   });
+
+  test("не падает при order_date: null", () => {
+    render(
+      <OrderCard order={{ ...manageProjectOrderFixture, order_date: null }} />,
+    );
+
+    expect(screen.getByText("ord-manage-001")).toBeTruthy();
+    expect(
+      screen.getByText("track_orders.card.date").nextElementSibling
+        ?.textContent,
+    ).toBe("—");
+  });
 });

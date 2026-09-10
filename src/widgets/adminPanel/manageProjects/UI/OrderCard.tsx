@@ -18,6 +18,7 @@ type OrderCardProps = {
 };
 
 const formatOrderDate = (orderDate: IAdminManageProjectOrder["order_date"]) => {
+  if (!orderDate) return "—";
   if (typeof orderDate === "object") {
     return `${orderDate.date_from} – ${orderDate.date_to}`;
   }

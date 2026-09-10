@@ -42,7 +42,7 @@ export interface ISelfConnectOrder {
   url: string;
   name: string;
   avatar: string | null;
-  order_date: string | IDatePeriod;
+  order_date: string | IDatePeriod | null;
   order_time: ITimePeriod;
   price: IOrderPriceManagerView;
   api_status: ENUM_OFFER_STATUS_BACKEND;
