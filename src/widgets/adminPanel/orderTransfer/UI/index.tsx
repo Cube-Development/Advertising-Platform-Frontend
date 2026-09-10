@@ -28,7 +28,7 @@ export const OrderTransfer = () => {
   const onSubmit = async (data: OrderTransferFormValues) => {
     try {
       await updateOrderDate({
-        order_ident: Number(data.order_ident),
+        order_ident: data.order_ident,
         order_date: data.order_date,
         time_from: data.time_from,
         time_to: data.time_to,

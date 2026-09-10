@@ -58,7 +58,7 @@ export interface adminRejectComplaintReq {
 }
 
 export interface adminUpdateOrderDateReq {
-  order_ident: number;
+  order_ident: string;
   order_date: string;
   time_from: string;
   time_to: string;
