@@ -36,16 +36,6 @@ export const SkeletonCatalogCard: FC<SkeletonCatalogCardProps> = () => {
                   <Skeleton className="h-[10px] w-[10px] rounded-full" />
                 </div>
                 <Skeleton className="w-3/5 h-4 max-w-32" />
-                {screen >= BREAKPOINT.MD && (
-                  <div className="flex gap-1.5">
-                    {Array.from({ length: 3 }).map((_, index) => (
-                      <Skeleton
-                        key={index}
-                        className="h-4 w-14 rounded-full"
-                      />
-                    ))}
-                  </div>
-                )}
               </div>
             </div>
             {screen >= BREAKPOINT.LG && (
@@ -58,13 +48,6 @@ export const SkeletonCatalogCard: FC<SkeletonCatalogCardProps> = () => {
               </div>
             </div>
           </div>
-          {screen < BREAKPOINT.MD && (
-            <div className="flex gap-1">
-              {Array.from({ length: 3 }).map((_, index) => (
-                <Skeleton key={index} className="h-3.5 w-12 rounded-full" />
-              ))}
-            </div>
-          )}
           {screen < BREAKPOINT.LG && (
             <Skeleton className="w-full h-[35px] rounded-[10px]" />
           )}
