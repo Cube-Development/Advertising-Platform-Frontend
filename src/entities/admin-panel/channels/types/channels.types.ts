@@ -1,6 +1,6 @@
 import type { ExecutorType } from "@entities/admin/config/executorType";
 import { platformTypesNum } from "@entities/platform";
-import { IFormat } from "@entities/project";
+import { ENUM_CHANNEL_TAG, IChannelTag, IFormat } from "@entities/project";
 import { IOption } from "@shared/types";
 import { ADMIN_CHANNEL_STATUS } from "../config";
 
@@ -21,6 +21,7 @@ export interface IAdminChannelData {
   status: number;
   user_id?: string | null;
   email?: string | null;
+  tags?: IChannelTag[];
 }
 
 interface IChannel {
@@ -89,4 +90,9 @@ export interface IAdminBanChannelReq {
   channel_id: string;
   reason: string;
   finish_date: string;
+}
+
+export interface IAdminChannelTagsReq {
+  channel_id: string;
+  tags: ENUM_CHANNEL_TAG[];
 }

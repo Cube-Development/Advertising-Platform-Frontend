@@ -2245,6 +2245,11 @@
     "badge": {
       "text": "<0>Project:</0> <1>{{name}}</1> — channels are added to it"
     },
+    "tags": {
+      "credit": "Credit",
+      "bnpl": "BNPL",
+      "repost": "Repost"
+    },
     "all_platform": "Channels",
     "search": {
       "parameters": "Search Parameters",
@@ -3199,6 +3204,10 @@
         "edit": {
           "success": "Channel data updated",
           "error": "Error during channel data update"
+        },
+        "tags": {
+          "success": "Channel tags updated",
+          "error": "Error during channel tags update"
         }
       },
       "accounting": {
@@ -3639,6 +3648,10 @@
         "sex": "Gender Ratio",
         "count": "Character Count",
         "description": "Channel Description",
+        "tags": {
+          "title": "Channel tags",
+          "save": "Save"
+        },
         "buttons": {
           "ban": "Ban",
           "unban": "Unban",

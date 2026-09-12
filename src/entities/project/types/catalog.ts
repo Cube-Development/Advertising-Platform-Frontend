@@ -34,6 +34,17 @@ export interface IRecommendCards {
   channels: ICatalogChannel[];
 }
 
+export enum ENUM_CHANNEL_TAG {
+  CREDIT = 1,
+  BNPL = 2,
+  REPOST = 3,
+}
+
+export interface IChannelTag {
+  tag: ENUM_CHANNEL_TAG;
+  state: boolean;
+}
+
 export interface ICatalogChannel {
   id: string;
   match?: number;
@@ -51,6 +62,7 @@ export interface ICatalogChannel {
   channel_languages: ENUM_LANGUAGES_NUM[];
   url?: string;
   is_self_connect?: boolean;
+  tags?: IChannelTag[];
 }
 
 export interface IFormat {

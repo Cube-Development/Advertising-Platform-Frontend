@@ -1,5 +1,6 @@
 export * from "./accept-channel";
 export * from "./ban-сhannel";
+export * from "./channel-tags";
 export * from "./channelCardMenu";
 export * from "./reject-channel";
 export * from "./unban-channel";

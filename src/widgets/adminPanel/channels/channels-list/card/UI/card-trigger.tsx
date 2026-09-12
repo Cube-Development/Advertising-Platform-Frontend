@@ -4,7 +4,7 @@ import {
 } from "@entities/admin-panel/channels/config/channels.config";
 import type { IAdminChannelData } from "@entities/admin-panel/channels/types/channels.types";
 import { platformToIcon } from "@entities/project/config/catalog";
-import { ChannelCardMenu } from "@features/admin-panel";
+import { ChannelCardMenu, ChannelTagsBadges, ChannelTagsCheckboxes } from "@features/admin-panel";
 import { useCopyLink } from "@shared/hooks";
 import { AccordionTrigger, AccountsLoader } from "@shared/ui";
 import { Badge, Card, CardContent, CardHeader } from "@shared/ui/shadcn-ui";
@@ -64,6 +64,7 @@ export const CardTrigger: FC<ICardTriggerProps> = ({
             >
               # {card?.channel?.id}
             </p>
+            <ChannelTagsBadges tags={card.tags} />
           </div>
         </div>
         <div className="flex items-center gap-2 shrink-0">
@@ -154,6 +155,9 @@ export const CardTrigger: FC<ICardTriggerProps> = ({
           <p className="text-sm font-semibold">{t(statusLabel)}</p>
         </div>
       </CardContent>
+      <div className="px-4 pb-4 sm:px-6 sm:pb-6" onClick={stopPropagation}>
+        <ChannelTagsCheckboxes channelId={card.channel.id} tags={card.tags} />
+      </div>
     </Card>
   );
 };
