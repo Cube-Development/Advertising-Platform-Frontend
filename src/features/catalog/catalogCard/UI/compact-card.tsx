@@ -24,7 +24,7 @@ import {
 } from "@shared/utils";
 import { FC, useState } from "react";
 import { Link } from "react-router-dom";
-import { ChannelCardMatch } from "../components";
+import { ChannelCardMatch, ChannelCardTags } from "../components";
 
 interface CompactCatalogCardProps extends IChangeCards, ICatalogCard {
   card: ICatalogChannel;
@@ -103,32 +103,34 @@ export const CompactCatalogCard: FC<CompactCatalogCardProps> = ({
       className="bg-white/70 md:rounded-xl rounded-[7px] shadow-[0px_1px_4px_0.5px_rgba(0,0,0,0.1)] relative group hover:shadow-md transition-shadow overflow-hidden cursor-pointer"
       onClick={handleChangeCard}
     >
-      <div className="grid grid-cols-[auto_1fr_auto_auto_auto] md:gap-2.5 gap-1.5 items-center md:pl-[10px] pl-[6px]">
-        <div className="relative shrink-0">
-          <Link
-            to={channelPath}
-            className={`size-8 md:size-10 rounded-full overflow-hidden shrink-0 block ${
-              card.is_self_connect
-                ? "border-2 border-[#37BBFE]"
-                : "border border-[--Personal-colors-main]"
-            }`}
-            onClick={stopPropagation}
-          >
-            <img
-              src={card?.avatar}
-              alt={card?.name}
-              className="object-cover w-full h-full"
-            />
-          </Link>
-          {card.is_self_connect && (
-            <div className="absolute -top-1 -right-1 size-3.5 md:size-4 rounded-full bg-white border-2 border-[#37BBFE] shadow-[0_2px_6px_rgba(55,187,254,0.5)] flex items-center justify-center pointer-events-none [&_svg]:size-3.5 md:[&_svg]:size-4">
-              <DiamondIcon />
+      <div className="flex items-stretch gap-1.5 md:grid md:grid-cols-[auto_1fr_auto_auto_auto] md:gap-2.5 md:items-center md:pl-[10px]">
+        <div className="min-w-0 flex-1 flex flex-col md:contents">
+          <div className="grid grid-cols-[auto_1fr_auto_auto] items-center gap-1.5 pl-[6px] md:contents">
+            <div className="relative shrink-0">
+              <Link
+                to={channelPath}
+                className={`size-8 md:size-10 rounded-full overflow-hidden shrink-0 block ${
+                  card.is_self_connect
+                    ? "border-2 border-[#37BBFE]"
+                    : "border border-[--Personal-colors-main]"
+                }`}
+                onClick={stopPropagation}
+              >
+                <img
+                  src={card?.avatar}
+                  alt={card?.name}
+                  className="object-cover w-full h-full"
+                />
+              </Link>
+              {card.is_self_connect && (
+                <div className="absolute -top-1 -right-1 size-3.5 md:size-4 rounded-full bg-white border-2 border-[#37BBFE] shadow-[0_2px_6px_rgba(55,187,254,0.5)] flex items-center justify-center pointer-events-none [&_svg]:size-3.5 md:[&_svg]:size-4">
+                  <DiamondIcon />
+                </div>
+              )}
             </div>
-          )}
-        </div>
 
-        {/* Name / Category / Languages */}
-        <div className="min-w-0 flex flex-col gap-0.5 py-2">
+            {/* Name / Category / Languages */}
+            <div className="min-w-0 flex flex-col gap-0.5 py-2">
           <Link
             to={channelPath}
             className="leading-3 block md:hidden text-[9px] font-semibold text-[--Personal-colors-main] truncate"
@@ -173,6 +175,11 @@ export const CompactCatalogCard: FC<CompactCatalogCardProps> = ({
               {card?.url}
             </p>
           )}
+          <ChannelCardTags
+            tags={card?.tags}
+            compact
+            className="hidden md:flex"
+          />
         </div>
 
         {/* Stats — compact 2x2 grid + gender bar */}
@@ -242,11 +249,19 @@ export const CompactCatalogCard: FC<CompactCatalogCardProps> = ({
             variant="compact"
           />
         </div>
+          </div>
+
+          <ChannelCardTags
+            tags={card?.tags}
+            compact
+            className="md:hidden mt-0 px-1.5 pb-1.5"
+          />
+        </div>
 
         {/* Action button */}
         <div
           onClick={stopPropagation}
-          className="flex self-stretch [&>button]:!rounded-l-none md:[&>button]:!rounded-r-xl [&>button]:!rounded-r-[7px] [&>button]:!shadow-none [&_[aria-haspopup]]:!px-2 [&_[aria-haspopup]]:!py-1 [&_[aria-haspopup]]:!rounded-md [&_[aria-haspopup]_*]:!text-[12px] [&_[aria-haspopup]_*]:!font-medium"
+          className="flex self-stretch shrink-0 [&>button]:!rounded-l-none md:[&>button]:!rounded-r-xl [&>button]:!rounded-r-[7px] [&>button]:!h-full [&>button]:!shadow-none [&_[aria-haspopup]]:!px-2 [&_[aria-haspopup]]:!py-1 [&_[aria-haspopup]]:!rounded-md [&_[aria-haspopup]_*]:!text-[12px] [&_[aria-haspopup]_*]:!font-medium"
         >
           <AddToBasketBtn
             selectedFormat={selectedFormat}

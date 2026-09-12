@@ -4,6 +4,7 @@ import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { buildAdminChannelsParams } from "../lib";
 import {
   IAdminBanChannelReq,
+  IAdminChannelTagsReq,
   IAdminRejectChannelReq,
   IGetAdminChannelsReq,
   IAdminChannelInfo,
@@ -116,6 +117,17 @@ export const adminChannelsAPI = authApi.injectEndpoints({
       }),
       invalidatesTags: [ADMIN_CHANNELS],
     }),
+    adminChannelTags: build.mutation<
+      { success: boolean },
+      IAdminChannelTagsReq
+    >({
+      query: (body) => ({
+        url: "/adv-admin/channel/tags",
+        method: "PUT",
+        body,
+      }),
+      invalidatesTags: [ADMIN_CHANNELS],
+    }),
   }),
 });
 
@@ -128,4 +140,5 @@ export const {
   useAdminChannelBanMutation,
   useAdminChannelUnbanMutation,
   useAdminChannelEditMutation,
+  useAdminChannelTagsMutation,
 } = adminChannelsAPI;

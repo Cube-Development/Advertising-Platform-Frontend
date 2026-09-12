@@ -9,6 +9,8 @@ vi.mock("@shared/hooks", () => ({
 
 vi.mock("@features/admin-panel", () => ({
   ChannelCardMenu: () => null,
+  ChannelTagsBadges: () => null,
+  ChannelTagsCheckboxes: () => null,
 }));
 
 vi.mock("@entities/project/config/catalog", () => ({

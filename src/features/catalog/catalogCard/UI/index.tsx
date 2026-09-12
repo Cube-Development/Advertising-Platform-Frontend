@@ -34,7 +34,7 @@ import {
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { ChannelCardMatch } from "../components";
+import { ChannelCardMatch, ChannelCardTags } from "../components";
 import styles from "./styles.module.scss";
 
 interface CatalogCardProps extends IChangeCards, ICatalogCard {
@@ -194,6 +194,7 @@ export const CatalogCard: FC<CatalogCardProps> = ({
                   {card?.url}
                 </p>
               )}
+              <ChannelCardTags tags={card?.tags} className="hidden md:flex" />
               {/* {screen >= BREAKPOINT.MD && (
                 <ChannelCardDescription description={card?.description} />
               )} */}
@@ -263,6 +264,7 @@ export const CatalogCard: FC<CatalogCardProps> = ({
             </div>
           </div>
         </div>
+        <ChannelCardTags tags={card?.tags} className="md:hidden" />
         {screen < BREAKPOINT.LG && screen >= BREAKPOINT.MD ? (
           <Accordion type="single" collapsible>
             <AccordionItem

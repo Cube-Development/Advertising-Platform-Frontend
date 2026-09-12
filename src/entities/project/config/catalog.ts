@@ -6,6 +6,7 @@ import {
   TelegramIcon,
   YouTubeIcon,
 } from "@shared/assets";
+import { ENUM_CHANNEL_TAG } from "../types";
 
 export enum CATALOG_FILTER {
   PARAMETERS = "parameters",
@@ -46,6 +47,12 @@ export enum sortingFilter {
   match = "match",
   rate = "rate",
 }
+
+export const CHANNEL_TAG_I18N: Record<ENUM_CHANNEL_TAG, string> = {
+  [ENUM_CHANNEL_TAG.CREDIT]: "catalog.tags.credit",
+  [ENUM_CHANNEL_TAG.BNPL]: "catalog.tags.bnpl",
+  [ENUM_CHANNEL_TAG.REPOST]: "catalog.tags.repost",
+};
 
 export const platformToIcon: any = {
   1: TelegramIcon,

@@ -2245,6 +2245,11 @@
     "badge": {
       "text": "<0>Loyih:</0> <1>{{name}}</1> — kanallar unga qo'shiladi"
     },
+    "tags": {
+      "credit": "Kredit",
+      "bnpl": "Nasiya",
+      "repost": "Repost"
+    },
     "all_platform": "Kanallar",
     "search": {
       "parameters": "Qidiruv parametrlari",
@@ -3199,6 +3204,10 @@
         "edit": {
           "success": "Kanal ma'lumotlari yangilandi",
           "error": "Kanal ma'lumotlarini yangilashda xatolik yuz berdi"
+        },
+        "tags": {
+          "success": "Kanal teglari yangilandi",
+          "error": "Kanal teglarini yangilashda xatolik yuz berdi"
         }
       },
       "accounting": {
@@ -3639,6 +3648,10 @@
         "sex": "Jins nisbati",
         "count": "Belgilar soni",
         "description": "Kanal tavsifi",
+        "tags": {
+          "title": "Kanal teglari",
+          "save": "Saqlash"
+        },
         "buttons": {
           "ban": "Bloklash",
           "unban": "Blokdan chiqarish",

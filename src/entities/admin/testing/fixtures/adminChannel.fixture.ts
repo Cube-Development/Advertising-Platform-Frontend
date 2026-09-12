@@ -4,6 +4,7 @@ import type {
   IAdminChannelData,
   IAdminChannelInfo,
 } from "../../../admin-panel/channels/types/channels.types";
+import { ENUM_CHANNEL_TAG } from "../../../project/types/catalog";
 
 export const adminChannelListItemFixture: IAdminChannelData = {
   channel: {
@@ -17,6 +18,11 @@ export const adminChannelListItemFixture: IAdminChannelData = {
   status: ADMIN_CHANNEL_STATUS.ACTIVE,
   user_id: "owner-user-uuid",
   email: "owner@blogix.uz",
+  tags: [
+    { tag: ENUM_CHANNEL_TAG.CREDIT, state: true },
+    { tag: ENUM_CHANNEL_TAG.BNPL, state: false },
+    { tag: ENUM_CHANNEL_TAG.REPOST, state: true },
+  ],
 };
 
 export const adminChannelInfoFixture: IAdminChannelInfo = {
