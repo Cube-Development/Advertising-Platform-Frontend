@@ -1,8 +1,11 @@
 import { useAdminChannelTagsMutation } from "@entities/admin-panel";
 import {
   CHANNEL_TAG_I18N,
+  CHANNEL_TAGS,
   ENUM_CHANNEL_TAG,
+  getChannelTagsSelection,
   IChannelTag,
+  toChannelTagsPayload,
 } from "@entities/project";
 import { useToast } from "@shared/ui";
 import { Button, Checkbox, Label } from "@shared/ui/shadcn-ui";
@@ -14,21 +17,6 @@ interface IChannelTagsCheckboxesProps {
   tags?: IChannelTag[];
 }
 
-const CHANNEL_TAGS = [
-  ENUM_CHANNEL_TAG.CREDIT,
-  ENUM_CHANNEL_TAG.BNPL,
-  ENUM_CHANNEL_TAG.REPOST,
-] as const;
-
-const isTagEnabled = (
-  tags: IChannelTag[] | undefined,
-  tag: ENUM_CHANNEL_TAG,
-): boolean => tags?.find((item) => item.tag === tag)?.state ?? false;
-
-const getEnabledTagIds = (
-  tags: IChannelTag[] | undefined,
-): ENUM_CHANNEL_TAG[] => CHANNEL_TAGS.filter((tag) => isTagEnabled(tags, tag));
-
 export const ChannelTagsCheckboxes: FC<IChannelTagsCheckboxesProps> = ({
   channelId,
   tags,
@@ -36,15 +24,13 @@ export const ChannelTagsCheckboxes: FC<IChannelTagsCheckboxesProps> = ({
   const { t } = useTranslation();
   const { toast } = useToast();
   const [updateTags, { isLoading }] = useAdminChannelTagsMutation();
-  const savedTags = getEnabledTagIds(tags);
-  const [selectedTags, setSelectedTags] =
-    useState<ENUM_CHANNEL_TAG[]>(savedTags);
+  const [selectedTags, setSelectedTags] = useState<ENUM_CHANNEL_TAG[]>(
+    getChannelTagsSelection(tags),
+  );
 
   useEffect(() => {
-    setSelectedTags(getEnabledTagIds(tags));
+    setSelectedTags(getChannelTagsSelection(tags));
   }, [channelId, tags]);
-
-  const isDirty = selectedTags.join() !== savedTags.join();
 
   const handleToggle = (tag: ENUM_CHANNEL_TAG, checked: boolean) => {
     if (isLoading) return;
@@ -63,12 +49,12 @@ export const ChannelTagsCheckboxes: FC<IChannelTagsCheckboxesProps> = ({
   };
 
   const handleSave = async () => {
-    if (isLoading || !channelId || !isDirty) return;
+    if (isLoading || !channelId) return;
 
     try {
       await updateTags({
         channel_id: channelId,
-        tags: selectedTags,
+        tags: toChannelTagsPayload(selectedTags),
       }).unwrap();
       toast({
         variant: "success",
@@ -114,7 +100,7 @@ export const ChannelTagsCheckboxes: FC<IChannelTagsCheckboxesProps> = ({
           type="button"
           variant="primary"
           size="sm"
-          disabled={!isDirty || isLoading}
+          disabled={isLoading}
           onClick={handleSave}
         >
           {t("admin_panel.channels.card.tags.save")}

@@ -1,8 +1,4 @@
-import {
-  CHANNEL_TAG_I18N,
-  ENUM_CHANNEL_TAG,
-  IChannelTag,
-} from "@entities/project";
+import { CHANNEL_TAG_I18N, getChannelTagView, IChannelTag } from "@entities/project";
 import { Badge, cn } from "@shared/ui/shadcn-ui";
 import { Check, X } from "lucide-react";
 import { FC } from "react";
@@ -14,21 +10,13 @@ interface ChannelCardTagsProps {
   className?: string;
 }
 
-const KNOWN_TAGS = new Set<number>([
-  ENUM_CHANNEL_TAG.CREDIT,
-  ENUM_CHANNEL_TAG.BNPL,
-  ENUM_CHANNEL_TAG.REPOST,
-]);
-
 export const ChannelCardTags: FC<ChannelCardTagsProps> = ({
   tags,
   compact,
   className,
 }) => {
   const { t } = useTranslation();
-  const visibleTags = tags?.filter((item) => KNOWN_TAGS.has(item.tag));
-
-  if (!visibleTags?.length) return null;
+  const viewTags = getChannelTagView(tags);
 
   return (
     <div
@@ -38,13 +26,13 @@ export const ChannelCardTags: FC<ChannelCardTagsProps> = ({
         className,
       )}
     >
-      {visibleTags.map(({ tag, state }) => {
-        const Icon = state ? Check : X;
+      {viewTags.map(({ tag, allowed }) => {
+        const Icon = allowed ? Check : X;
 
         return (
           <Badge
             key={tag}
-            variant={state ? "success" : "destructive"}
+            variant={allowed ? "success" : "destructive"}
             className={cn(
               "shrink-0 gap-0.5 font-medium leading-none whitespace-nowrap pointer-events-none",
               compact
@@ -54,9 +42,7 @@ export const ChannelCardTags: FC<ChannelCardTagsProps> = ({
           >
             <Icon
               className={cn(
-                compact
-                  ? "size-2 md:size-2.5"
-                  : "size-2.5 mobile-xl:size-3",
+                compact ? "size-2 md:size-2.5" : "size-2.5 mobile-xl:size-3",
               )}
               strokeWidth={3}
             />
