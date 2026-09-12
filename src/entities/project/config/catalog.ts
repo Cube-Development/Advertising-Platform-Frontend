@@ -6,7 +6,7 @@ import {
   TelegramIcon,
   YouTubeIcon,
 } from "@shared/assets";
-import { ENUM_CHANNEL_TAG } from "../types";
+import { ENUM_CHANNEL_TAG, IChannelTag } from "../types";
 
 export enum CATALOG_FILTER {
   PARAMETERS = "parameters",
@@ -48,11 +48,40 @@ export enum sortingFilter {
   rate = "rate",
 }
 
+export const CHANNEL_TAGS = [
+  ENUM_CHANNEL_TAG.CREDIT,
+  ENUM_CHANNEL_TAG.BNPL,
+  ENUM_CHANNEL_TAG.REPOST,
+] as const;
+
 export const CHANNEL_TAG_I18N: Record<ENUM_CHANNEL_TAG, string> = {
   [ENUM_CHANNEL_TAG.CREDIT]: "catalog.tags.credit",
   [ENUM_CHANNEL_TAG.BNPL]: "catalog.tags.bnpl",
   [ENUM_CHANNEL_TAG.REPOST]: "catalog.tags.repost",
 };
+
+const isChannelTagAllowed = (
+  tags: IChannelTag[] | undefined,
+  tag: ENUM_CHANNEL_TAG,
+): boolean => tags?.find((item) => item.tag === tag)?.state !== true;
+
+export const getChannelTagView = (
+  tags?: IChannelTag[],
+): { tag: ENUM_CHANNEL_TAG; allowed: boolean }[] =>
+  CHANNEL_TAGS.map((tag) => ({
+    tag,
+    allowed: isChannelTagAllowed(tags, tag),
+  }));
+
+export const getChannelTagsSelection = (
+  tags?: IChannelTag[],
+): ENUM_CHANNEL_TAG[] =>
+  CHANNEL_TAGS.filter((tag) => isChannelTagAllowed(tags, tag));
+
+export const toChannelTagsPayload = (
+  selected: ENUM_CHANNEL_TAG[],
+): ENUM_CHANNEL_TAG[] =>
+  CHANNEL_TAGS.filter((tag) => !selected.includes(tag));
 
 export const platformToIcon: any = {
   1: TelegramIcon,
