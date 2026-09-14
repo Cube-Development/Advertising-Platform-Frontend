@@ -4,7 +4,7 @@ import { useAppSelector, useWindowWidth } from "@shared/hooks";
 import { ENUM_PATHS } from "@shared/routing";
 import { cn, MyButton, WalletCard } from "@shared/ui";
 import { AlertCircle, ArrowRight } from "lucide-react";
-import { FC, useRef } from "react";
+import { FC, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import SwiperCore from "swiper";
@@ -21,6 +21,7 @@ interface IWalletsBarProps {
   setWalletType: (type: ENUM_WALLETS_TYPE | null) => void;
   direction?: "row" | "column";
   wallets?: ENUM_WALLETS_TYPE[];
+  onTopUp?: () => void | Promise<void>;
 }
 
 export const WalletsBar: FC<IWalletsBarProps> = ({
@@ -33,6 +34,7 @@ export const WalletsBar: FC<IWalletsBarProps> = ({
     ENUM_WALLETS_TYPE.PROFIT,
     ENUM_WALLETS_TYPE.SPENDING,
   ],
+  onTopUp,
 }) => {
   const { t } = useTranslation();
   const screen = useWindowWidth();
@@ -40,6 +42,17 @@ export const WalletsBar: FC<IWalletsBarProps> = ({
     (state) => state.wallet,
   );
   const swiperRef = useRef<SwiperCore | null>(null);
+  const [isTopUpPending, setIsTopUpPending] = useState(false);
+
+  const handleTopUpClick = async () => {
+    if (!onTopUp || isTopUpPending) return;
+    setIsTopUpPending(true);
+    try {
+      await onTopUp();
+    } finally {
+      setIsTopUpPending(false);
+    }
+  };
 
   const handleChangeStepSwiper = (type: ENUM_WALLETS_TYPE, index: number) => {
     swiperRef.current?.slideTo(index);
@@ -78,6 +91,19 @@ export const WalletsBar: FC<IWalletsBarProps> = ({
     WALLETS.length > 0 &&
     WALLETS.every(({ amount }) => amount < requiredAmount);
 
+  const topUpAction = (
+    <MyButton
+      type="button"
+      buttons_type="button__white"
+      disabled={isTopUpPending}
+      className="flex w-full items-center justify-center gap-2 rounded-xl text-xs text-[var(--Personal-colors-main)]"
+      onClick={onTopUp ? handleTopUpClick : undefined}
+    >
+      {t("wallets.top_up_action")}
+      <ArrowRight className="h-4 w-4" />
+    </MyButton>
+  );
+
   const insufficientBalanceAlert = hasNoSufficientWallet ? (
     <div className="mt-2.5 flex flex-col gap-3 rounded-xl bg-[rgba(12,162,184,0.1)] p-3">
       <div className="flex items-start gap-2">
@@ -86,15 +112,13 @@ export const WalletsBar: FC<IWalletsBarProps> = ({
           {t("wallets.insufficient_balance")}
         </p>
       </div>
-      <Link to={ENUM_PATHS.WALLET_TOP_UP} className="w-full">
-        <MyButton
-          buttons_type="button__white"
-          className="flex w-full items-center justify-center gap-2 rounded-xl text-xs text-[var(--Personal-colors-main)]"
-        >
-          {t("wallets.top_up_action")}
-          <ArrowRight className="h-4 w-4" />
-        </MyButton>
-      </Link>
+      {onTopUp ? (
+        <div className="w-full">{topUpAction}</div>
+      ) : (
+        <Link to={ENUM_PATHS.WALLET_TOP_UP} className="w-full">
+          {topUpAction}
+        </Link>
+      )}
     </div>
   ) : null;
 

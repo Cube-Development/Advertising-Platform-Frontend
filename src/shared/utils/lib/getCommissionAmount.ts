@@ -24,6 +24,16 @@ export const getCommissionAmount = (
   };
 };
 
+export const getAmountWithCommission = (
+  needed: number,
+  commission: number,
+): number => {
+  const safeNeeded = Math.max(0, needed);
+  return Math.round(
+    getCommissionAmount(safeNeeded, commission, false).finallyAmount,
+  );
+};
+
 export const getMaxWithdrawAmount = (balance: number, commission: number) => {
   const maxWithdrawAmount = balance / (1 + commission / 100);
 

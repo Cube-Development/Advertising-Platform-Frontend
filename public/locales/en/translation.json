@@ -3494,7 +3494,8 @@
       },
       "save": {
         "success": "Project successfully saved",
-        "error": "Error during project saving"
+        "error": "Error during project saving",
+        "before_topup": "We'll save your project"
       },
       "date": {
         "error": "Error creating dates for channels",

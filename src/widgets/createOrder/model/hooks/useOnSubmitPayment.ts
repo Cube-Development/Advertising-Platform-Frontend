@@ -46,7 +46,8 @@ export const useOnSubmitPayment = () => {
     projectId: string,
     role: ENUM_ROLES,
     saveOnly?: boolean,
-  ) => {
+    options?: { skipSaveNavigate?: boolean },
+  ): Promise<boolean> => {
     try {
       setIsLoading(true);
 
@@ -69,17 +70,23 @@ export const useOnSubmitPayment = () => {
 
       if (saveOnly) {
         // Сохранение проекта
-        await handleSaveProject(projectId);
+        await handleSaveProject(projectId, options?.skipSaveNavigate);
       } else {
         // Оплата или подтверждение
         await handleProjectPayment(projectId, role, formData?.wallet_type);
       }
+      return true;
     } catch (error) {
-      toast({
-        variant: "error",
-        title: t("toasts.create_order.post.error"),
-        description: String(error),
-      });
+      const isSaveError =
+        error instanceof Error && error.message === "Error: Save project";
+      if (!isSaveError) {
+        toast({
+          variant: "error",
+          title: t("toasts.create_order.post.error"),
+          description: String(error),
+        });
+      }
+      return false;
     } finally {
       setIsLoading(false);
     }
@@ -171,9 +178,13 @@ export const useOnSubmitPayment = () => {
     }
   };
 
-  const handleSaveProject = async (projectId: string) => {
+  const handleSaveProject = async (
+    projectId: string,
+    skipSaveNavigate?: boolean,
+  ) => {
     try {
       await saveProject({ project_id: projectId }).unwrap();
+      if (skipSaveNavigate) return;
       toast({
         variant: "success",
         title: t("toasts.create_order.save.success"),
@@ -186,6 +197,7 @@ export const useOnSubmitPayment = () => {
         variant: "error",
         title: t("toasts.create_order.save.error"),
       });
+      throw new Error("Error: Save project");
     }
   };
 

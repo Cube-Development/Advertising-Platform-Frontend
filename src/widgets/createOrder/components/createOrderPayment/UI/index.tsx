@@ -20,6 +20,7 @@ interface CreateOrderPaymentProps {
   isAllowed: boolean;
   onAction?: () => void;
   onSave?: () => void;
+  onTopUp?: () => void;
   setValue: UseFormSetValue<ICreatePostForm>;
   formState: ICreatePostForm;
   step: number;
@@ -32,6 +33,7 @@ export const CreateOrderPayment: FC<CreateOrderPaymentProps> = ({
   isAllowed,
   onAction,
   onSave,
+  onTopUp,
   setValue,
   formState,
   step,
@@ -82,6 +84,7 @@ export const CreateOrderPayment: FC<CreateOrderPaymentProps> = ({
                     disabled={!isAllowed}
                     isAllowed={isAllowed}
                     onAction={onAction}
+                    onTopUp={onTopUp}
                     totalAmount={totalAmount}
                     setValue={setValue}
                     formState={formState}

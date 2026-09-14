@@ -3494,7 +3494,8 @@
       },
       "save": {
         "success": "Reklama kampaniyasi muvaffaqiyatli saqlandi",
-        "error": "Reklama kampaniyasini saqlashda xatolik yuz berdi"
+        "error": "Reklama kampaniyasini saqlashda xatolik yuz berdi",
+        "before_topup": "Loyihangizni saqlaymiz"
       },
       "date": {
         "error": "Kanallar uchun sana yaratishda xatolik",

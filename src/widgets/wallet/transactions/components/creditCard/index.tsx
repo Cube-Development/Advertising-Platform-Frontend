@@ -27,12 +27,19 @@ interface IOnlineBankingData {
   is_fee_included?: boolean;
 }
 
-export const CreditCard: FC = () => {
+interface CreditCardProps {
+  initialAmount?: number;
+}
+
+export const CreditCard: FC<CreditCardProps> = ({ initialAmount }) => {
   const { t } = useTranslation();
   const [payme, { isLoading: isLoadingPayme }] =
     useCreateDepositPaymeMutation();
   const [click, { isLoading: isLoadingClick }] =
     useCreateDepositClickMutation();
+
+  const amountDefault =
+    initialAmount && initialAmount > 0 ? String(Math.round(initialAmount)) : "";
 
   const {
     watch,
@@ -40,13 +47,13 @@ export const CreditCard: FC = () => {
     register,
     handleSubmit,
     setValue,
-    formState: { errors, isSubmitted },
+    formState: { errors },
   } = useForm<IOnlineBankingData>({
     mode: "onChange",
     defaultValues: {
       way_type: paymentTypes.payme,
-      amount: "",
-      is_fee_included: false,
+      amount: amountDefault,
+      is_fee_included: Boolean(amountDefault),
     },
   });
 
@@ -60,7 +67,7 @@ export const CreditCard: FC = () => {
     );
 
   const onSubmit: SubmitHandler<IOnlineBankingData> = async (data) => {
-    if (isLoadingPayme) return;
+    if (isLoadingPayme || isLoadingClick) return;
     let payment;
 
     if (data?.way_type === paymentTypes.payme) {
