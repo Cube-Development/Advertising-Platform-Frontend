@@ -176,6 +176,10 @@
           grid-template: auto minmax(0, 400px) 1fr / 1fr;
           row-gap: 30px;
 
+          &.with_telegram_collect {
+            grid-template: auto auto minmax(0, 400px) 1fr / 1fr;
+          }
+
           // В AI-режиме нет эдитора/block__bottom — форма сама растягивается.
           &.ai_mode {
             grid-template: auto 1fr / 1fr;

@@ -42,6 +42,7 @@ import {
   TemplatePostsDialog,
   TypeRenderEditor,
   TypeTabs,
+  TelegramCollectNotice,
   type PostSource,
 } from "../components";
 import {
@@ -63,6 +64,8 @@ interface CreateOrderPostProps {
   setValue: UseFormSetValue<ICreatePostForm>;
   getValues: UseFormGetValues<ICreatePostForm>;
   formState: ICreatePostForm;
+  saveProject: (formData: ICreatePostForm) => Promise<boolean>;
+  isSaving?: boolean;
 }
 
 export const CreateOrderPost: FC<CreateOrderPostProps> = ({
@@ -73,6 +76,8 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
   setValue,
   getValues,
   formState,
+  saveProject,
+  isSaving,
 }) => {
   const { t } = useTranslation();
   const { toast } = useToast();
@@ -192,6 +197,10 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
               <div
                 className={clsx(styles.post_data, {
                   [styles.ai_mode]: postSource === "ai",
+                  [styles.with_telegram_collect]:
+                    postSource === "manual" &&
+                    formState.platformFilter?.type ===
+                      platformTypesStr.telegram,
                 })}
               >
                 <PostSourceTabs
@@ -199,6 +208,20 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                   onChange={setPostSource}
                   disabled={isGenerating}
                 />
+                {postSource === "manual" &&
+                  formState.platformFilter?.type ===
+                    platformTypesStr.telegram && (
+                    <TelegramCollectNotice
+                      projectId={formState.datetime.project_id}
+                      isMultiPost={formState.isMultiPost}
+                      selectedMultiPostId={formState.selectedMultiPostId}
+                      cards={cards}
+                      getValues={getValues}
+                      setValue={setValue}
+                      saveProject={saveProject}
+                      isSaving={isSaving}
+                    />
+                  )}
                 {postSource === "manual" ? (
                   <>
                     <TypeRenderEditor

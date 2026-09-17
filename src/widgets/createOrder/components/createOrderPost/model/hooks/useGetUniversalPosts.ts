@@ -6,7 +6,7 @@ import {
   IManagerOrderPost,
 } from "@entities/project";
 import { useEffect, useMemo, useState } from "react";
-import { downloadAllFiles } from "../helpers";
+import { downloadAllFiles, getPostsHydrationKey } from "../helpers";
 
 interface Props {
   form: ICreatePostForm;
@@ -24,6 +24,7 @@ export const useGetUniversalPosts = ({ form, posts, skip }: Props) => {
     () => posts.filter((post) => post.match_type === MatchTypesNum.universal),
     [posts],
   );
+  const postsHydrationKey = getPostsHydrationKey(posts);
 
   useEffect(() => {
     if (skip) {
@@ -109,7 +110,7 @@ export const useGetUniversalPosts = ({ form, posts, skip }: Props) => {
         process();
       }
     }
-  }, [posts?.length, form?.posts?.length, skip]);
+  }, [postsHydrationKey, form?.posts?.length, skip]);
 
   return { data: processedPosts, isLoading };
 };

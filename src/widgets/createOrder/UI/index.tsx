@@ -152,6 +152,12 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
               setValue={setValue}
               getValues={getValues}
               formState={formState}
+              saveProject={(formData) =>
+                payment(formData, projectId, role, true, {
+                  skipSaveNavigate: true,
+                })
+              }
+              isSaving={isLoading}
             />
 
             <CreateOrderDatetime

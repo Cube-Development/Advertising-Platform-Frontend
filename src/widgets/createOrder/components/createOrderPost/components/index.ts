@@ -3,3 +3,4 @@ export * from "./renderDisplay";
 export * from "./tabs";
 export * from "./typeRenderEditor";
 export * from "./templatePostsDialog";
+export * from "./telegramCollectNotice";

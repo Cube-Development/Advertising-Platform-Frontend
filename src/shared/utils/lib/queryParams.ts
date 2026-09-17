@@ -61,6 +61,7 @@ export enum queryParamKeys {
   saveProject = "save_project",
   googleAuth = "google_auth",
   amount = "amount",
+  resetDatetime = "reset_datetime",
 }
 
 type QueryParamsType = Partial<Record<queryParamKeys, string | null>>;

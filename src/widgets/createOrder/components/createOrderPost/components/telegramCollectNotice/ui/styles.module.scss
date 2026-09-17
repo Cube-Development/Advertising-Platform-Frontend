@@ -1,0 +1,18 @@
+.wrapper {
+  display: grid;
+  justify-items: start;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: var(--Personal-colors-White);
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.12);
+
+  p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--Personal-colors-black);
+    white-space: normal;
+  }
+}

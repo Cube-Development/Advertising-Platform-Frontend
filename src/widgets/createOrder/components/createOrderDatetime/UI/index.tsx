@@ -12,16 +12,16 @@ import {
 } from "@features/createOrder";
 import { useToast } from "@shared/ui";
 import { formatRuStringToDate } from "@shared/utils";
-import {
-  cleanExpiredDates,
-  resetAllDates,
-  resetAllTimes,
-} from "@features/createOrder/orderCard/lib/formStateUtils";
+import { cleanExpiredDates } from "@features/createOrder/orderCard/lib/formStateUtils";
 import { FC, useEffect } from "react";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { ICreateOrderBlur } from "@widgets/createOrder/model";
+import {
+  ICreateOrderBlur,
+  useResetDatetimeQuery,
+  useResetOrderDatetime,
+} from "@widgets/createOrder/model";
 import { ENUM_ROLES } from "@entities/user";
 
 interface CreateOrderDatetimeProps {
@@ -45,6 +45,16 @@ export const CreateOrderDatetime: FC<CreateOrderDatetimeProps> = ({
 }) => {
   const { t } = useTranslation();
   const { toast } = useToast();
+  const { resetDates, resetTimes, resetDateAndTime } = useResetOrderDatetime(
+    getValues,
+    setValue,
+  );
+
+  useResetDatetimeQuery({
+    cardsCount: cards.length,
+    ordersCount: formState.datetime?.orders?.length || 0,
+    resetDateAndTime,
+  });
 
   // ---------- Очистка устаревших дат при маунте ----------
   useEffect(() => {
@@ -67,18 +77,6 @@ export const CreateOrderDatetime: FC<CreateOrderDatetimeProps> = ({
       });
     }
   }, []);
-
-  const handleResetDates = () => {
-    const datetime = getValues().datetime;
-    if (!datetime) return;
-    setValue(CreatePostFormData.datetime, resetAllDates(datetime));
-  };
-
-  const handleResetTimes = () => {
-    const datetime = getValues().datetime;
-    if (!datetime) return;
-    setValue(CreatePostFormData.datetime, resetAllTimes(datetime));
-  };
 
   const handleCheckDatetimes = () => {
     const form: ICreatePostForm = getValues();
@@ -127,12 +125,12 @@ export const CreateOrderDatetime: FC<CreateOrderDatetimeProps> = ({
             <ResetConfirmButton
               label={t("create_order.datetime.reset_date")}
               confirmMessage={t("create_order.datetime.reset_date_confirm")}
-              onConfirm={handleResetDates}
+              onConfirm={resetDates}
             />
             <ResetConfirmButton
               label={t("create_order.datetime.reset_time")}
               confirmMessage={t("create_order.datetime.reset_time_confirm")}
-              onConfirm={handleResetTimes}
+              onConfirm={resetTimes}
             />
           </div>
         </div>

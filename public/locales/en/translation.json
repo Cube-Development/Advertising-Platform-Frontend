@@ -2564,6 +2564,10 @@
         "manual": "Custom post",
         "ai": "Generate with AI"
       },
+      "telegram_collect": {
+        "hint": "⚠️ If you already have a post, you can send it to our Telegram bot instead of creating it from scratch here",
+        "button": "Send to Telegram bot"
+      },
       "choose_platform": "Choose a Platform",
       "your_posts": "Your Posts",
       "add_file": "Upload File",

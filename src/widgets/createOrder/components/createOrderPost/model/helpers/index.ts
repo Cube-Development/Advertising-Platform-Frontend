@@ -4,3 +4,5 @@ export * from "./downloadAllFiles";
 export * from "./getPostFormats";
 export * from "./getPlatformIds";
 export * from "./checkPosts";
+export * from "./encodeTelegramCollectStart";
+export * from "./getPostsHydrationKey";
