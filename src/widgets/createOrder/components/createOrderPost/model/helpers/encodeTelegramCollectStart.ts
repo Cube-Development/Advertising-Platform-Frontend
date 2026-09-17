@@ -1,6 +1,6 @@
 import { parse as parseUuid, validate as isValidUuid } from "uuid";
 
-export const BLOGIX_BOT_URL = "https://t.me/TestingAssistantBot";
+export const BLOGIX_BOT_URL = "https://t.me/blogix_bot";
 export const TELEGRAM_START_MAX_LENGTH = 64;
 export const COLLECT_PAYLOAD_VERSION = 1;
 
