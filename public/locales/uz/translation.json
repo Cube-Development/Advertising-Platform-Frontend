@@ -2564,6 +2564,10 @@
         "manual": "O'z postim",
         "ai": "AI bilan yaratish"
       },
+      "telegram_collect": {
+        "hint": "⚠️ Tayyor postingiz bo‘lsa, uni shu yerda noldan yaratmasdan Telegram-botga yuborishingiz mumkin",
+        "button": "Telegram-botga yuborish"
+      },
       "choose_platform": "Platformani tanlang",
       "your_posts": "Sizning postlaringiz",
       "add_file": "Fayl yuklash",
@@ -3494,7 +3498,8 @@
       },
       "save": {
         "success": "Reklama kampaniyasi muvaffaqiyatli saqlandi",
-        "error": "Reklama kampaniyasini saqlashda xatolik yuz berdi"
+        "error": "Reklama kampaniyasini saqlashda xatolik yuz berdi",
+        "before_topup": "Loyihangizni saqlaymiz"
       },
       "date": {
         "error": "Kanallar uchun sana yaratishda xatolik",

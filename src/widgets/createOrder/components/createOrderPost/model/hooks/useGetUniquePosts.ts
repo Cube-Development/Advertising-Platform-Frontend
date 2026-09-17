@@ -6,7 +6,7 @@ import {
   IManagerOrderPost,
 } from "@entities/project";
 import { useEffect, useMemo, useState } from "react";
-import { downloadAllFiles } from "../helpers";
+import { downloadAllFiles, getPostsHydrationKey } from "../helpers";
 
 const assignMultipostGroupsFromBackend = (
   posts: IManagerOrderPost[],
@@ -53,6 +53,7 @@ export const useGetUniquePosts = ({ form, posts, skip }: Props) => {
     [posts],
   );
   const isMultiPost = useMemo(() => !!orders.length, [orders]);
+  const postsHydrationKey = getPostsHydrationKey(posts);
 
   useEffect(() => {
     if (skip) {
@@ -139,7 +140,7 @@ export const useGetUniquePosts = ({ form, posts, skip }: Props) => {
         process();
       }
     }
-  }, [posts?.length, form?.multiposts?.length, skip]);
+  }, [postsHydrationKey, form?.multiposts?.length, skip]);
 
   return { data: processedPosts, isLoading, isMultiPost };
 };

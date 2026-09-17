@@ -18,23 +18,29 @@ import {
   useWindowWidth,
 } from "@shared/hooks";
 import { CustomTitle } from "@shared/ui";
-import { formatWithOutSpaces } from "@shared/utils";
+import {
+  formatWithOutSpaces,
+  queryParamKeys,
+  QueryParamsNumber,
+} from "@shared/utils";
 import { NotLogin } from "@widgets/organization";
 import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { CreditCard, OrganizationData } from "../../components";
-import { useWalletDeposit } from "../../model";
+import { useReturnToCreateOrderAfterTopup, useWalletDeposit } from "../../model";
 import styles from "./styles.module.scss";
 
 export const Topup: FC = () => {
   useClearCookiesOnPage();
+  useReturnToCreateOrderAfterTopup();
   const { t } = useTranslation();
   const { isAuthEcp, isOfferSign, isCommittent } = useAppSelector(
     (state) => state.user,
   );
   const screen = useWindowWidth();
   const dispatch = useAppDispatch();
+  const amountFromQuery = QueryParamsNumber(queryParamKeys.amount);
 
   const {
     setValue,
@@ -48,10 +54,11 @@ export const Topup: FC = () => {
         type: PROFILE_TYPE.SELF_EMPLOYED_ACCOUNT,
         id: PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT,
       },
+      ...(amountFromQuery ? { amount: amountFromQuery } : {}),
     },
   });
   const formState = watch();
-  const { deposit, isLoading, isSuccess, uploadUrl } = useWalletDeposit();
+  const { deposit, isSuccess, uploadUrl } = useWalletDeposit();
 
   const changeTab = (filter: PROFILE_TYPE) => {
     const item = WALLET_TOP_UP_FILTER_TABS_LIST.find(
@@ -90,7 +97,7 @@ export const Topup: FC = () => {
             <UnrealizedWallet />
             {formState?.profileFilter?.type ===
             PROFILE_TYPE.SELF_EMPLOYED_ACCOUNT ? (
-              <CreditCard />
+              <CreditCard initialAmount={amountFromQuery || undefined} />
             ) : !isAuthEcp ? (
               <NotLogin />
             ) : (

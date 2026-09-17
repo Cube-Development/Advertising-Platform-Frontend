@@ -21,6 +21,7 @@ interface CreateOrderProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   isAllowed: boolean;
   totalAmount: number;
   onAction?: () => void;
+  onTopUp?: () => void;
   setValue: UseFormSetValue<ICreatePostForm>;
   formState: ICreatePostForm;
 }
@@ -29,6 +30,7 @@ export const CreateOrder: FC<CreateOrderProps> = ({
   isAllowed,
   totalAmount,
   onAction,
+  onTopUp,
   setValue,
   formState,
   ...props
@@ -75,6 +77,7 @@ export const CreateOrder: FC<CreateOrderProps> = ({
               walletType={formState?.wallet_type!}
               setWalletType={(type) => setValue("wallet_type", type!)}
               totalAmount={totalAmount}
+              onTopUp={onTopUp}
             />
           </div>
           <div className={styles.bottom}>

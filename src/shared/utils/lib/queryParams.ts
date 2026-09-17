@@ -60,6 +60,8 @@ export enum queryParamKeys {
   permission = "permission",
   saveProject = "save_project",
   googleAuth = "google_auth",
+  amount = "amount",
+  resetDatetime = "reset_datetime",
 }
 
 type QueryParamsType = Partial<Record<queryParamKeys, string | null>>;
@@ -93,4 +95,11 @@ export const QueryParamsUUID = (key: queryParamKeys): string => {
   const params = QueryParams();
   const value = params[key];
   return value && isValidUUID(value) ? value : "";
+};
+
+export const QueryParamsNumber = (key: queryParamKeys): number => {
+  const value = QueryParams()[key];
+  if (!value) return 0;
+  const num = Number(value);
+  return Number.isFinite(num) && num > 0 ? num : 0;
 };
