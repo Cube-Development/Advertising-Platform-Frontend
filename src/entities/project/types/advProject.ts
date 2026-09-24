@@ -32,6 +32,7 @@ export interface IAdvProjectCard {
   wait?: number;
   in_progress?: number;
   moderation?: number;
+  report?: IOrderReportInfo | null;
   subcard?: IAdvProjectSubcard[];
 }
 
@@ -133,4 +134,8 @@ export interface IOrderReportInfo {
   file_name: string;
   url: string;
   created: string;
+}
+
+export interface IProjectReports {
+  reports: IOrderReportInfo[];
 }

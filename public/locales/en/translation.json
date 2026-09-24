@@ -3132,6 +3132,12 @@
     },
     "sendReport": "Upload report",
     "downloadReport": "Detailed report",
+    "requestReport": "Generate report",
+    "reportGenerating": "Generating report",
+    "reportVersions": "Report versions",
+    "reportLatest": "Latest",
+    "reportRequestError": "Failed to start report generation",
+    "reportDownloadError": "Failed to download the file",
     "copyProject": "Copy project",
     "continue": "Continue",
     "is_upload_files": "Uploading files"

@@ -3132,6 +3132,12 @@
     },
     "sendReport": "Hisobot yuklash",
     "downloadReport": "Batafsil hisobot",
+    "requestReport": "Hisobotni shakllantirish",
+    "reportGenerating": "Hisobot shakllantirilmoqda",
+    "reportVersions": "Hisobot versiyalari",
+    "reportLatest": "Joriy",
+    "reportRequestError": "Hisobotni shakllantirishni boshlab bo'lmadi",
+    "reportDownloadError": "Faylni yuklab bo'lmadi",
     "copyProject": "Loyihani nusxalash",
     "continue": "Davom etish",
     "is_upload_files": "Fayllarni yuboryapmiz"

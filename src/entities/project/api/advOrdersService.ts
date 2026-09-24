@@ -7,6 +7,7 @@ import {
   ICreateDate,
   IFile,
   IOrderReportInfo,
+  IProjectReports,
   IPostChannel,
   ENUM_MANAGER_PROJECT_STATUS,
   ENUM_ADV_MY_PROJECT_STATUS,
@@ -213,6 +214,19 @@ export const advProjectsAPI = authApi.injectEndpoints({
         url: `/order/advertiser/report`,
         method: "GET",
         params: params,
+      }),
+    }),
+    requestCompletedReport: build.mutation<void, { project_id: string }>({
+      query: ({ project_id }) => ({
+        url: `/report/orders-completed/request`,
+        method: "POST",
+        params: { project_id },
+      }),
+    }),
+    getProjectReports: build.query<IProjectReports, { project_id: string }>({
+      query: ({ project_id }) => ({
+        url: `/report/${project_id}/reports`,
+        method: "GET",
       }),
     }),
     getAdvProjects: build.query<
@@ -531,5 +545,7 @@ export const {
   useGetAdvManagerProjectsQuery,
   useGetAdvManagerSubprojectsQuery,
   useOrderReportInfoMutation,
+  useRequestCompletedReportMutation,
+  useGetProjectReportsQuery,
   useGetProjectNameQuery,
 } = advProjectsAPI;

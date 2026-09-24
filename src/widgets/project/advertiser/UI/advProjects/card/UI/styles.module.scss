@@ -16,7 +16,7 @@
     align-items: flex-start;
 
     &.completed {
-      min-height: 550px;
+      min-height: 600px;
     }
   }
 }
@@ -186,7 +186,7 @@
 
   &__info {
     display: grid;
-    grid-template: repeat(2, 1fr) / 1fr;
+    // grid-template: repeat(2, 1fr) / 1fr;
     padding: 0 20px;
     border-right: 1px solid var(--Card-separator);
 
@@ -235,7 +235,7 @@
         justify-content: center;
         justify-items: center;
         align-content: center;
-        padding: 0px 10px;
+        padding: 5px 10px;
 
         p {
           color: rgba(0, 0, 0, 0.45);
@@ -270,6 +270,7 @@
         @media (max-width: 992px) {
           justify-content: start;
           justify-items: start;
+
           p,
           span {
             font-size: 12px;
@@ -421,7 +422,10 @@
         }
 
         @media (max-width: 768px) {
-          padding-top: 0;
+          padding-top: 10px;
+          grid-template-columns: 1fr;
+          grid-template-rows: auto auto;
+          row-gap: 10px;
         }
 
         big {
@@ -485,7 +489,7 @@
       column-gap: 10px;
       padding-top: 20px;
 
-      > * {
+      >* {
         flex: 1 1 50%;
       }
 
@@ -553,15 +557,31 @@
         }
 
         @media (max-width: 768px) {
-          padding: 50px 5px;
+          padding: 15px 5px;
+
+          svg {
+            width: 26px;
+            height: 26px;
+          }
         }
       }
 
       @media (max-width: 992px) {
         padding-top: 0;
         padding-left: 15px;
-        grid-template: 2fr 1fr / 1fr;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
         row-gap: 10px;
+
+        >.icons,
+        >.card__info__icons {
+          width: 100%;
+        }
+
+        > :last-child {
+          width: 100%;
+          min-width: 0;
+        }
 
         svg {
           width: 26px;
@@ -571,7 +591,7 @@
 
       @media (max-width: 768px) {
         padding-left: 0;
-        grid-template: 3fr 1fr / 1fr;
+        row-gap: 10px;
       }
     }
   }
@@ -581,6 +601,7 @@
   display: grid;
   grid-auto-flow: row;
   align-items: center;
+
   @media (max-width: 768px) {
     min-height: 500px;
   }
