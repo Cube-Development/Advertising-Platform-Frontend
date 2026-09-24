@@ -16,6 +16,7 @@ import {
 } from "@entities/project";
 import {
   ADV_ORDERS,
+  ADV_PROJECT_REPORTS,
   ADV_PROJECTS,
   ADV_TARIFF_ORDERS,
   ADV_TARIFF_PROJECTS,
@@ -222,12 +223,19 @@ export const advProjectsAPI = authApi.injectEndpoints({
         method: "POST",
         params: { project_id },
       }),
+      invalidatesTags: (_result, _error, { project_id }) => [
+        { type: ADV_PROJECT_REPORTS, id: project_id },
+        ADV_PROJECTS,
+      ],
     }),
     getProjectReports: build.query<IProjectReports, { project_id: string }>({
       query: ({ project_id }) => ({
         url: `/report/${project_id}/reports`,
         method: "GET",
       }),
+      providesTags: (_result, _error, { project_id }) => [
+        { type: ADV_PROJECT_REPORTS, id: project_id },
+      ],
     }),
     getAdvProjects: build.query<
       IAdvProjects,
