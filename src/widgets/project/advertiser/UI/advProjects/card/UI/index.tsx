@@ -21,7 +21,7 @@ import {
 } from "@features/order";
 import {
   AcceptProject,
-  DownloadReport,
+  ProjectReportActions,
   ProjectCardMenu,
 } from "@features/project";
 import {
@@ -168,7 +168,7 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
               </div>
               <div className={styles.bottom}>
                 <Feedback />
-                <DownloadReport project_id={card?.id} report={card?.report} />
+                <ProjectReportActions project_id={card?.id} report={card?.report} />
               </div>
             </div>
           ) : typeFilter === ENUM_PROJECT_TYPES.MANAGER_PROJECT &&
@@ -204,7 +204,7 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
                   <p>{card?.canceled_rejected?.toLocaleString()}</p>
                 </div>
               </div>
-              <DownloadReport project_id={card?.id} report={card?.report} />
+              <ProjectReportActions project_id={card?.id} report={card?.report} />
             </div>
           ) : (
             <div className={styles.card__info__icons_completed}>
@@ -230,7 +230,7 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
                   <p>{card?.moderation?.toLocaleString()}</p>
                 </div> */}
               </div>
-              <DownloadReport project_id={card?.id} report={card?.report} />
+              <ProjectReportActions project_id={card?.id} report={card?.report} />
             </div>
           )}
         </>
