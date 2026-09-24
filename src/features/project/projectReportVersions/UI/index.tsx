@@ -2,7 +2,7 @@ import { IOrderReportInfo, useGetProjectReportsQuery } from "@entities/project";
 import { MyButton, Popover, PopoverTrigger, useToast } from "@shared/ui";
 import { downloadFileOnDevice } from "@shared/utils";
 import { ChevronDown, Loader } from "lucide-react";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { getReportDownloadFileName } from "../model/getReportDownloadFileName";
 import { ReportVersionsPopoverContent } from "./report-versions-popover-content";
@@ -23,37 +23,25 @@ export const ProjectReportVersions: FC<ProjectReportVersionsProps> = ({
   const { toast } = useToast();
   const [isOpen, setIsOpen] = useState(false);
   const [downloadingId, setDownloadingId] = useState<string | null>(null);
-  const [reports, setReports] = useState<IOrderReportInfo[]>(() =>
-    report ? [report] : [],
-  );
 
   const { data, isFetching } = useGetProjectReportsQuery(
     { project_id },
     {
-      skip: !project_id || !isOpen,
+      skip: !project_id,
       pollingInterval: 0,
     },
   );
 
-  useEffect(() => {
-    if (!report) return;
+  const reports: IOrderReportInfo[] = data?.reports?.length
+    ? data.reports
+    : report
+      ? [report]
+      : [];
 
-    setReports((current) =>
-      current.some((item) => item.id === report.id)
-        ? current
-        : [report, ...current],
-    );
-  }, [report]);
-
-  useEffect(() => {
-    if (!data?.reports.length) return;
-
-    setReports(data.reports);
-  }, [data?.reports]);
+  const hasVersions = reports.length > 0;
 
   const latestReportId =
-    report?.id ?? data?.reports?.[0]?.id ?? reports[0]?.id;
-  const hasVersions = Boolean(report) || reports.length > 0;
+    data?.reports?.[0]?.id ?? report?.id ?? reports[0]?.id;
 
   const handleDownload = async (file: IOrderReportInfo) => {
     try {
@@ -96,7 +84,7 @@ export const ProjectReportVersions: FC<ProjectReportVersionsProps> = ({
         className="w-72 max-w-[min(18rem,calc(100vw-1.5rem))] p-2"
         onOpenAutoFocus={(event) => event.preventDefault()}
       >
-        {isFetching && reports.length === 0 ? (
+        {isFetching && !reports.length ? (
           <div className="flex justify-center py-3">
             <Loader className="animate-spin" width={20} height={20} />
           </div>
