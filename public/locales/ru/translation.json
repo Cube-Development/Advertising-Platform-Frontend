@@ -3134,6 +3134,12 @@
     },
     "sendReport": "Загрузить отчет",
     "downloadReport": "Подробный отчет",
+    "requestReport": "Сформировать отчёт",
+    "reportGenerating": "Отчёт формируется",
+    "reportVersions": "Версии отчёта",
+    "reportLatest": "Актуальная",
+    "reportRequestError": "Не удалось запустить формирование отчёта",
+    "reportDownloadError": "Не удалось скачать файл",
     "copyProject": "Копировать проект",
     "continue": "Продолжить",
     "is_upload_files": "Отправляем файлы"
