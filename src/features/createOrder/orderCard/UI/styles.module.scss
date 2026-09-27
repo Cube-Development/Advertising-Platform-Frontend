@@ -7,6 +7,11 @@
   background: var(--Personal-colors-White);
   padding: 10px 15px 10px 15px;
 
+  &.wrapper_unavailable {
+    outline: 1.5px solid var(--toast-error);
+    outline-offset: -1.5px;
+  }
+
   @media (max-width: 768px) {
     grid-auto-flow: column;
     padding: 10px;
@@ -206,4 +211,12 @@
       }
     }
   }
+}
+
+.unavailable {
+  margin: 8px 2px 0;
+  color: var(--toast-error);
+  font-size: 12px;
+  font-weight: 600;
+  text-align: start;
 }

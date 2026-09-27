@@ -2334,6 +2334,7 @@
       "finnaly_short": "Yakuniy",
       "vat_info": "*QQS 12% bilan"
     },
+    "format_unavailable": "Format eskirgan, boshqasini tanlang",
     "recomendation": "Tavsiya etilgan kanallar",
     "hide": "yashirish",
     "show": "ko'rsatish",
@@ -2550,6 +2551,7 @@
   },
   "create_order": {
     "create_order": "Buyurtmani rasmiylashtirish",
+    "format_unavailable": "Format eskirgan. Savatga qaytib, boshqa formatni tanlang",
     "name": {
       "title": "Reklama kampaniyasini qanday nomlaymiz?",
       "default_value": "Nomi kiriting..."
@@ -3398,7 +3400,8 @@
       "clear": {
         "success": "Savatcha tozalandi",
         "error": "Savatchani tozalashda xatolik"
-      }
+      },
+      "format_unavailable": "Ayrim formatlar eskirgan. Savatni tekshiring"
     },
     "offers_blogger": {
       "channel": {
@@ -3515,6 +3518,7 @@
       "create_order": {
         "error": "Xatolik yuz berdi"
       },
+      "format_unavailable": "Savatga o'ting va formatlarni tekshiring",
       "channels": {
         "error": "Avval savatga kanallarni qoʻshish kerak"
       }

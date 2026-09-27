@@ -127,6 +127,11 @@
             color: #fff;
           }
 
+          .unavailable_mark {
+            background: rgba(255, 255, 255, 0.22);
+            color: #fff;
+          }
+
           .icon_btn {
             color: #fff;
             opacity: 0.95;
@@ -190,6 +195,16 @@
           border-radius: 8px;
           background: rgba(34, 197, 94, 0.15);
           color: rgb(22, 101, 52);
+        }
+
+        .unavailable_mark {
+          flex-shrink: 0;
+          font-size: 10px;
+          font-weight: 600;
+          padding: 2px 6px;
+          border-radius: 8px;
+          background: rgba(239, 68, 68, 0.15);
+          color: var(--toast-error);
         }
 
         .status {

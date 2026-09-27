@@ -151,6 +151,11 @@ export const MultiPostsList: FC<MultiPostsListProps> = ({
                   </span>
                   <span className={styles.post__title}>
                     {index + 1}. {post?.name}
+                    {post.format_unavailable ? (
+                      <span className={styles.unavailable_mark}>
+                        {t("cart.format_unavailable")}
+                      </span>
+                    ) : null}
                     {groupSize > 1 ? (
                       <span className={styles.group_badge}>
                         {t("create_order.create.multi_posts_list.group_badge", {

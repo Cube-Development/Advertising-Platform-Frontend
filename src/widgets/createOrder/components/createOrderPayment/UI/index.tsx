@@ -24,6 +24,8 @@ interface CreateOrderPaymentProps {
   setValue: UseFormSetValue<ICreatePostForm>;
   formState: ICreatePostForm;
   step: number;
+  blocked?: boolean;
+  onBlocked?: () => void;
 }
 
 export const CreateOrderPayment: FC<CreateOrderPaymentProps> = ({
@@ -37,6 +39,8 @@ export const CreateOrderPayment: FC<CreateOrderPaymentProps> = ({
   setValue,
   formState,
   step,
+  blocked,
+  onBlocked,
 }) => {
   const { t } = useTranslation();
   const totalAmountCurrent =
@@ -88,6 +92,8 @@ export const CreateOrderPayment: FC<CreateOrderPaymentProps> = ({
                     totalAmount={totalAmount}
                     setValue={setValue}
                     formState={formState}
+                    blocked={blocked}
+                    onBlocked={onBlocked}
                   />
                   {!isPremiumUser ? (
                     <LoginPremiumAccess

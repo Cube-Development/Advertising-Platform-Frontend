@@ -185,8 +185,10 @@ export const Cart: FC = () => {
                   const index = draft.channels.findIndex(
                     (c) => c.id === cartChannel.id,
                   );
-                  if (index !== -1)
+                  if (index !== -1) {
                     draft.channels[index].selected_format = newFormat;
+                    draft.channels[index].format_unavailable = false;
+                  }
                 } else {
                   draft.channels = draft.channels.filter(
                     (c) => c.id !== cartChannel.id,
@@ -208,8 +210,10 @@ export const Cart: FC = () => {
                   const index = draft.channels.findIndex(
                     (c) => c.id === cartChannel.id,
                   );
-                  if (index !== -1)
+                  if (index !== -1) {
                     draft.channels[index].selected_format = newFormat;
+                    draft.channels[index].format_unavailable = false;
+                  }
                 } else {
                   draft.channels = draft.channels.filter(
                     (c) => c.id !== cartChannel.id,
@@ -231,8 +235,10 @@ export const Cart: FC = () => {
                   const index = draft.channels.findIndex(
                     (c) => c.id === cartChannel.id,
                   );
-                  if (index !== -1)
+                  if (index !== -1) {
                     draft.channels[index].selected_format = newFormat;
+                    draft.channels[index].format_unavailable = false;
+                  }
                 } else {
                   draft.channels = draft.channels.filter(
                     (c) => c.id !== cartChannel.id,
@@ -252,7 +258,11 @@ export const Cart: FC = () => {
               ...prev,
               channels: prev.channels.map((c) =>
                 c.id === cartChannel.id
-                  ? { ...c, selected_format: newFormat }
+                  ? {
+                      ...c,
+                      selected_format: newFormat,
+                      format_unavailable: false,
+                    }
                   : c,
               ),
             };

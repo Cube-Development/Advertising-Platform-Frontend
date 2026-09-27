@@ -63,6 +63,7 @@ export interface ICatalogChannel {
   url?: string;
   is_self_connect?: boolean;
   tags?: IChannelTag[];
+  format_unavailable?: boolean;
 }
 
 export interface IFormat {

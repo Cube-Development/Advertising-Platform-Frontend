@@ -7,6 +7,11 @@
   background: rgba(255, 255, 255, 0.5);
   position: relative;
 
+  &.wrapper_unavailable {
+    outline: 1.5px solid var(--toast-error);
+    outline-offset: -1.5px;
+  }
+
   .channel {
     display: grid;
     grid-auto-flow: row;
@@ -551,4 +556,12 @@
       line-height: normal;
     }
   }
+}
+
+.unavailable {
+  margin: 8px 2px 0;
+  color: var(--toast-error);
+  font-size: 12px;
+  font-weight: 600;
+  text-align: start;
 }
