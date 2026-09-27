@@ -24,6 +24,8 @@ interface CreateOrderProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   onTopUp?: () => void;
   setValue: UseFormSetValue<ICreatePostForm>;
   formState: ICreatePostForm;
+  blocked?: boolean;
+  onBlocked?: () => void;
 }
 
 export const CreateOrder: FC<CreateOrderProps> = ({
@@ -33,6 +35,8 @@ export const CreateOrder: FC<CreateOrderProps> = ({
   onTopUp,
   setValue,
   formState,
+  blocked,
+  onBlocked,
   ...props
 }) => {
   const [open, setOpen] = useState(false);
@@ -42,8 +46,16 @@ export const CreateOrder: FC<CreateOrderProps> = ({
     onAction && onAction();
   };
 
+  const handleOpenChange = (next: boolean) => {
+    if (next && blocked) {
+      onBlocked?.();
+      return;
+    }
+    setOpen(next);
+  };
+
   return (
-    <Sheet open={open} onOpenChange={setOpen}>
+    <Sheet open={open} onOpenChange={handleOpenChange}>
       <SheetTrigger asChild>
         <MyButton buttons_type="button__green" type="button" {...props}>
           {!isAllowed ? (

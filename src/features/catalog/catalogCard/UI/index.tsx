@@ -31,6 +31,7 @@ import {
   queryParamKeys,
   QueryParamsUUID,
 } from "@shared/utils";
+import clsx from "clsx";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -131,147 +132,89 @@ export const CatalogCard: FC<CatalogCardProps> = ({
     });
   };
 
+  const formatUnavailable =
+    page === ENUM_PAGE_FILTER.CART && card.format_unavailable;
+
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.channel}>
-        <div className={styles.channel__top}>
-          <div className={styles.column__logo}>
-            <div className={styles.logo}>
-              <div className={styles.logo__avatar}>
-                <Link
-                  to={channelPath}
-                  className={`${styles.logo__img_wrapper}${
-                    card.is_self_connect
-                      ? ` ${styles.logo__img_wrapper_self_connect}`
-                      : ""
-                  }`}
-                >
-                  <img src={card?.avatar} alt={card?.name} />
-                </Link>
-                {card.is_self_connect && (
-                  <div className={styles.logo__self_connect_badge}>
-                    <DiamondIcon />
-                  </div>
-                )}
-              </div>
-              <div className={styles.rate}>
-                <RatingIcon rate={card?.rate || 0} />
+    <div>
+      <div
+        className={clsx(
+          styles.wrapper,
+          formatUnavailable && styles.wrapper_unavailable,
+        )}
+      >
+        <div className={styles.channel}>
+          <div className={styles.channel__top}>
+            <div className={styles.column__logo}>
+              <div className={styles.logo}>
+                <div className={styles.logo__avatar}>
+                  <Link
+                    to={channelPath}
+                    className={`${styles.logo__img_wrapper}${
+                      card.is_self_connect
+                        ? ` ${styles.logo__img_wrapper_self_connect}`
+                        : ""
+                    }`}
+                  >
+                    <img src={card?.avatar} alt={card?.name} />
+                  </Link>
+                  {card.is_self_connect && (
+                    <div className={styles.logo__self_connect_badge}>
+                      <DiamondIcon />
+                    </div>
+                  )}
+                </div>
+                <div className={styles.rate}>
+                  <RatingIcon rate={card?.rate || 0} />
+                </div>
               </div>
             </div>
-          </div>
-          <div className={styles.column__info}>
-            <div className={styles.info}>
-              <Link to={channelPath} className={`${styles.title} truncate`}>
-                {card?.name}
-                {/* языки */}
-                {card?.channel_languages && (
-                  <div className={styles.languages}>
-                    {[...card.channel_languages]
-                      .sort((a, b) => a - b)
-                      .map((lang) => {
-                        const languageInfo = CHANNEL_LANGUAGES_LIST.find(
-                          (l) => l.id === lang,
-                        );
+            <div className={styles.column__info}>
+              <div className={styles.info}>
+                <Link to={channelPath} className={`${styles.title} truncate`}>
+                  {card?.name}
+                  {/* языки */}
+                  {card?.channel_languages && (
+                    <div className={styles.languages}>
+                      {[...card.channel_languages]
+                        .sort((a, b) => a - b)
+                        .map((lang) => {
+                          const languageInfo = CHANNEL_LANGUAGES_LIST.find(
+                            (l) => l.id === lang,
+                          );
 
-                        if (!languageInfo) return "...";
+                          if (!languageInfo) return "...";
 
-                        return (
-                          <img
-                            className={styles.languages__icon}
-                            key={languageInfo.id}
-                            src={`/images/${languageInfo.icon}.svg`}
-                            alt={languageInfo.name}
-                          />
-                        );
-                      })}
-                  </div>
-                )}
-                {/* языки */}
-              </Link>
-              <p className={`${styles.category} truncate`}>{card?.category}</p>
-              {card?.url && (
-                <p className="text-[var(--URL)] font-medium mobile-xl:text-[12px] text-[10px] break-words break-all mobile-xl:-mt-2">
-                  {card?.url}
+                          return (
+                            <img
+                              className={styles.languages__icon}
+                              key={languageInfo.id}
+                              src={`/images/${languageInfo.icon}.svg`}
+                              alt={languageInfo.name}
+                            />
+                          );
+                        })}
+                    </div>
+                  )}
+                  {/* языки */}
+                </Link>
+                <p className={`${styles.category} truncate`}>
+                  {card?.category}
                 </p>
-              )}
-              <ChannelCardTags tags={card?.tags} className="hidden md:flex" />
-              {/* {screen >= BREAKPOINT.MD && (
+                {card?.url && (
+                  <p className="text-[var(--URL)] font-medium mobile-xl:text-[12px] text-[10px] break-words break-all mobile-xl:-mt-2">
+                    {card?.url}
+                  </p>
+                )}
+                <ChannelCardTags tags={card?.tags} className="hidden md:flex" />
+                {/* {screen >= BREAKPOINT.MD && (
                 <ChannelCardDescription description={card?.description} />
               )} */}
+              </div>
             </div>
-          </div>
 
-          {screen >= BREAKPOINT.LG && (
-            <div className={styles.column__data}>
-              <div className={styles.channel__data_row}>
-                <div className={styles.data}>
-                  <div>
-                    <SubsIcon />
-                  </div>
-                  <span>{card?.subscribers?.toLocaleString()}</span>
-                </div>
-                <div className={styles.data}>
-                  <div>
-                    <EyeIcon />
-                  </div>
-                  <span>{selectedFormat?.views!.toLocaleString()}</span>
-                </div>
-              </div>
-              <div className={styles.channel__data_middle}>
-                <div>
-                  <BoyIcon />
-                </div>
-                <div
-                  className="colorline"
-                  style={{ "--male": `${card?.male}%` } as React.CSSProperties}
-                  data-male={`${card?.male}%`}
-                  data-female={`${card?.female}%`}
-                />
-                <div>
-                  <GirlIcon />
-                </div>
-              </div>
-              <div className={styles.channel__data_row}>
-                <div className={styles.data}>
-                  <p>ER:</p>
-                  <span>
-                    {isModal ? <Modal /> : <>{selectedFormat?.er}%</>}
-                  </span>
-                </div>
-                <div className={styles.data}>
-                  <p>CPV:</p>
-                  <span>
-                    {isModal ? (
-                      <Modal />
-                    ) : (
-                      <>
-                        {selectedFormat?.cpv!.toLocaleString()} {t(`symbol`)}
-                      </>
-                    )}
-                  </span>
-                </div>
-              </div>
-            </div>
-          )}
-          <div className={styles.column__cross}>
-            <ChannelCardMatch
-              match={card.match ? Math.ceil(card.match) : undefined}
-            />
-            <div className={styles.platform__icon}>
-              {card?.platform && card?.platform in platformToIcon
-                ? platformToIcon[card.platform!]()
-                : "..."}
-            </div>
-          </div>
-        </div>
-        <ChannelCardTags tags={card?.tags} className="md:hidden" />
-        {screen < BREAKPOINT.LG && screen >= BREAKPOINT.MD ? (
-          <Accordion type="single" collapsible>
-            <AccordionItem
-              value={`item-${card.id}`}
-              className={styles.channel__data__md}
-            >
-              <AccordionTrigger onClick={handleChangeOpenSubcard}>
+            {screen >= BREAKPOINT.LG && (
+              <div className={styles.column__data}>
                 <div className={styles.channel__data_row}>
                   <div className={styles.data}>
                     <div>
@@ -285,34 +228,21 @@ export const CatalogCard: FC<CatalogCardProps> = ({
                     </div>
                     <span>{selectedFormat?.views!.toLocaleString()}</span>
                   </div>
-                  <div className={styles.arrow}>
-                    <ArrowSmallVerticalIcon
-                      className={
-                        isSubcardOpen
-                          ? "icon__grey rotate"
-                          : "icon__grey rotate__down"
-                      }
-                    />
-                  </div>
                 </div>
-              </AccordionTrigger>
-              <AccordionContent className={styles.channel__content}>
                 <div className={styles.channel__data_middle}>
-                  <div className={styles.middle}>
-                    <div>
-                      <BoyIcon />
-                    </div>
-                    <div
-                      className="colorline"
-                      style={
-                        { "--male": `${card?.male}%` } as React.CSSProperties
-                      }
-                      data-male={`${card?.male}%`}
-                      data-female={`${card?.female}%`}
-                    />
-                    <div>
-                      <GirlIcon />
-                    </div>
+                  <div>
+                    <BoyIcon />
+                  </div>
+                  <div
+                    className="colorline"
+                    style={
+                      { "--male": `${card?.male}%` } as React.CSSProperties
+                    }
+                    data-male={`${card?.male}%`}
+                    data-female={`${card?.female}%`}
+                  />
+                  <div>
+                    <GirlIcon />
                   </div>
                 </div>
                 <div className={styles.channel__data_row}>
@@ -335,19 +265,27 @@ export const CatalogCard: FC<CatalogCardProps> = ({
                     </span>
                   </div>
                 </div>
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-        ) : screen < BREAKPOINT.MD ? (
-          <>
-            {/* <ChannelCardDescription description={card?.description} /> */}
-
+              </div>
+            )}
+            <div className={styles.column__cross}>
+              <ChannelCardMatch
+                match={card.match ? Math.ceil(card.match) : undefined}
+              />
+              <div className={styles.platform__icon}>
+                {card?.platform && card?.platform in platformToIcon
+                  ? platformToIcon[card.platform!]()
+                  : "..."}
+              </div>
+            </div>
+          </div>
+          <ChannelCardTags tags={card?.tags} className="md:hidden" />
+          {screen < BREAKPOINT.LG && screen >= BREAKPOINT.MD ? (
             <Accordion type="single" collapsible>
               <AccordionItem
                 value={`item-${card.id}`}
-                className={styles.channel__xs}
+                className={styles.channel__data__md}
               >
-                <div className={styles.channel__data__xs}>
+                <AccordionTrigger onClick={handleChangeOpenSubcard}>
                   <div className={styles.channel__data_row}>
                     <div className={styles.data}>
                       <div>
@@ -361,84 +299,165 @@ export const CatalogCard: FC<CatalogCardProps> = ({
                       </div>
                       <span>{selectedFormat?.views!.toLocaleString()}</span>
                     </div>
+                    <div className={styles.arrow}>
+                      <ArrowSmallVerticalIcon
+                        className={
+                          isSubcardOpen
+                            ? "icon__grey rotate"
+                            : "icon__grey rotate__down"
+                        }
+                      />
+                    </div>
                   </div>
-                  <AccordionContent className={styles.channel__content}>
-                    <div className={styles.channel__data_middle}>
-                      <div className={styles.middle}>
-                        <div>
-                          <BoyIcon />
-                        </div>
-                        <div
-                          className="colorline"
-                          style={
-                            {
-                              "--male": `${card?.male}%`,
-                            } as React.CSSProperties
-                          }
-                          data-male={`${card?.male}%`}
-                          data-female={`${card?.female}%`}
-                        />
-                        <div>
-                          <GirlIcon />
-                        </div>
-                      </div>
-                    </div>
-                    <div className={styles.channel__data_row}>
-                      <div className={styles.data}>
-                        <p>ER:</p>
-                        <span>
-                          {isModal ? <Modal /> : <>{selectedFormat?.er}%</>}
-                        </span>
-                      </div>
-                      <div className={styles.data}>
-                        <p>CPV:</p>
-                        <span>
-                          {isModal ? (
-                            <Modal />
-                          ) : (
-                            <>
-                              {selectedFormat?.cpv!.toLocaleString()}{" "}
-                              {t(`symbol`)}
-                            </>
-                          )}
-                        </span>
-                      </div>
-                    </div>
-                  </AccordionContent>
-                </div>
-                <AccordionTrigger
-                  onClick={handleChangeOpenSubcard}
-                  className={styles.channel__data__xs__bottom}
-                >
-                  <p className="gradient_color">
-                    {isSubcardOpen
-                      ? t("catalog.see_less")
-                      : t("catalog.see_more")}
-                  </p>
-                  <ArrowSmallVerticalIcon
-                    className={
-                      isSubcardOpen
-                        ? "active__icon rotate"
-                        : "active__icon rotate__down"
-                    }
-                  />
                 </AccordionTrigger>
+                <AccordionContent className={styles.channel__content}>
+                  <div className={styles.channel__data_middle}>
+                    <div className={styles.middle}>
+                      <div>
+                        <BoyIcon />
+                      </div>
+                      <div
+                        className="colorline"
+                        style={
+                          { "--male": `${card?.male}%` } as React.CSSProperties
+                        }
+                        data-male={`${card?.male}%`}
+                        data-female={`${card?.female}%`}
+                      />
+                      <div>
+                        <GirlIcon />
+                      </div>
+                    </div>
+                  </div>
+                  <div className={styles.channel__data_row}>
+                    <div className={styles.data}>
+                      <p>ER:</p>
+                      <span>
+                        {isModal ? <Modal /> : <>{selectedFormat?.er}%</>}
+                      </span>
+                    </div>
+                    <div className={styles.data}>
+                      <p>CPV:</p>
+                      <span>
+                        {isModal ? (
+                          <Modal />
+                        ) : (
+                          <>
+                            {selectedFormat?.cpv!.toLocaleString()}{" "}
+                            {t(`symbol`)}
+                          </>
+                        )}
+                      </span>
+                    </div>
+                  </div>
+                </AccordionContent>
               </AccordionItem>
             </Accordion>
-          </>
-        ) : (
-          <></>
-        )}
-      </div>
+          ) : screen < BREAKPOINT.MD ? (
+            <>
+              {/* <ChannelCardDescription description={card?.description} /> */}
 
-      <AddToBasketBtn
-        selectedFormat={selectedFormat}
-        FormatList={FormatList}
-        changeFormat={handleChangeFormat}
-        changeCard={handleChangeCard}
-        card={card}
-        page={page}
-      />
+              <Accordion type="single" collapsible>
+                <AccordionItem
+                  value={`item-${card.id}`}
+                  className={styles.channel__xs}
+                >
+                  <div className={styles.channel__data__xs}>
+                    <div className={styles.channel__data_row}>
+                      <div className={styles.data}>
+                        <div>
+                          <SubsIcon />
+                        </div>
+                        <span>{card?.subscribers?.toLocaleString()}</span>
+                      </div>
+                      <div className={styles.data}>
+                        <div>
+                          <EyeIcon />
+                        </div>
+                        <span>{selectedFormat?.views!.toLocaleString()}</span>
+                      </div>
+                    </div>
+                    <AccordionContent className={styles.channel__content}>
+                      <div className={styles.channel__data_middle}>
+                        <div className={styles.middle}>
+                          <div>
+                            <BoyIcon />
+                          </div>
+                          <div
+                            className="colorline"
+                            style={
+                              {
+                                "--male": `${card?.male}%`,
+                              } as React.CSSProperties
+                            }
+                            data-male={`${card?.male}%`}
+                            data-female={`${card?.female}%`}
+                          />
+                          <div>
+                            <GirlIcon />
+                          </div>
+                        </div>
+                      </div>
+                      <div className={styles.channel__data_row}>
+                        <div className={styles.data}>
+                          <p>ER:</p>
+                          <span>
+                            {isModal ? <Modal /> : <>{selectedFormat?.er}%</>}
+                          </span>
+                        </div>
+                        <div className={styles.data}>
+                          <p>CPV:</p>
+                          <span>
+                            {isModal ? (
+                              <Modal />
+                            ) : (
+                              <>
+                                {selectedFormat?.cpv!.toLocaleString()}{" "}
+                                {t(`symbol`)}
+                              </>
+                            )}
+                          </span>
+                        </div>
+                      </div>
+                    </AccordionContent>
+                  </div>
+                  <AccordionTrigger
+                    onClick={handleChangeOpenSubcard}
+                    className={styles.channel__data__xs__bottom}
+                  >
+                    <p className="gradient_color">
+                      {isSubcardOpen
+                        ? t("catalog.see_less")
+                        : t("catalog.see_more")}
+                    </p>
+                    <ArrowSmallVerticalIcon
+                      className={
+                        isSubcardOpen
+                          ? "active__icon rotate"
+                          : "active__icon rotate__down"
+                      }
+                    />
+                  </AccordionTrigger>
+                </AccordionItem>
+              </Accordion>
+            </>
+          ) : (
+            <></>
+          )}
+        </div>
+
+        <AddToBasketBtn
+          selectedFormat={selectedFormat}
+          FormatList={FormatList}
+          changeFormat={handleChangeFormat}
+          changeCard={handleChangeCard}
+          card={card}
+          page={page}
+        />
+      </div>
+      {formatUnavailable && (
+        <p className={styles.unavailable}>{t("cart.format_unavailable")}</p>
+      )}
     </div>
   );
 };

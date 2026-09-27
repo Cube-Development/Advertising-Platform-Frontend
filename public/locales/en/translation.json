@@ -2334,6 +2334,7 @@
       "finnaly_short": "Amount",
       "vat_info": "*Including VAT 12%"
     },
+    "format_unavailable": "The format is outdated, choose another",
     "recomendation": "Recommended Channels",
     "hide": "Hide",
     "show": "Show",
@@ -2550,6 +2551,7 @@
   },
   "create_order": {
     "create_order": "Order Placement",
+    "format_unavailable": "The format is outdated. Go back to the cart and choose another",
     "name": {
       "title": "What shall we name the advertising campaign?",
       "default_value": "Enter a name..."
@@ -3398,7 +3400,8 @@
       "clear": {
         "success": "Cart cleared",
         "error": "Error clearing cart"
-      }
+      },
+      "format_unavailable": "Some formats are outdated. Check the cart"
     },
     "offers_blogger": {
       "channel": {
@@ -3515,6 +3518,7 @@
       "create_order": {
         "error": "Error occurred"
       },
+      "format_unavailable": "Go to the cart and check the formats",
       "channels": {
         "error": "You need to add channels to the cart first"
       }

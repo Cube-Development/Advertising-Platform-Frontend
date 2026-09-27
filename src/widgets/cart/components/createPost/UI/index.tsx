@@ -21,6 +21,9 @@ export const CreatePost: FC<CreatePostProps> = ({ cart, role, isLoading }) => {
   const { t } = useTranslation();
   const screen = useWindowWidth();
   const { isPremiumUser, isAuth } = useAppSelector((state) => state.user);
+  const hasUnavailableFormat = cart?.channels?.some(
+    (channel) => channel.format_unavailable,
+  );
 
   // const isModal = !isAuth || !isPremiumUser;
   const isModal = false;
@@ -122,7 +125,7 @@ export const CreatePost: FC<CreatePostProps> = ({ cart, role, isLoading }) => {
         <div
           className={`${styles.button} ${!cart?.channels?.length && "deactive"}`}
         >
-          <CreatePostBtn />
+          <CreatePostBtn hasUnavailableFormat={hasUnavailableFormat} />
         </div>
       </div>
     </motion.div>

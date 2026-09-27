@@ -8,7 +8,11 @@ import { useTranslation } from "react-i18next";
 import { useCreatePostAdvertiser, useCreatePostManager } from "../model";
 import styles from "./styles.module.scss";
 
-export const CreatePost: FC = () => {
+interface CreatePostProps {
+  hasUnavailableFormat?: boolean;
+}
+
+export const CreatePost: FC<CreatePostProps> = ({ hasUnavailableFormat }) => {
   const { t } = useTranslation();
   const { isAuth, role } = useAppSelector((state) => state.user);
   const { toast } = useToast();
@@ -22,6 +26,14 @@ export const CreatePost: FC = () => {
       toast({
         variant: "error",
         title: t("toasts.auth.token.alert"),
+      });
+      return;
+    }
+
+    if (hasUnavailableFormat) {
+      toast({
+        variant: "error",
+        title: t("toasts.cart.format_unavailable"),
       });
       return;
     }

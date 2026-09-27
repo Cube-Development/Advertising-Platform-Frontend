@@ -1,9 +1,10 @@
 import { ICreatePostForm } from "@entities/project";
 import { ENUM_ROLES } from "@entities/user";
 import { useAppSelector } from "@shared/hooks";
-import { SpinnerLoader } from "@shared/ui";
+import { SpinnerLoader, useToast } from "@shared/ui";
 import { FC, useEffect, useRef } from "react";
 import { SubmitHandler } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import {
   CreateOrderDatetime,
   CreateOrderLoading,
@@ -27,6 +28,8 @@ interface CreateOrderBlockProps {}
 export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
   const { role } = useAppSelector((state) => state.user);
   const { projectId } = useRequireProjectId();
+  const { toast } = useToast();
+  const { t } = useTranslation();
 
   if (!projectId) return null;
 
@@ -44,6 +47,16 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
     totalPrice,
     projectPrices,
   } = useCreateOrderLoad({ projectId, role });
+
+  const orders = projectChannels?.orders || [];
+  const hasUnavailableFormat = orders.some((order) => order.format_unavailable);
+
+  const notifyUnavailableFormat = () => {
+    toast({
+      variant: "error",
+      title: t("toasts.create_order.format_unavailable"),
+    });
+  };
 
   const { register, getValues, handleSubmit, setValue, formState } =
     useCreateOrderForm({
@@ -72,6 +85,11 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
   }, [sectionId, isOrdersLoading, scrollToSection]);
 
   const onSubmit: SubmitHandler<ICreatePostForm> = async (formData) => {
+    if (orders.some((order) => order.format_unavailable)) {
+      notifyUnavailableFormat();
+      return;
+    }
+
     const postsOk =
       formData?.isMultiPost && formData?.multiposts?.length
         ? true
@@ -145,7 +163,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
         ) : (
           <>
             <CreateOrderPost
-              cards={projectChannels?.orders || []}
+              cards={orders}
               posts={projectPosts?.posts || []}
               isBlur={blur.post}
               onChangeBlur={handleOnChangeBlur}
@@ -161,7 +179,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
             />
 
             <CreateOrderDatetime
-              cards={projectChannels?.orders || []}
+              cards={orders}
               isBlur={blur.datetime}
               onChangeBlur={handleOnChangeBlur}
               setValue={setValue}
@@ -195,6 +213,8 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
                 !isPostsLoading
               }
               step={role === ENUM_ROLES.AGENCY ? 5 : 4}
+              blocked={hasUnavailableFormat}
+              onBlocked={notifyUnavailableFormat}
             />
           </>
         )}
