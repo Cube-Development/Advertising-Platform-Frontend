@@ -35,6 +35,8 @@ export enum ENUM_PATHS {
   ADMIN_CHANNELS = "/admin/channels",
   ADMIN_USERS = "/admin/users",
   ADMIN_USER_INFO = "/admin/users/:id",
+  ADMIN_USER_GROUPS = "/admin/user-groups",
+  ADMIN_USER_GROUP_INFO = "/admin/user-groups/:id",
   ADMIN_TRANSACTIONS = "/admin/transactions",
   ADMIN_REVIEWS = "/admin/reviews",
   ADMIN_COMPLAINTS = "/admin/complaints",

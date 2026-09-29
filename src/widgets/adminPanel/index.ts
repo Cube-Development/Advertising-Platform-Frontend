@@ -5,6 +5,7 @@ export * from "./reviews";
 export * from "./transactions";
 export * from "./users";
 export * from "./userInfo";
+export * from "./userGroups";
 export * from "./home";
 export * from "./organization";
 export * from "./documents";

@@ -96,3 +96,28 @@ export interface IAdminChannelTagsReq {
   channel_id: string;
   tags: ENUM_CHANNEL_TAG[];
 }
+
+export interface IChannelFormatGroupPrice {
+  group_id: string;
+  group_name: string;
+  price: number;
+}
+
+export interface IChannelFormatPrices {
+  format: number;
+  blogger_price: number;
+  default_price: number;
+  default_price_auto: boolean;
+  groups: IChannelFormatGroupPrice[];
+}
+
+export interface IChannelPrices {
+  channel_id: string;
+  formats: IChannelFormatPrices[];
+}
+
+export interface ISetChannelPricesReq {
+  channel_id: string;
+  group_id: string | null;
+  prices: { format: number; price: number }[];
+}

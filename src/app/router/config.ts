@@ -20,6 +20,8 @@ import { AdminOrganizationPage } from "@pages/AdminOrganization";
 import { AdminReviewsPage } from "@pages/AdminReviews";
 import { AdminTransactionsPage } from "@pages/AdminTransactions";
 import { AdminUserInfoPage } from "@pages/AdminUserInfo";
+import { AdminUserGroupInfoPage } from "@pages/AdminUserGroupInfo";
+import { AdminUserGroupsPage } from "@pages/AdminUserGroups";
 import { AdminUsersPage } from "@pages/AdminUsers";
 import { ProjectPage } from "@pages/Project";
 import { CartPage } from "@pages/Cart";
@@ -336,6 +338,22 @@ export const ALL_APP_ROUTES_LIST: IRouting[] = [
   {
     path: ENUM_PATHS.ADMIN_USER_INFO,
     component: AdminUserInfoPage,
+    roles: [ENUM_ROLES.MODERATOR],
+    auth: ENUM_AUTH_TYPES.PRIVATE,
+    layout: ENUM_LAYOUT_TYPES.ADMIN,
+    adminSidebar: true,
+  },
+  {
+    path: ENUM_PATHS.ADMIN_USER_GROUPS,
+    component: AdminUserGroupsPage,
+    roles: [ENUM_ROLES.MODERATOR],
+    auth: ENUM_AUTH_TYPES.PRIVATE,
+    layout: ENUM_LAYOUT_TYPES.ADMIN,
+    adminSidebar: true,
+  },
+  {
+    path: ENUM_PATHS.ADMIN_USER_GROUP_INFO,
+    component: AdminUserGroupInfoPage,
     roles: [ENUM_ROLES.MODERATOR],
     auth: ENUM_AUTH_TYPES.PRIVATE,
     layout: ENUM_LAYOUT_TYPES.ADMIN,

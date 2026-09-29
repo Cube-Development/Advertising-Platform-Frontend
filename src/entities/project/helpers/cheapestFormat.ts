@@ -5,9 +5,12 @@ import { IFormat } from "../types";
  * Если форматов нет — возвращает undefined.
  */
 export const getCheapestFormat = (formats?: IFormat[]): IFormat | undefined => {
-  if (!formats || formats.length === 0) return undefined;
+  const available = formats?.filter(
+    (format) => !format.format_unavailable && format.price != null,
+  );
+  if (!available || available.length === 0) return undefined;
 
-  return formats.reduce((cheapest, current) =>
-    current?.price < cheapest?.price ? current : cheapest,
+  return available.reduce((cheapest, current) =>
+    (current.price as number) < (cheapest.price as number) ? current : cheapest,
   );
 };

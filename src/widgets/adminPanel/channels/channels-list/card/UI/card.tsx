@@ -1,15 +1,16 @@
 import { IAdminChannelData } from "@entities/admin-panel";
-import { channelParameterData } from "@entities/channel";
+import { channelParameterData, IChannelFormat } from "@entities/channel";
+import { IFormat } from "@entities/project";
 import { FormatPrice, SelectPrice } from "@features/channel";
 import { SelectDescription, SelectOptions, SelectSex } from "@features/other";
 import { AccordionContent, AccordionItem } from "@shared/ui";
-import { FC, MutableRefObject } from "react";
+import { FC, MutableRefObject, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { useChannelData } from "../model";
-import { useCheckUpdate, useSubcardData } from "../model";
+import { useChannelData, useCheckUpdate, useSubcardData } from "../model";
 import { CardButtons } from "./card-buttons";
 import { CardContent } from "./card-content";
 import { CardTrigger } from "./card-trigger";
+import { ChannelPrices } from "./channel-prices";
 
 interface ChannelCardProps {
   card: IAdminChannelData;
@@ -40,6 +41,24 @@ export const ChannelCard: FC<ChannelCardProps> = ({
     });
 
   const { isUpdate } = useCheckUpdate(formState, startData);
+
+  const formatNames = useMemo(() => {
+    const names = new Map<number, string>();
+    channel?.format?.forEach((format: IFormat) => {
+      names.set(
+        format.format,
+        format.format_name?.big ||
+          format.format_name?.small ||
+          String(format.format),
+      );
+    });
+    formats?.forEach((format: IChannelFormat) => {
+      if (!names.has(format.id)) {
+        names.set(format.id, format.big || format.small || String(format.id));
+      }
+    });
+    return names;
+  }, [channel, formats]);
 
   return (
     <AccordionItem
@@ -134,6 +153,11 @@ export const ChannelCard: FC<ChannelCardProps> = ({
                 />
               </div>
             </div>
+            <ChannelPrices
+              channelId={card.channel.id}
+              enabled={isSubcardOpen}
+              formatNames={formatNames}
+            />
             <CardButtons
               card={card}
               formState={formState}

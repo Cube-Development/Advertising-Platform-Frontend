@@ -72,10 +72,11 @@ export interface IFormat {
     small: string;
     big: string;
   };
-  price: number;
+  price: number | null;
   views?: number;
   er?: number;
   cpv?: number;
+  format_unavailable?: boolean;
 }
 
 export interface IChangeCards {
