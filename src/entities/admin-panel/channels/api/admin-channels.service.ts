@@ -1,15 +1,22 @@
-import { ADMIN_CHANNELS, authApi } from "@shared/api";
+import {
+  ADMIN_CHANNELS,
+  ADMIN_CHANNEL_PRICES,
+  ADMIN_USER_GROUPS,
+  authApi,
+} from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 
 import { buildAdminChannelsParams } from "../lib";
 import {
   IAdminBanChannelReq,
-  IAdminChannelTagsReq,
-  IAdminRejectChannelReq,
-  IGetAdminChannelsReq,
   IAdminChannelInfo,
+  IAdminChannelTagsReq,
   IAdminChannels,
   IAdminEditChannelData,
+  IAdminRejectChannelReq,
+  IChannelPrices,
+  IGetAdminChannelsReq,
+  ISetChannelPricesReq,
 } from "../types";
 
 export const adminChannelsAPI = authApi.injectEndpoints({
@@ -128,6 +135,28 @@ export const adminChannelsAPI = authApi.injectEndpoints({
       }),
       invalidatesTags: [ADMIN_CHANNELS],
     }),
+    getChannelPrices: build.query<IChannelPrices, { channel_id: string }>({
+      query: ({ channel_id }) => ({
+        url: `/adv-admin/channel/${channel_id}/prices`,
+        method: "GET",
+      }),
+      providesTags: (_result, _error, { channel_id }) => [
+        { type: ADMIN_CHANNEL_PRICES, id: channel_id },
+      ],
+    }),
+    setChannelPrices: build.mutation<{ success: boolean }, ISetChannelPricesReq>(
+      {
+        query: ({ channel_id, group_id, prices }) => ({
+          url: `/adv-admin/channel/${channel_id}/prices`,
+          method: "PUT",
+          body: { group_id, prices },
+        }),
+        invalidatesTags: (_result, _error, { channel_id }) => [
+          { type: ADMIN_CHANNEL_PRICES, id: channel_id },
+          ADMIN_USER_GROUPS,
+        ],
+      },
+    ),
   }),
 });
 
@@ -141,4 +170,6 @@ export const {
   useAdminChannelUnbanMutation,
   useAdminChannelEditMutation,
   useAdminChannelTagsMutation,
+  useGetChannelPricesQuery,
+  useSetChannelPricesMutation,
 } = adminChannelsAPI;

@@ -23,6 +23,8 @@ export const AddToCart: FC<AddToCartProps> = ({
   isLoading,
 }) => {
   const { t } = useTranslation();
+  const outdated =
+    Boolean(selectedFormat?.format_unavailable) || selectedFormat?.price == null;
   const inBasket = Boolean(card?.selected_format);
 
   return (
@@ -45,15 +47,19 @@ export const AddToCart: FC<AddToCartProps> = ({
       </div>
       <div className={styles.price}>
         <p>{t("channel.add_to_cart.price")}</p>
-        <span>
-          {selectedFormat?.price.toLocaleString()} {t("symbol")}
-        </span>
+        {outdated ? (
+          <p className={styles.unavailable}>{t("cart.format_unavailable")}</p>
+        ) : (
+          <span>
+            {selectedFormat.price?.toLocaleString()} {t("symbol")}
+          </span>
+        )}
       </div>
       <MyButton
         className={styles.button}
         buttons_type={`${inBasket ? "button__green" : "button__blue"}`}
         onClick={onChange}
-        disabled={isLoading}
+        disabled={isLoading || outdated}
       >
         {inBasket ? (
           <p>{t("channel.add_to_cart.remove")}</p>

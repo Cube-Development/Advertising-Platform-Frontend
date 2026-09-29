@@ -18,6 +18,7 @@ import {
   Send,
   Tv,
   Users,
+  UsersRound,
   Mail,
 } from "lucide-react";
 
@@ -41,6 +42,13 @@ export const ADMIN_MENU: IMenuItem[] = [
       title: "admin_panel.burger_menu.users",
       path: ENUM_PATHS.ADMIN_USERS,
       icon: Users,
+    },
+  },
+  {
+    item: {
+      title: "admin_panel.burger_menu.user_groups",
+      path: ENUM_PATHS.ADMIN_USER_GROUPS,
+      icon: UsersRound,
     },
   },
   {

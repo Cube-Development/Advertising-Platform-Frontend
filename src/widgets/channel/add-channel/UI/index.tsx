@@ -91,7 +91,7 @@ export const AddChannelBlock: FC<AddChannelBlockProps> = () => {
         age: channel?.age?.map((item) => item?.id),
         format: channel?.format?.map((format: IFormat) => ({
           name: format?.format,
-          price: format?.price,
+          price: format?.price ?? 0,
         })),
       });
     }
