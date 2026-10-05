@@ -12,10 +12,13 @@
   },
   "iconLibrary": "lucide",
   "aliases": {
-    "components": "src/shared/ui/shadcn-ui",
-    "utils": "@/lib/utils"
+    "components": "@shared/ui/shadcn-ui",
+    "ui": "@shared/ui/shadcn-ui/ui",
+    "utils": "@shared/ui/shadcn-ui/lib/utils",
+    "lib": "@shared/ui/shadcn-ui/lib"
   },
   "registries": {
-    "@magicui": "https://magicui.design/r/{name}"
+    "@magicui": "https://magicui.design/r/{name}.json",
+    "@kibo-ui": "https://www.kibo-ui.com/r/{name}.json"
   }
 }

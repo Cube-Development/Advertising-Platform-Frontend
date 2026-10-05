@@ -42,22 +42,32 @@ export const FormatList: FC<IFormatListProps> = ({
   }, [screen, card?.format]);
 
   const defaultValue = useMemo(() => {
+    if (card?.format_unavailable) return [];
+
     if (isMultiple) {
-      // selectedFormat может быть массивом объектов
       const selectedIds = Array.isArray(card?.selected_format)
         ? card?.selected_format?.map((format) => format?.format)
         : [card?.selected_format?.format];
 
-      return options
-        ?.filter((option) => selectedIds.includes(option.id))
-        ?.map((option) => option.id); // возвращаем массив id
+      return (
+        options
+          ?.filter((option) => selectedIds.includes(option.id))
+          ?.map((option) => option.id) ?? []
+      );
     }
 
-    // isMultiple === false → одиночный выбор
-    return [
-      options?.find((option) => option.id === selectedFormat?.format)?.id,
-    ];
-  }, [options, selectedFormat?.format, isMultiple]);
+    const selectedId = options?.find(
+      (option) => option.id === selectedFormat?.format,
+    )?.id;
+
+    return selectedId != null ? [selectedId] : [];
+  }, [
+    options,
+    selectedFormat?.format,
+    isMultiple,
+    card?.format_unavailable,
+    card?.selected_format,
+  ]);
 
   const handleMultiOptionsChange = (values: number[]) => {
     if (isMultiple) {
@@ -80,7 +90,9 @@ export const FormatList: FC<IFormatListProps> = ({
       onValueChange={handleMultiOptionsChange}
       defaultValue={defaultValue}
       single={!isMultiple}
-      placeholder={isMultiple ? options?.[0]?.name : ""}
+      placeholder={
+        isMultiple && !card?.format_unavailable ? options?.[0]?.name : ""
+      }
       // placeholder={allText?.default_value}
       // disabled={disabled}
       // single={single}

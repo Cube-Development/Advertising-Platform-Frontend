@@ -80,11 +80,14 @@ export interface IFormat {
 }
 
 export interface IChangeCards {
-  onChangeCard: (cart: ICatalogChannel) => void | Promise<void>;
+  onChangeCard: (
+    cart: ICatalogChannel,
+    options?: { replaceUnavailableFormat?: boolean },
+  ) => void | Promise<void>;
 }
 
 export interface IFormatListProps {
-  selectedFormat: IFormat;
+  selectedFormat?: IFormat;
   changeFormat: (selectedValue: IFormat) => void | Promise<void>;
   card: ICatalogChannel;
   isSmall?: boolean;
