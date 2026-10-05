@@ -19,23 +19,32 @@ export const RequestProjectReport: FC<RequestProjectReportProps> = ({
 }) => {
   const { t } = useTranslation();
   const { toast } = useToast();
+
   const [isWaiting, setIsWaiting] = useState(false);
+
   const [requestCompletedReport, { isLoading }] =
     useRequestCompletedReportMutation();
 
-  const { data } = useGetProjectReportsQuery(
+  const { refetch } = useGetProjectReportsQuery(
     { project_id },
     {
-      skip: !project_id || !isWaiting,
-      pollingInterval: isWaiting ? 4000 : 0,
+      skip: !project_id,
     },
   );
 
   useEffect(() => {
-    if (!isWaiting || !data?.reports?.length) return;
+    if (!isWaiting) return;
 
-    setIsWaiting(false);
-  }, [data?.reports, isWaiting]);
+    const timeoutId = window.setTimeout(async () => {
+      try {
+        await refetch();
+      } finally {
+        setIsWaiting(false);
+      }
+    }, 4000);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [isWaiting, refetch]);
 
   const handleRequest = async () => {
     try {
