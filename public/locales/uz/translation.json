@@ -144,6 +144,25 @@
         }
       ]
     },
+    "demo_video": {
+      "title": "Blogix qanday ishlaydi",
+      "subtitle": "Qisqa videoni tomosha qiling — kanal tanlashdan natijalar hisobotigacha bir necha daqiqada",
+      "badge": "Platforma sharhi",
+      "steps": {
+        "find": {
+          "title": "Kanallarni toping",
+          "text": "Mavzu, qamrov va narx bo‘yicha filtrlar"
+        },
+        "launch": {
+          "title": "Reklamani ishga tushiring",
+          "text": "Buyurtma bering va bir necha bosishda to‘lang"
+        },
+        "results": {
+          "title": "Natijani oling",
+          "text": "Har bir post bo‘yicha statistika va hisobot"
+        }
+      }
+    },
     "work_with_us": {
       "title": "Hamkorlik uchun ochiqmiz",
       "subtitle": "Platformaga qo‘shiling va kanalingiz orqali bugunoq daromad olishni boshlang",

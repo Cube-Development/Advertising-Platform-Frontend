@@ -11,6 +11,10 @@ const Cta = React.lazy(() =>
   import("@widgets/main").then((module) => ({ default: module.Cta })),
 );
 
+const MainVideo = React.lazy(() =>
+  import("@widgets/main").then((module) => ({ default: module.MainVideo })),
+);
+
 const WorkWithUs = React.lazy(() =>
   import("@widgets/main").then((module) => ({ default: module.WorkWithUs })),
 );
@@ -35,6 +39,8 @@ export const MainPage = () => {
       {/* 1. CTA */}
       <div className="grid gap-10 sm:gap-12 lg:gap-16 xl:mt-0 my-6">
         <Cta />
+
+        <MainVideo />
 
         {/* 2. WORK WITH US */}
         <WorkWithUs />

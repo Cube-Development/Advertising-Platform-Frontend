@@ -144,6 +144,25 @@
         }
       ]
     },
+    "demo_video": {
+      "title": "How Blogix works",
+      "subtitle": "Watch a short video — from choosing a channel to the results report in just a couple of minutes",
+      "badge": "Platform overview",
+      "steps": {
+        "find": {
+          "title": "Find channels",
+          "text": "Filter by topic, reach and price"
+        },
+        "launch": {
+          "title": "Launch your ad",
+          "text": "Place and pay for an order in a few clicks"
+        },
+        "results": {
+          "title": "Get results",
+          "text": "Stats and a report for every post"
+        }
+      }
+    },
     "work_with_us": {
       "title": "Open for Partnership",
       "subtitle": "Join the platform and start earning from your channel today",
