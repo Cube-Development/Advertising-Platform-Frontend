@@ -154,23 +154,30 @@ export const Cart: FC = () => {
   const [addToManagerCart] = useAddToManagerCartMutation();
   const [removeFromManagerCart] = useRemoveFromManagerCartMutation();
 
-  const handleChangeCartCards = (cartChannel: ICatalogChannel) => {
+  const handleChangeCartCards = (
+    cartChannel: ICatalogChannel,
+    options?: { replaceUnavailableFormat?: boolean },
+  ) => {
     const currentCard = currentCart.channels?.find(
       (card) => card?.id === cartChannel?.id,
     );
-    return handleChangeCards(cartChannel, currentCard);
+    return handleChangeCards(cartChannel, currentCard, options);
   };
 
-  const handleChangeRecommendCards = (cartChannel: ICatalogChannel) => {
+  const handleChangeRecommendCards = (
+    cartChannel: ICatalogChannel,
+    options?: { replaceUnavailableFormat?: boolean },
+  ) => {
     const currentCard = recomendCards?.channels?.find(
       (card) => card?.id === cartChannel?.id,
     );
-    return handleChangeCards(cartChannel, currentCard);
+    return handleChangeCards(cartChannel, currentCard, options);
   };
 
   const handleChangeCards = (
     cartChannel: ICatalogChannel,
     currentCard: ICatalogChannel | undefined,
+    options?: { replaceUnavailableFormat?: boolean },
   ) => {
     const handleUpdateCache = (newFormat?: any) => {
       const params = { language: language?.id || USER_LANGUAGES_LIST[0].id };
@@ -278,10 +285,28 @@ export const Cart: FC = () => {
       });
     };
 
-    if (cartChannel?.selected_format && currentCard) {
+    if (!currentCard) return;
+
+    const nextFormat = cartChannel.selected_format;
+    const replaceUnavailable =
+      options?.replaceUnavailableFormat &&
+      currentCard.format_unavailable &&
+      nextFormat;
+    const sameFormat =
+      currentCard.selected_format?.format === nextFormat?.format;
+    const shouldAdd = Boolean(
+      replaceUnavailable || (nextFormat && !sameFormat),
+    );
+    const isCartItem = currentCart?.channels?.some(
+      (channel) => channel.id === currentCard.id,
+    );
+
+    if (!shouldAdd && !nextFormat && !isCartItem) return;
+
+    {
       const addReq = {
         channel_id: cartChannel?.id,
-        format: cartChannel?.selected_format.format,
+        format: nextFormat?.format ?? 0,
         language: language?.id || USER_LANGUAGES_LIST[0].id,
         ...(cartChannel?.match && { match: cartChannel.match }),
       };
@@ -292,10 +317,7 @@ export const Cart: FC = () => {
 
       let mutationPromise: Promise<any> | undefined;
 
-      if (
-        currentCard?.selected_format?.format ===
-        cartChannel?.selected_format?.format
-      ) {
+      if (!shouldAdd || !nextFormat) {
         if (!isAuth && guestId) {
           mutationPromise = removeFromPublicCart({
             ...removeReq,
@@ -336,10 +358,7 @@ export const Cart: FC = () => {
               console.error("Ошибка при удалении с корзины", error);
             });
         }
-      } else if (
-        currentCard?.selected_format?.format !==
-        cartChannel?.selected_format?.format
-      ) {
+      } else {
         if (!isAuth && guestId) {
           mutationPromise = addToPublicCart({ ...addReq, guest_id: guestId })
             .unwrap()

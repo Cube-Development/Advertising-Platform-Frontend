@@ -55,45 +55,57 @@ export const CompactCatalogCard: FC<CompactCatalogCardProps> = ({
       <LoginPremiumAccess />
     ) : null;
 
-  let startFormat: IFormat;
-  switch (Array.isArray(card?.selected_format)) {
-    case true: {
-      startFormat = card?.selected_format
-        ? card.format.find(
-            (format) =>
-              format?.format === (card.selected_format as any)?.[0]?.format,
-          )!
-        : getCheapestFormat(card.format)!;
-      break;
-    }
-    case false: {
-      startFormat = card?.selected_format
-        ? card.format.find(
-            (format) => format?.format === card.selected_format?.format,
-          )!
-        : getCheapestFormat(card.format)!;
-      break;
-    }
+  let startFormat: IFormat | undefined;
+
+  if (card.format_unavailable) {
+    startFormat = undefined;
+  } else if (Array.isArray(card?.selected_format)) {
+    startFormat = card.selected_format
+      ? card.format.find(
+          (format) =>
+            format?.format === (card.selected_format as any)?.[0]?.format,
+        )
+      : getCheapestFormat(card.format);
+  } else {
+    startFormat = card?.selected_format
+      ? card.format.find(
+          (format) => format?.format === card.selected_format?.format,
+        )
+      : getCheapestFormat(card.format);
   }
 
-  const [selectedFormat, setSelectedFormat] = useState<IFormat>(startFormat);
+  const [selectedFormat, setSelectedFormat] = useState<IFormat | undefined>(
+    startFormat,
+  );
 
   const handleChangeFormat = (selectedValue: IFormat) => {
-    if (Array.isArray(selectedValue)) {
-      setSelectedFormat(selectedValue[0]);
-    } else {
-      setSelectedFormat(selectedValue);
-    }
-    if (
-      card?.selected_format &&
-      card?.selected_format?.format !== selectedValue?.format
-    ) {
-      return onChangeCard({ ...card, selected_format: selectedValue });
+    const nextFormat = Array.isArray(selectedValue)
+      ? selectedValue[0]
+      : selectedValue;
+
+    setSelectedFormat(nextFormat);
+
+    if (!nextFormat) return;
+
+    const formatChanged =
+      !!card?.selected_format &&
+      card.selected_format.format !== nextFormat.format;
+
+    if (card.format_unavailable || formatChanged) {
+      return onChangeCard(
+        { ...card, selected_format: nextFormat },
+        card.format_unavailable
+          ? { replaceUnavailableFormat: true }
+          : undefined,
+      );
     }
   };
 
   const handleChangeCard = () => {
-    return onChangeCard({ ...card, selected_format: selectedFormat });
+    return onChangeCard({
+      ...card,
+      selected_format: selectedFormat ?? card.selected_format,
+    });
   };
 
   const stopPropagation = (e: React.MouseEvent) => e.stopPropagation();

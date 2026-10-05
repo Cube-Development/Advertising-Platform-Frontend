@@ -297,7 +297,10 @@ export const CatalogBlock: FC = () => {
   const [addToManagerCart] = useAddToManagerCartMutation();
   const [removeFromManagerCart] = useRemoveFromManagerCartMutation();
 
-  const handleChangeCards = (cartChannel: ICatalogChannel) => {
+  const handleChangeCards = (
+    cartChannel: ICatalogChannel,
+    options?: { replaceUnavailableFormat?: boolean },
+  ) => {
     if (
       (role === ENUM_ROLES.MANAGER || role === ENUM_ROLES.AGENCY) &&
       !projectId
@@ -375,6 +378,7 @@ export const CatalogBlock: FC = () => {
                   draft.channels[index] = {
                     ...draft.channels[index],
                     selected_format: newFormat,
+                    ...(newFormat ? { format_unavailable: false } : {}),
                   };
                 }
               },
@@ -398,6 +402,7 @@ export const CatalogBlock: FC = () => {
                   draft.channels[index] = {
                     ...draft.channels[index],
                     selected_format: newFormat,
+                    ...(newFormat ? { format_unavailable: false } : {}),
                   };
                 }
               },
@@ -406,52 +411,14 @@ export const CatalogBlock: FC = () => {
         }
       };
 
+      const replaceUnavailable =
+        options?.replaceUnavailableFormat && currentCard?.format_unavailable;
+
       if (
-        currentCard &&
-        !currentCard?.selected_format &&
-        cartChannel.selected_format
-      ) {
-        if (!isAuth && guestId) {
-          mutationPromise = addToPublicCart({ ...addReq, guest_id: guestId })
-            .unwrap()
-            .then(() => handleUpdateCache(cartChannel.selected_format))
-            .catch((error) => {
-              toast({
-                variant: "error",
-                title: t("toasts.catalog.add.error"),
-              });
-              console.error("Ошибка при добавлении в корзину", error);
-            });
-        } else if (isAuth && !projectId) {
-          mutationPromise = addToCommonCart(addReq)
-            .unwrap()
-            .then(() => handleUpdateCache(cartChannel.selected_format))
-            .catch((error) => {
-              toast({
-                variant: "error",
-                title: t("toasts.catalog.add.error"),
-              });
-              console.error("Ошибка при добавлении в корзину", error);
-            });
-        } else if (isAuth && projectId) {
-          mutationPromise = addToManagerCart({
-            ...addReq,
-            project_id: projectId,
-          })
-            .unwrap()
-            .then(() => handleUpdateCache(cartChannel.selected_format))
-            .catch((error) => {
-              toast({
-                variant: "error",
-                title: t("toasts.catalog.add.error"),
-              });
-              console.error("Ошибка при добавлении в корзину", error);
-            });
-        }
-      } else if (
+        (currentCard && !currentCard.selected_format) ||
+        replaceUnavailable ||
         currentCard?.selected_format?.format !==
-          cartChannel.selected_format?.format &&
-        cartChannel.selected_format
+          cartChannel.selected_format?.format
       ) {
         if (!isAuth && guestId) {
           mutationPromise = addToPublicCart({ ...addReq, guest_id: guestId })
