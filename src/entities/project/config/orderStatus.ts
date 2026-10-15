@@ -13,6 +13,7 @@ export enum orderStatus {
   channel_agreed = 12, // согласованный канал
   adv_accept = 13, // отправил сф взял деньги(блогер)
   saved = 14, // ордер в сохраненном проекте
+  frozen = 15, // заморожен админом
 }
 
 export const orderStatusChat = [

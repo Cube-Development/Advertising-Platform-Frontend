@@ -288,9 +288,15 @@
 
     &__icons {
       display: grid;
-      grid-template: 1fr / repeat(4, 1fr);
+      grid-template: 1fr / repeat(5, 1fr);
       column-gap: 20px;
       padding-top: 20px;
+
+      .frozen__icon {
+        width: 32px;
+        height: 32px;
+        color: var(--Personal-colors-main);
+      }
 
       div {
         display: grid;

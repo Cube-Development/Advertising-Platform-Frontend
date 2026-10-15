@@ -13,6 +13,7 @@ export enum ENUM_OFFER_STATUS_BACKEND {
   unknown2 = 12,
   toSign = 13,
   waitingForPayment = 14,
+  frozen = 15,
 }
 
 export enum ENUM_OFFER_STATUS {
@@ -22,6 +23,7 @@ export enum ENUM_OFFER_STATUS {
   CANCELED = "canceled",
   MODERATION = "moderation",
   UNFULFILLED = "unfulfilled",
+  FROZEN = "frozen",
 }
 
 export const BLOGGER_OFFER_TABS_LIST = [
@@ -32,6 +34,10 @@ export const BLOGGER_OFFER_TABS_LIST = [
   {
     name: "offers_blogger.status_filter.waiting",
     type: ENUM_OFFER_STATUS.WAIT,
+  },
+  {
+    name: "offers_blogger.status_filter.frozen",
+    type: ENUM_OFFER_STATUS.FROZEN,
   },
   {
     name: "offers_blogger.status_filter.complete",

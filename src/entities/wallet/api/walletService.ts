@@ -1,4 +1,5 @@
 import {
+  ICheckPaymentPromocodeRequest,
   ICreateDeposit,
   ICreateDepositRequest,
   ICreateDepositResponse,
@@ -9,6 +10,7 @@ import {
   IGetBalance,
   IHistoryRequest,
   IHistoryResponse,
+  IPromocodeDiscount,
   IWalletResponse,
   IWithdrawResponse,
 } from "@entities/wallet";
@@ -105,6 +107,17 @@ export const walletAPI = authApi.injectEndpoints({
         CART_MANAGER,
       ],
     }),
+    // Ничего не меняет: считает скидку по заказам проекта — ровно то, что спишется при оплате
+    checkPaymentPromocode: build.mutation<
+      IPromocodeDiscount,
+      ICheckPaymentPromocodeRequest
+    >({
+      query: (params) => ({
+        url: `/wallet/payment/project/promocode`,
+        method: "GET",
+        params: params,
+      }),
+    }),
     createDepositRequest: build.mutation<
       ICreateDepositResponse,
       ICreateDepositRequest
@@ -154,6 +167,7 @@ export const {
   useGetBalanceQuery,
   useGetHistoryQuery,
   useCreatePaymentProjectMutation,
+  useCheckPaymentPromocodeMutation,
   useCreateDepositRequestMutation,
   useCreateDepositMutation,
   useCreateWithdrawMutation,

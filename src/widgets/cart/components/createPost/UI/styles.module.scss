@@ -176,6 +176,30 @@
       }
     }
 
+    .promocode {
+      display: grid;
+      grid-auto-flow: row;
+      gap: 8px;
+      margin-top: 14px;
+
+      &__discount {
+        display: grid;
+        grid-auto-flow: column;
+        align-items: center;
+        justify-content: space-between;
+        color: var(--Personal-colors-main2);
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 1;
+      }
+
+      &__before {
+        color: var(--Personal-colors-grey);
+        font-size: 14px;
+        font-weight: 500;
+      }
+    }
+
     &__text {
       display: grid;
       grid-auto-flow: row;

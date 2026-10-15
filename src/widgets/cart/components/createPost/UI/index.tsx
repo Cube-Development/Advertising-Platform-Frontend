@@ -1,5 +1,5 @@
 import { CART, ICart } from "@entities/project";
-import { CreatePost as CreatePostBtn } from "@features/cart";
+import { ApplyPromocode, CreatePost as CreatePostBtn } from "@features/cart";
 import { ProtectIcon3 } from "@shared/assets";
 import { BREAKPOINT, PAGE_ANIMATION } from "@shared/config";
 import { useAppSelector, useWindowWidth } from "@shared/hooks";
@@ -10,6 +10,7 @@ import styles from "./styles.module.scss";
 import { ENUM_ROLES } from "@entities/user";
 import { LoginPremiumAccess, LoginToViewMore } from "@features/user";
 import { Skeleton } from "@shared/ui";
+import { queryParamKeys, QueryParamsUUID } from "@shared/utils";
 
 interface CreatePostProps {
   cart: ICart;
@@ -21,6 +22,12 @@ export const CreatePost: FC<CreatePostProps> = ({ cart, role, isLoading }) => {
   const { t } = useTranslation();
   const screen = useWindowWidth();
   const { isPremiumUser, isAuth } = useAppSelector((state) => state.user);
+  const { discount } = useAppSelector((state) => state.promocode);
+  /** Промокод — только в общей корзине рекламодателя: не у гостя и не в корзине сохранённого проекта */
+  const hasPromocode =
+    isAuth &&
+    role === ENUM_ROLES.ADVERTISER &&
+    !QueryParamsUUID(queryParamKeys.saveProject);
   const hasUnavailableFormat = cart?.channels?.some(
     (channel) => channel.format_unavailable,
   );
@@ -100,6 +107,19 @@ export const CreatePost: FC<CreatePostProps> = ({ cart, role, isLoading }) => {
                 )}
               </div>
             )}
+            {hasPromocode && (
+              <div className={styles.promocode}>
+                <ApplyPromocode amount={cart?.amount} />
+                {discount && (
+                  <div className={styles.promocode__discount}>
+                    <p>{t("cart.promocode.discount")}:</p>
+                    <span>
+                      −{discount.discount_amount.toLocaleString()} {t("symbol")}
+                    </span>
+                  </div>
+                )}
+              </div>
+            )}
             <div className={styles.finnaly__text}>
               <p className={`${styles.finnaly_long}`}>
                 {t("cart.create_post.finnaly")}:
@@ -110,6 +130,13 @@ export const CreatePost: FC<CreatePostProps> = ({ cart, role, isLoading }) => {
               <span className="truncate flex flex-col md:items-center items-end gap-1">
                 {isLoading ? (
                   <Skeleton className="h-5 w-40" />
+                ) : hasPromocode && discount ? (
+                  <>
+                    <s className={styles.promocode__before}>
+                      {discount.amount_before.toLocaleString()} {t("symbol")}
+                    </s>
+                    {discount.amount_after.toLocaleString()} {t("symbol")}
+                  </>
                 ) : (
                   <>
                     {cart?.amount?.toLocaleString()} {t("symbol")}

@@ -8,6 +8,7 @@ import { notificationsTypes } from "@entities/communication";
 import {
   ENUM_OFFER_STATUS,
   bloggerOffersAPI,
+  invalidateBloggerOfferByFreeze,
   invalidateBloggerOfferByUserAction,
   invalidateBloggerOfferByWebsocketAction,
 } from "@entities/offer";
@@ -20,6 +21,7 @@ import {
   invalidateAdvManagerProjectByRequestApprove,
   invalidateAdvProjectByBloggerAction,
   invalidateAdvProjectByCompleteProject,
+  invalidateAdvProjectByFreeze,
   invalidateAdvProjectUpdate,
   invalidateManagerNewProject,
   invalidateManagerProjectByBloggerAction,
@@ -50,7 +52,7 @@ export const useRevalidateCash = () => {
   const dispatch = useAppDispatch();
 
   const revalidateCash = async (data: any) => {
-    const { method, project_id, order_id, channel_id } = data;
+    const { method, project_id, order_id, channel_id, frozen } = data;
 
     if (method === notificationsTypes.notification_refund_money_reject) {
       // Отклонен возврат средств
@@ -469,6 +471,38 @@ export const useRevalidateCash = () => {
       dispatch(
         advProjectsAPI.util.invalidateTags([ADV_PROJECTS, VIEWS_ADVERTISER]),
       );
+    } else if (
+      method === notificationsTypes.notification_advertiser_project_freeze
+    ) {
+      // Админ заморозил или разморозил проект рекламодателя
+      await invalidateAdvProjectByFreeze({
+        dispatch,
+        trigger: triggerAdvMyProjects,
+        language,
+        project_id,
+        frozen,
+      });
+    } else if (
+      method === notificationsTypes.notification_advertiser_order_freeze
+    ) {
+      // Админ заморозил или разморозил заказ в проекте: меняются счётчики и подкарточки
+      await invalidateAdvProjectByBloggerAction({
+        dispatch,
+        trigger: triggerAdvMyProjects,
+        language,
+        project_id,
+      });
+    } else if (
+      method === notificationsTypes.notification_blogger_order_freeze
+    ) {
+      // Админ заморозил или разморозил заказ блогера
+      await invalidateBloggerOfferByFreeze({
+        dispatch,
+        trigger: triggerOffers,
+        language,
+        order_id,
+        frozen,
+      });
     }
   };
 

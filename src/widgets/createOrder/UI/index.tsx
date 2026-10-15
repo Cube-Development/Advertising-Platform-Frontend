@@ -19,6 +19,7 @@ import {
   useCreateOrderForm,
   useCreateOrderLoad,
   useOnSubmitPayment,
+  usePaymentPromocode,
   useRequireProjectId,
   useTopUpFromCreateOrder,
 } from "../model";
@@ -65,15 +66,22 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
       projectId,
     });
 
+  // С промокодом списывается amount_after: с ним сравниваем баланс и считаем пополнение
+  const { payableAmount, amountBefore } = usePaymentPromocode({
+    projectId,
+    role,
+    totalAmount: totalPrice?.amount || 0,
+  });
+
   const { checkBalance } = useCheckBalance(
     formState?.wallet_type,
-    totalPrice?.amount,
+    payableAmount,
   );
 
   const { handleTopUp } = useTopUpFromCreateOrder({
     payment,
     projectId,
-    totalAmount: totalPrice?.amount || 0,
+    totalAmount: payableAmount,
     role,
   });
 
@@ -200,7 +208,8 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
 
             <CreateOrderPayment
               isBlur={blur.payment}
-              totalAmount={totalPrice?.amount || 0}
+              totalAmount={payableAmount}
+              amountBefore={amountBefore}
               role={role}
               setValue={setValue}
               formState={formState}

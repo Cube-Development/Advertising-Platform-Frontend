@@ -16,6 +16,8 @@ import { LockIcon } from "@shared/assets";
 interface CreateOrderPaymentProps {
   isBlur?: boolean;
   totalAmount: number;
+  /** Сумма без скидки по промокоду — показывается зачёркнутой */
+  amountBefore?: number;
   role: ENUM_ROLES;
   isAllowed: boolean;
   onAction?: () => void;
@@ -31,6 +33,7 @@ interface CreateOrderPaymentProps {
 export const CreateOrderPayment: FC<CreateOrderPaymentProps> = ({
   isBlur,
   totalAmount,
+  amountBefore,
   role,
   isAllowed,
   onAction,
@@ -72,6 +75,11 @@ export const CreateOrderPayment: FC<CreateOrderPaymentProps> = ({
               <div className={styles.lottie}>
                 <img src={heartAnimation} alt="heart_lottie_gif" />
               </div>
+              {amountBefore !== undefined && (
+                <p className={styles.price__before}>
+                  {amountBefore.toLocaleString()} <span>{t("symbol")}</span>
+                </p>
+              )}
               <p className={styles.price}>
                 {totalAmountCurrent?.toLocaleString()}{" "}
                 <span>{t("symbol")}</span>

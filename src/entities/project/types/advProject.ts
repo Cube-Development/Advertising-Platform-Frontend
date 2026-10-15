@@ -32,6 +32,7 @@ export interface IAdvProjectCard {
   wait?: number;
   in_progress?: number;
   moderation?: number;
+  frozen?: number;
   report?: IOrderReportInfo | null;
   subcard?: IAdvProjectSubcard[];
 }

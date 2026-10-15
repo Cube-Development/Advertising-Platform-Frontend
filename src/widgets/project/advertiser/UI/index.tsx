@@ -3,6 +3,7 @@ import { dateSortingTypes } from "@entities/platform";
 import {
   ADVERTISER_PROJECT_TABS_LIST,
   ADV_MANAGER_PROJECT_TABS_LIST,
+  ADV_MY_PROJECT_TABS_LIST,
   ENUM_ADV_MANAGER_PROJECT_STATUS,
   getProjectsCardReq,
   ENUM_ADV_MY_PROJECT_STATUS,
@@ -110,7 +111,12 @@ export const AdvOrders: FC = () => {
         }
       });
       if (project_status) {
-        ADV_MANAGER_PROJECT_TABS_LIST.map((status) => {
+        // статус из адреса сверяем со вкладками своего типа: у «Моих проектов» есть frozen, у менеджерских — нет
+        const statusTabs =
+          project_type === ENUM_PROJECT_TYPES.MY_PROJECT
+            ? ADV_MY_PROJECT_TABS_LIST
+            : ADV_MANAGER_PROJECT_TABS_LIST;
+        statusTabs.map((status) => {
           if (project_status === status.type) {
             handleChangeStatus(status.type);
           }

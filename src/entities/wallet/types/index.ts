@@ -3,3 +3,4 @@ export * from "./transaction.types";
 export * from "./wallet.types";
 export * from "./walletFilter";
 export * from "./wallets.enum";
+export * from "./promocode.types";

@@ -42,6 +42,7 @@ import {
   SpinnerLoader,
 } from "@shared/ui";
 import { Chat } from "@widgets/communication";
+import { Snowflake } from "lucide-react";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import SwiperCore from "swiper";
@@ -89,7 +90,9 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
           <p>
             {statusFilter === ENUM_ADV_MY_PROJECT_STATUS.COMPLETED
               ? t("orders_advertiser.card.status.completed")
-              : t("orders_advertiser.card.status.active")}
+              : statusFilter === ENUM_ADV_MY_PROJECT_STATUS.FROZEN
+                ? t("orders_advertiser.card.status.frozen")
+                : t("orders_advertiser.card.status.active")}
           </p>
         </div>
       </div>
@@ -224,6 +227,11 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
                 <div className={styles.item__right}>
                   <WaitIcon />
                   <p>{card?.wait?.toLocaleString()}</p>
+                </div>
+                {/* Заказы, замороженные админом: приходит и в активных, и в замороженных проектах */}
+                <div className={styles.item__full}>
+                  <Snowflake className={styles.frozen__icon} />
+                  <p>{(card?.frozen ?? 0).toLocaleString()}</p>
                 </div>
                 {/* <div className={styles.item__right}>
                   <SearchIcon />

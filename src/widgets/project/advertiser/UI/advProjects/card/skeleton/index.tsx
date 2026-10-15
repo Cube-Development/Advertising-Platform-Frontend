@@ -125,6 +125,9 @@ export const ProjectCardSkeleton: FC<ProjectCardSkeletonProps> = ({
                   <Skeleton
                     className={`w-full h-full rounded-[10px] ${styles.item__right}`}
                   />
+                  <Skeleton
+                    className={`w-full h-full rounded-[10px] ${styles.item__full}`}
+                  />
                   {/* <Skeleton
                     className={`w-full h-full rounded-[10px] ${styles.item__right}`}
                   /> */}
