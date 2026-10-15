@@ -192,6 +192,19 @@
         line-height: 1;
         white-space: nowrap;
       }
+
+      // Замороженный заказ: старые дата и время будут переназначены
+      &.muted span {
+        color: var(--Personal-colors-grey);
+        text-decoration: line-through;
+      }
+
+      small {
+        color: var(--Personal-colors-grey);
+        font-size: 10px;
+        line-height: 1;
+        text-align: center;
+      }
       @media (max-width: 992px) {
         padding: 3px;
         p {
@@ -314,7 +327,8 @@
     }
   }
 
-  &__cancel {
+  &__cancel,
+  &__frozen {
     display: grid;
     align-items: center;
     align-content: center;
@@ -423,6 +437,7 @@
   &__wait,
   &__complete,
   &__cancel,
+  &__frozen,
   &__moderation,
   &__uncomplete,
   &__check {

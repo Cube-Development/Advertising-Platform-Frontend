@@ -1,0 +1,44 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  column-gap: 10px;
+  width: 100%;
+}
+
+.field {
+  position: relative;
+  grid-column: 1 / -1;
+
+  &:not(:only-child) {
+    grid-column: 1;
+  }
+
+  input {
+    padding-right: 36px;
+  }
+}
+
+.reset {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  color: var(--Personal-colors-grey);
+
+  &:hover {
+    color: var(--Personal-colors-black);
+  }
+}
+
+.button {
+  padding: 8px 16px;
+  font-size: 14px;
+  white-space: nowrap;
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+}

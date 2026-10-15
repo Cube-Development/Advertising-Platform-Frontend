@@ -107,6 +107,14 @@
         }
       }
 
+      // Сумма без скидки по промокоду
+      .price__before {
+        color: var(--Personal-colors-grey);
+        font-size: var(--font-size-title-secondary-sm);
+        text-align: center;
+        text-decoration: line-through;
+      }
+
       .price {
         font-size: var(--font-size-title-secondary-xl);
         text-align: center;

@@ -22,8 +22,12 @@ import { useUploadFilesAndMedia } from "./useUploadFilesAndMedia";
 import { useUploadPosts } from "./useUploadPosts";
 import {
   ENUM_WALLETS_TYPE,
+  getPromocodeError,
+  PROMOCODE_ERROR_DEFAULT,
+  resetPromocode,
   useCreatePaymentProjectMutation,
 } from "@entities/wallet";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
 
 export const useOnSubmitPayment = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -37,6 +41,8 @@ export const useOnSubmitPayment = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+  const { code: promocode } = useAppSelector((state) => state.promocode);
 
   const { uploadPosts } = useUploadPosts();
   const { uploadFilesAndMedia } = useUploadFilesAndMedia();
@@ -148,7 +154,9 @@ export const useOnSubmitPayment = () => {
         await createPayment({
           project_id: projectId,
           wallet_type: wallet_type!,
+          promocode: promocode ?? undefined,
         }).unwrap();
+        dispatch(resetPromocode());
       } else if (role === ENUM_ROLES.MANAGER) {
         await approveProject({ project_id: projectId }).unwrap();
       } else if (role === ENUM_ROLES.AGENCY) {
@@ -169,11 +177,22 @@ export const useOnSubmitPayment = () => {
       } else {
         navigate(ENUM_PATHS.ORDERS);
       }
-    } catch (error) {
-      toast({
-        variant: "error",
-        title: t("toasts.create_order.payment.error"),
-      });
+    } catch (err: unknown) {
+      const error = err as { data?: { message?: string } };
+      const promocodeError = getPromocodeError(error?.data?.message);
+      // Промокод стал недоступен между предпросмотром и оплатой — деньги не списаны, убираем код
+      if (promocode && promocodeError.key !== PROMOCODE_ERROR_DEFAULT) {
+        dispatch(resetPromocode());
+        toast({
+          variant: "error",
+          title: t(promocodeError.key, { amount: promocodeError.amount }),
+        });
+      } else {
+        toast({
+          variant: "error",
+          title: t("toasts.create_order.payment.error"),
+        });
+      }
       throw new Error("Error: Create order payment | approve project");
     }
   };

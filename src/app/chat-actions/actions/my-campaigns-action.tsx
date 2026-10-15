@@ -24,6 +24,11 @@ const STATUS_TABS = [
     fallback: "Активные",
   },
   {
+    value: ENUM_ADV_MY_PROJECT_STATUS.FROZEN,
+    key: "orders_advertiser.status_filter.frozen",
+    fallback: "Замороженные",
+  },
+  {
     value: ENUM_ADV_MY_PROJECT_STATUS.COMPLETED,
     key: "orders_advertiser.status_filter.complete",
     fallback: "Завершённые",

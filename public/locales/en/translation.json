@@ -1063,7 +1063,8 @@
       "active": "Active",
       "complete": "Completed",
       "develop": "In Development",
-      "agreed": "Under Review"
+      "agreed": "Under Review",
+      "frozen": "Frozen"
     },
     "card": {
       "status": {
@@ -1071,7 +1072,8 @@
         "develop": "In Development",
         "agreed": "Under Review",
         "completed": "Completed",
-        "saved": "Saved"
+        "saved": "Saved",
+        "frozen": "Frozen"
       },
       "channels": "Channels",
       "views": "Views",
@@ -1141,6 +1143,10 @@
       },
       "template": {
         "title": "Draft"
+      },
+      "frozen": {
+        "title": "Order frozen",
+        "text": "The administrator has paused this order. A new publication date will be set after it is unfrozen"
       }
     }
   },
@@ -1338,7 +1344,8 @@
       "complete": "Completed",
       "reject": "Rejected",
       "moderation": "Under Moderation",
-      "uncomplete": "Unfulfilled"
+      "uncomplete": "Unfulfilled",
+      "frozen": "Frozen"
     },
     "card": {
       "status": {
@@ -1353,7 +1360,8 @@
       "date": "Date",
       "accommodation": "Placement Format",
       "time": "Placement Time",
-      "price": "Price"
+      "price": "Price",
+      "date_reassign": "date will be rescheduled"
     },
     "days": {
       "day": "day",
@@ -1401,6 +1409,10 @@
       },
       "not_activated": {
         "text": "The project has not been activated yet"
+      },
+      "frozen": {
+        "title": "Order frozen",
+        "text": "The administrator has paused this order. You will receive a new publication date after it is unfrozen"
       }
     }
   },
@@ -2362,6 +2374,12 @@
       "channel_to_be_replaced": "Replacement Channel",
       "not_found": "Project Not Found",
       "no_data": "No information available for this project"
+    },
+    "promocode": {
+      "placeholder": "Promo code",
+      "apply": "Apply",
+      "remove": "Remove promo code",
+      "discount": "Promo code discount"
     }
   },
   "wallet": {
@@ -3420,7 +3438,15 @@
         "success": "Cart cleared",
         "error": "Error clearing cart"
       },
-      "format_unavailable": "Some formats are outdated. Check the cart"
+      "format_unavailable": "Some formats are outdated. Check the cart",
+      "promocode": {
+        "not_found": "Promo code not found",
+        "not_active": "Promo code is not valid",
+        "expired": "Promo code has expired",
+        "exhausted": "Promo code is no longer available",
+        "min_amount": "Promo code applies to orders from {{amount}} sum",
+        "error": "Failed to apply promo code"
+      }
     },
     "offers_blogger": {
       "channel": {

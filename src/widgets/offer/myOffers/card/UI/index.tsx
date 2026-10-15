@@ -31,6 +31,8 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
   const { t } = useTranslation();
   const { toast } = useToast();
   const hasChat = OFFER_CHAT_LIST.includes(statusFilter as ENUM_OFFER_STATUS);
+  /** Заморожен админом: действий нет, дата будет переназначена после разморозки */
+  const isFrozen = statusFilter === ENUM_OFFER_STATUS.FROZEN;
 
   const { data: post, error } = useGetPostQuery({ order_id: card?.id });
 
@@ -87,7 +89,7 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
             {card.price.toLocaleString()} {t(`symbol`)}
           </span>
         </div>
-        <div className={styles.info}>
+        <div className={`${styles.info} ${isFrozen ? styles.muted : ""}`}>
           <p>{t(`offers_blogger.card.time`)}</p>
           <span className="truncate">
             {card.publish_time?.time_from} - {card.publish_time?.time_to}
@@ -98,7 +100,7 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
           <p>{t(`offers_blogger.card.accommodation`)}</p>
           <span className="truncate">{card.format?.small}</span>
         </div>
-        <div className={styles.info}>
+        <div className={`${styles.info} ${isFrozen ? styles.muted : ""}`}>
           <p>{t(`offers_blogger.card.date`)}</p>
           <span>
             {typeof card?.publish_date === "object"
@@ -107,6 +109,7 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
                 card?.publish_date.date_to
               : card?.publish_date}
           </span>
+          {isFrozen && <small>{t(`offers_blogger.card.date_reassign`)}</small>}
         </div>
       </div>
       <>
@@ -240,6 +243,16 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
             <span className="!grid !grid-flow-row !gap-2 w-full">
               <SeePost post={post!} post_deeplink={card?.post_deeplink} />
               {card?.post_link && <CheckPost url={card?.post_link} />}
+            </span>
+          </div>
+        ) : isFrozen ? (
+          <div className={styles.card__frozen}>
+            <div>
+              <p>{t(`offers_blogger.offer_status.frozen.title`)}</p>
+              <span>{t(`offers_blogger.offer_status.frozen.text`)}</span>
+            </div>
+            <span className="!grid !grid-flow-row !gap-2 w-full">
+              <SeePost post={post!} post_deeplink={card?.post_deeplink} />
             </span>
           </div>
         ) : statusFilter === ENUM_OFFER_STATUS.UNFULFILLED ? (

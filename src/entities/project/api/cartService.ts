@@ -8,6 +8,7 @@ import {
   CART_SHORT,
   RECOMMEND_CARDS,
 } from "@shared/api";
+import { IPromocodeDiscount } from "@entities/wallet";
 import { ENUM_LANGUAGES_NUM } from "@shared/languages";
 import { cartStatusFilter } from "../config";
 import { ICart } from "../types";
@@ -114,6 +115,17 @@ export const authCartAPI = authApi.injectEndpoints({
         params: params,
       }),
     }),
+    // Ничего не меняет: только считает скидку по текущей корзине
+    checkCommonCartPromocode: build.mutation<
+      IPromocodeDiscount,
+      { promocode: string }
+    >({
+      query: (params) => ({
+        url: `/cart/common/promocode`,
+        method: `GET`,
+        params: params,
+      }),
+    }),
   }),
 });
 
@@ -126,6 +138,7 @@ export const {
   useTransferPublicMutation,
   useCheckCartMutation,
   useReadCommonCartShortQuery,
+  useCheckCommonCartPromocodeMutation,
 } = authCartAPI;
 
 // Публичные запросы

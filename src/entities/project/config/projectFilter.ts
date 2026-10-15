@@ -15,6 +15,7 @@ export enum ENUM_AGENCY_PROJECT_TYPES {
 export enum ENUM_ADV_MY_PROJECT_STATUS {
   ACTIVE = "active",
   COMPLETED = "completed",
+  FROZEN = "frozen",
 }
 
 export enum ENUM_ADV_MANAGER_PROJECT_STATUS {
@@ -41,6 +42,10 @@ export const ADV_MY_PROJECT_TABS_LIST = [
   {
     name: "orders_advertiser.status_filter.active",
     type: ENUM_ADV_MY_PROJECT_STATUS.ACTIVE,
+  },
+  {
+    name: "orders_advertiser.status_filter.frozen",
+    type: ENUM_ADV_MY_PROJECT_STATUS.FROZEN,
   },
   {
     name: "orders_advertiser.status_filter.complete",

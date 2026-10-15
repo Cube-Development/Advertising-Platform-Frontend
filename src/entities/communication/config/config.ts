@@ -104,6 +104,10 @@ export enum notificationsTypes {
   notification_create_withdrawal = "NotificationCreateWithdrawal",
   notification_create_refund = "NotificationCreateRefund",
   notification_create_top_up = "NotificationCreateTopUp",
+  // заморозка: один method и для заморозки, и для разморозки — различает поле frozen
+  notification_advertiser_project_freeze = "NotificationAdvertiserProjectFreeze",
+  notification_advertiser_order_freeze = "NotificationAdvertiserOrderFreeze",
+  notification_blogger_order_freeze = "NotificationBloggerOrderFreeze",
 }
 
 export const WEBSOCKET_MESSAGES_LIST = [
@@ -156,4 +160,7 @@ export const WEBSOCKET_NOTIFICATIONS_LIST = [
   notificationsTypes.notification_create_withdrawal,
   notificationsTypes.notification_create_refund,
   notificationsTypes.notification_create_top_up,
+  notificationsTypes.notification_advertiser_project_freeze,
+  notificationsTypes.notification_advertiser_order_freeze,
+  notificationsTypes.notification_blogger_order_freeze,
 ];

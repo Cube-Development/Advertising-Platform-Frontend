@@ -1,6 +1,6 @@
 import { userSlice } from "@entities/user";
 import { catalogFilterSlice } from "@entities/project";
-import { walletSlice } from "@entities/wallet";
+import { promocodeSlice, walletSlice } from "@entities/wallet";
 import { dropdownMenuSlice } from "@shared/slice";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import {
@@ -18,6 +18,7 @@ const rootReducer = combineReducers({
   [userSlice.reducerPath]: userSlice.reducer,
   [catalogFilterSlice.reducerPath]: catalogFilterSlice.reducer,
   [walletSlice.reducerPath]: walletSlice.reducer,
+  [promocodeSlice.reducerPath]: promocodeSlice.reducer,
   [dropdownMenuSlice.reducerPath]: dropdownMenuSlice.reducer,
   [authEcpApi.reducerPath]: authEcpApi.reducer,
   [authEcpApi2.reducerPath]: authEcpApi2.reducer,

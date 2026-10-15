@@ -5,4 +5,5 @@ export enum projectStatus {
   changed = 4,
   in_progress = 6,
   completed = 7,
+  frozen = 9,
 }

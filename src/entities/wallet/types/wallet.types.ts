@@ -4,6 +4,7 @@ import { ENUM_WALLETS_TYPE } from "./wallets.enum";
 export interface ICreatePaymentRequest {
   project_id: string;
   wallet_type: ENUM_WALLETS_TYPE;
+  promocode?: string;
 }
 
 export interface ICreatePaymentResponse {

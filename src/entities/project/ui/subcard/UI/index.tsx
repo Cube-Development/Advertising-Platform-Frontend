@@ -95,7 +95,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
 
   return (
     <div
-      className={`${styles.wrapper} ${(typeFilter === ENUM_PROJECT_TYPES.MY_PROJECT && statusFilter === ENUM_ADV_MANAGER_PROJECT_STATUS.COMPLETED) || typeFilter === ENUM_PROJECT_TYPES.MANAGER_PROJECT ? styles.no__chat : ""}`}
+      className={`${styles.wrapper} ${(typeFilter === ENUM_PROJECT_TYPES.MY_PROJECT && (statusFilter === ENUM_ADV_MANAGER_PROJECT_STATUS.COMPLETED || statusFilter === ENUM_ADV_MY_PROJECT_STATUS.FROZEN)) || typeFilter === ENUM_PROJECT_TYPES.MANAGER_PROJECT ? styles.no__chat : ""}`}
     >
       <div
         className={`${styles.subcard} ${typeFilter === ENUM_PROJECT_TYPES.MY_PROJECT && statusFilter === ENUM_ADV_MANAGER_PROJECT_STATUS.ACTIVE ? styles.grid__active : styles.grid}`}
@@ -329,6 +329,17 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                   />
                   {subcard?.post_url && <CheckBtn url={subcard?.post_url} />}
                 </div>
+              </div>
+            ) : subcard?.api_status === orderStatus.frozen ? (
+              <div className={styles.subcard__frozen}>
+                <div>
+                  <p>{t(`orders_advertiser.order_status.frozen.title`)}</p>
+                  <span>{t(`orders_advertiser.order_status.frozen.text`)}</span>
+                </div>
+                <SeePostBtn
+                  post={post!}
+                  post_deeplink={subcard?.post_deeplink}
+                />
               </div>
             ) : subcard?.api_status === orderStatus.order_review ? (
               <div className={styles.subcard__agreed}>
@@ -582,6 +593,14 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                 />
                 {subcard?.post_url && <CheckBtn url={subcard?.post_url} />}
               </div>
+            </div>
+          ) : subcard?.api_status === orderStatus.frozen ? (
+            <div className={styles.subcard__frozen}>
+              <div>
+                <p>{t(`orders_advertiser.order_status.frozen.title`)}</p>
+                <span>{t(`orders_advertiser.order_status.frozen.text`)}</span>
+              </div>
+              <SeePostBtn post={post!} post_deeplink={subcard?.post_deeplink} />
             </div>
           ) : subcard?.api_status === orderStatus.order_review ? (
             <div className={styles.subcard__agreed}>

@@ -70,7 +70,8 @@ export const OfferCardSkeleton: FC<OfferCardSkeletonProps> = ({
               <Skeleton className="h-[90px] w-[90px] rounded-[15px]" />
               <Skeleton className="h-3 w-[150px] rounded-[15px]" />
             </div>
-          ) : statusFilter === ENUM_OFFER_STATUS.CANCELED ? (
+          ) : statusFilter === ENUM_OFFER_STATUS.CANCELED ||
+            statusFilter === ENUM_OFFER_STATUS.FROZEN ? (
             <div className={styles.card__cancel}>
               <div className={styles.card__cancel__title}>
                 <Skeleton className="h-3 w-full" />

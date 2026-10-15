@@ -1063,7 +1063,8 @@
       "active": "Faol",
       "complete": "Bajarilgan",
       "develop": "Ishlab chiqilmoqda",
-      "agreed": "Kelishilmoqda"
+      "agreed": "Kelishilmoqda",
+      "frozen": "Muzlatilgan"
     },
     "card": {
       "status": {
@@ -1071,7 +1072,8 @@
         "develop": "Ishlab chiqilmoqda",
         "agreed": "Kelishilmoqda",
         "completed": "Bajarilgan",
-        "saved": "Saqlangan"
+        "saved": "Saqlangan",
+        "frozen": "Muzlatilgan"
       },
       "channels": "Kanallar",
       "views": "Ko'rishlar",
@@ -1141,6 +1143,10 @@
       },
       "template": {
         "title": "Qoralama"
+      },
+      "frozen": {
+        "title": "Buyurtma muzlatilgan",
+        "text": "Administrator buyurtmani to'xtatib qo'ydi. Muzdan chiqarilgandan so'ng yangi nashr sanasi belgilanadi"
       }
     }
   },
@@ -1338,7 +1344,8 @@
       "complete": "Bajarilgan",
       "reject": "Rad etilgan",
       "moderation": "Moderatsiyada",
-      "uncomplete": "Bajarilmagan"
+      "uncomplete": "Bajarilmagan",
+      "frozen": "Muzlatilgan"
     },
     "card": {
       "status": {
@@ -1353,7 +1360,8 @@
       "date": "Sana",
       "accommodation": "Joylashtirish formati",
       "time": "Joylashtirish vaqti",
-      "price": "Narx"
+      "price": "Narx",
+      "date_reassign": "sana qayta belgilanadi"
     },
     "days": {
       "day": "kun",
@@ -1401,6 +1409,10 @@
       },
       "not_activated": {
         "text": "Loyiha hali aktivlashtirilmagan"
+      },
+      "frozen": {
+        "title": "Buyurtma muzlatilgan",
+        "text": "Administrator buyurtmani to'xtatib qo'ydi. Muzdan chiqarilgandan so'ng yangi nashr sanasi keladi"
       }
     }
   },
@@ -2362,6 +2374,12 @@
       "channel_to_be_replaced": "Almashtiriladigan kanal",
       "not_found": "Loyiha topilmadi",
       "no_data": "Loyiha bo'yicha ma'lumot yo'q"
+    },
+    "promocode": {
+      "placeholder": "Promokod",
+      "apply": "Qo'llash",
+      "remove": "Promokodni olib tashlash",
+      "discount": "Promokod bo'yicha chegirma"
     }
   },
   "wallet": {
@@ -3420,7 +3438,15 @@
         "success": "Savatcha tozalandi",
         "error": "Savatchani tozalashda xatolik"
       },
-      "format_unavailable": "Ayrim formatlar eskirgan. Savatni tekshiring"
+      "format_unavailable": "Ayrim formatlar eskirgan. Savatni tekshiring",
+      "promocode": {
+        "not_found": "Promokod topilmadi",
+        "not_active": "Promokod yaroqsiz",
+        "expired": "Promokodning amal qilish muddati tugagan",
+        "exhausted": "Promokod endi mavjud emas",
+        "min_amount": "Promokod {{amount}} so'mdan boshlab buyurtmalarga amal qiladi",
+        "error": "Promokodni qo'llab bo'lmadi"
+      }
     },
     "offers_blogger": {
       "channel": {
