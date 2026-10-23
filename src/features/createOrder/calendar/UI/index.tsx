@@ -151,7 +151,7 @@ export const CustomCalendar: FC<DateListProps> = ({
         const minSelectableDate = new Date(today);
         const currentHour = new Date().getHours();
 
-        if (currentHour >= 21) {
+        if (currentHour >= 22) {
           minSelectableDate.setDate(today.getDate() + 1);
         }
 
