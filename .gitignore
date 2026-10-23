@@ -29,3 +29,4 @@ dist-ssr
 .env.sentry-build-plugin
 # Локальные инструменты разработки (скриншоты адаптива) — не для репозитория
 /scripts/
+.playwright-mcp
