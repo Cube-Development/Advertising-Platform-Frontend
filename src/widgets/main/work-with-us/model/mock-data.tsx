@@ -63,21 +63,21 @@ const YouTubeIcon = () => (
 export const PLATFORM_CARDS: PlatformData[] = [
   {
     name: "main_advertiser.work_with_us.platforms.platform_names.telegram",
-    count: "615+",
+    count: "1151+",
     label: "main_advertiser.work_with_us.platforms.channels",
     icon: <TelegramIcon />,
     brandColor: "#26A5E4",
   },
   {
     name: "main_advertiser.work_with_us.platforms.platform_names.instagram",
-    count: "330+",
+    count: "506+",
     label: "main_advertiser.work_with_us.platforms.bloggers",
     icon: <InstagramIcon />,
     brandColor: "#E1306C",
   },
   {
     name: "main_advertiser.work_with_us.platforms.platform_names.youtube",
-    count: "22+",
+    count: "98+",
     label: "main_advertiser.work_with_us.platforms.channels",
     icon: <YouTubeIcon />,
     brandColor: "#FF0000",
