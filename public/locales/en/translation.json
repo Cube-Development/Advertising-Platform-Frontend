@@ -3051,6 +3051,54 @@
     "create_template_post": "Create template",
     "uploading_files": "Uploading files..."
   },
+  "adv_project_page": {
+    "report": {
+      "link": "Project report",
+      "short": "Report",
+      "title": "Report",
+      "to_project": "To project",
+      "empty": "No completed placements yet",
+      "summary": {
+        "placements": "Placements",
+        "total": "Total incl. VAT",
+        "er": "Actual ER",
+        "cpv": "Actual CPV",
+        "average": "Average",
+        "period": "Placement period"
+      },
+      "tabs": {
+        "orders": "Placements",
+        "charts": "Charts"
+      },
+      "chart": {
+        "open": "Chart",
+        "title": "Views dynamics",
+        "views": "views",
+        "hour_short": "h",
+        "empty": "No dynamics data yet",
+        "category": "Category",
+        "total_views": "Views"
+      }
+    },
+    "open": "Details",
+    "back": "Back to projects",
+    "orders_title": "Project orders",
+    "empty_orders": "No orders in this project yet",
+    "not_found": "Project not found",
+    "completed_orders": {
+      "title": "Completed placements",
+      "subscribers": "Subscribers",
+      "average_views": "Average views",
+      "real_views": "Actual views",
+      "publish_date": "Publish date",
+      "publish_count": "Publications",
+      "amount": "Cost",
+      "vat": "VAT",
+      "total": "Total",
+      "post": "Open post",
+      "screenshot": "Screenshot"
+    }
+  },
   "project_page": {
     "top_info": {
       "views": "Views",

@@ -24,6 +24,7 @@ import { AdminUserGroupInfoPage } from "@pages/AdminUserGroupInfo";
 import { AdminUserGroupsPage } from "@pages/AdminUserGroups";
 import { AdminUsersPage } from "@pages/AdminUsers";
 import { ProjectPage } from "@pages/Project";
+import { ProjectReportPage } from "@pages/ProjectReport";
 import { CartPage } from "@pages/Cart";
 import { CatalogPage } from "@pages/Catalog";
 import { ChannelPage } from "@pages/Channel";
@@ -123,8 +124,20 @@ export const ALL_APP_ROUTES_LIST: IRouting[] = [
   {
     path: ENUM_PATHS.PROJECT_PAGE,
     component: ProjectPage,
-    roles: [...USER_ROLES, ENUM_ROLES.AGENCY],
-    auth: ENUM_AUTH_TYPES.PUBLIC,
+    // Раньше — публичная агентская страница по ?permission=:
+    // roles: [...USER_ROLES, ENUM_ROLES.AGENCY],
+    // auth: ENUM_AUTH_TYPES.PUBLIC,
+    roles: [ENUM_ROLES.ADVERTISER],
+    auth: ENUM_AUTH_TYPES.PRIVATE,
+    authSidebar: true,
+    layout: ENUM_LAYOUT_TYPES.ROOT,
+  },
+  {
+    path: ENUM_PATHS.PROJECT_REPORT,
+    component: ProjectReportPage,
+    roles: [ENUM_ROLES.ADVERTISER],
+    auth: ENUM_AUTH_TYPES.PRIVATE,
+    authSidebar: true,
     layout: ENUM_LAYOUT_TYPES.ROOT,
   },
   {

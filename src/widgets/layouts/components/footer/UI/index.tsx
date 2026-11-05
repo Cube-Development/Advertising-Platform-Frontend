@@ -29,8 +29,6 @@ export const Footer: FC = () => {
   const isCreateOrderPage =
     pathname.pathname === ENUM_PATHS.CREATE_ORDER || false;
 
-  const isProjectPage = pathname.pathname.startsWith("/project/") || false;
-
   const handleCopyError = (error: any) => {
     navigator.clipboard.writeText(JSON.stringify(error, null, 2));
     toast({
@@ -44,84 +42,76 @@ export const Footer: FC = () => {
       className={`${styles.wrapper} ${isCreateOrderPage && styles.create_order_bg} relative`}
     >
       <section className="container">
-        {isProjectPage ? (
-          <div className="text-center md:text-base text-sm font-semibold tracking-wider text-white">
-            Created by Blogix
+        <>
+          <div className={styles.results__wrapper}>
+            <div className={styles.logo}>Blogix</div>
+            <div className={styles.results}>{/* ... existing code ... */}</div>
           </div>
-        ) : (
-          <>
-            <div className={styles.results__wrapper}>
-              <div className={styles.logo}>Blogix</div>
-              <div className={styles.results}>
-                {/* ... existing code ... */}
-              </div>
+          <div className={styles.content}>
+            {/* ... existing navigation and contacts ... */}
+            <div className={styles.nav}>
+              {FOOTER_NAV_ITEMS.map((block, index) => (
+                <div key={index} className={styles.nav__block}>
+                  <h4>{t(`${block.name}`)}</h4>
+                  <ul>
+                    {block.items.map((item, index) => (
+                      <Link to={item.path} key={index}>
+                        {t(`${item.name}`)}
+                      </Link>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
-            <div className={styles.content}>
-              {/* ... existing navigation and contacts ... */}
-              <div className={styles.nav}>
-                {FOOTER_NAV_ITEMS.map((block, index) => (
-                  <div key={index} className={styles.nav__block}>
-                    <h4>{t(`${block.name}`)}</h4>
-                    <ul>
-                      {block.items.map((item, index) => (
-                        <Link to={item.path} key={index}>
-                          {t(`${item.name}`)}
-                        </Link>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
+            <div className={styles.contacts}>
+              <div className={styles.contacts__item}>
+                <h4 className="!underline">
+                  <Link to="https://t.me/blogix_support" target="_blank">
+                    {t("footer.contacts.advertiser_contact")}
+                  </Link>
+                </h4>
+                <p>{t("footer.contacts.advertiser_title")}</p>
               </div>
-              <div className={styles.contacts}>
-                <div className={styles.contacts__item}>
-                  <h4 className="!underline">
-                    <Link to="https://t.me/blogix_support" target="_blank">
-                      {t("footer.contacts.advertiser_contact")}
-                    </Link>
-                  </h4>
-                  <p>{t("footer.contacts.advertiser_title")}</p>
+              <div className={styles.contacts__item}>
+                <h4 className="!underline">
+                  <Link
+                    to="https://t.me/blogix_support_bloggers"
+                    target="_blank"
+                  >
+                    {t("footer.contacts.blogger_contact")}
+                  </Link>
+                </h4>
+                <p>{t("footer.contacts.blogger_title")}</p>
+              </div>
+              <div className={styles.contacts__item}>
+                <h4 className="!underline">
+                  <Link to="tel:+998930708686">+998 93 070 86 86</Link>
+                </h4>
+                <p>{t("footer.contacts.cooperation_title")}</p>
+              </div>
+              <div className={styles.contacts__item}>
+                <h4 className="!underline">
+                  <Link to="https://t.me/blogix_support" target="_blank">
+                    {t("footer.contacts.email")}
+                  </Link>
+                </h4>
+                <p>{t("footer.contacts.email_title")}</p>
+              </div>
+              <div className={styles.contacts__address}>
+                <div>
+                  <LocationIcon />
                 </div>
-                <div className={styles.contacts__item}>
-                  <h4 className="!underline">
-                    <Link
-                      to="https://t.me/blogix_support_bloggers"
-                      target="_blank"
-                    >
-                      {t("footer.contacts.blogger_contact")}
-                    </Link>
-                  </h4>
-                  <p>{t("footer.contacts.blogger_title")}</p>
+                <p>{t("footer.contacts.address")}</p>
+                <div>
+                  <LineInstagramIcon />
                 </div>
-                <div className={styles.contacts__item}>
-                  <h4 className="!underline">
-                    <Link to="tel:+998930708686">+998 93 070 86 86</Link>
-                  </h4>
-                  <p>{t("footer.contacts.cooperation_title")}</p>
-                </div>
-                <div className={styles.contacts__item}>
-                  <h4 className="!underline">
-                    <Link to="https://t.me/blogix_support" target="_blank">
-                      {t("footer.contacts.email")}
-                    </Link>
-                  </h4>
-                  <p>{t("footer.contacts.email_title")}</p>
-                </div>
-                <div className={styles.contacts__address}>
-                  <div>
-                    <LocationIcon />
-                  </div>
-                  <p>{t("footer.contacts.address")}</p>
-                  <div>
-                    <LineInstagramIcon />
-                  </div>
-                  <div>
-                    <LineTelegramIcon />
-                  </div>
+                <div>
+                  <LineTelegramIcon />
                 </div>
               </div>
             </div>
-          </>
-        )}
+          </div>
+        </>
         <div
           className={styles.all_rights}
           onClick={() => setDevClicks((v) => v + 1)}

@@ -8,7 +8,7 @@ import { TurnkeyProject } from "@features/other";
 import { NewProject, ZeroProject } from "@features/project";
 import { PAGE_ANIMATION } from "@shared/config";
 import { INTERSECTION_ELEMENTS } from "@shared/config/common";
-import { Accordion, ShowMoreBtn, SpinnerLoader } from "@shared/ui";
+import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
 import { getAnimationDelay } from "@shared/utils";
 import { motion } from "framer-motion";
 import { FC } from "react";
@@ -35,7 +35,7 @@ export const AdvProjectsList: FC<AdvProjectsListProps> = ({
   currentPage,
 }) => {
   return (
-    <Accordion type="single" collapsible className={styles.wrapper}>
+    <div className={styles.wrapper}>
       {!isLoading && projects?.length === 0 ? (
         <ZeroProject
           listLength={!!projects?.length}
@@ -85,6 +85,6 @@ export const AdvProjectsList: FC<AdvProjectsListProps> = ({
           </div>
         </div>
       )}
-    </Accordion>
+    </div>
   );
 };

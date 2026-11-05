@@ -3053,6 +3053,54 @@
     "create_template_post": "Создать шаблон",
     "uploading_files": "Загружаем файлы..."
   },
+  "adv_project_page": {
+    "report": {
+      "link": "Отчёт по проекту",
+      "short": "Отчёт",
+      "title": "Отчёт",
+      "to_project": "К проекту",
+      "empty": "Пока нет выполненных размещений",
+      "summary": {
+        "placements": "Размещений",
+        "total": "Итого с НДС",
+        "er": "Фактический ER",
+        "cpv": "Фактический CPV",
+        "average": "Средний",
+        "period": "Период размещений"
+      },
+      "tabs": {
+        "orders": "Размещения",
+        "charts": "Графики"
+      },
+      "chart": {
+        "open": "График",
+        "title": "Динамика просмотров",
+        "views": "просмотров",
+        "hour_short": "ч",
+        "empty": "Данных по динамике пока нет",
+        "category": "Категория",
+        "total_views": "Просмотры"
+      }
+    },
+    "open": "Подробнее",
+    "back": "Назад к проектам",
+    "orders_title": "Заказы проекта",
+    "empty_orders": "В проекте пока нет заказов",
+    "not_found": "Проект не найден",
+    "completed_orders": {
+      "title": "Выполненные размещения",
+      "subscribers": "Подписчики",
+      "average_views": "Средний охват",
+      "real_views": "Фактический охват",
+      "publish_date": "Дата публикации",
+      "publish_count": "Публикаций",
+      "amount": "Стоимость",
+      "vat": "НДС",
+      "total": "Итого",
+      "post": "Открыть пост",
+      "screenshot": "Скриншот"
+    }
+  },
   "project_page": {
     "top_info": {
       "views": "Охват",

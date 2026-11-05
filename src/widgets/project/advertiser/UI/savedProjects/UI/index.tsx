@@ -1,7 +1,7 @@
 import { ENUM_PROJECT_TYPES, ISavedProjectCard } from "@entities/project";
 import { NewProject, ZeroProject } from "@features/project";
 import { INTERSECTION_ELEMENTS, PAGE_ANIMATION } from "@shared/config";
-import { Accordion, ShowMoreBtn, SpinnerLoader } from "@shared/ui";
+import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
 import { getAnimationDelay } from "@shared/utils";
 import { motion } from "framer-motion";
 import { FC } from "react";
@@ -25,7 +25,7 @@ export const SavedProjectsList: FC<SavedProjectsListProps> = ({
   currentPage,
 }) => {
   return (
-    <Accordion type="single" collapsible className={styles.wrapper}>
+    <div className={styles.wrapper}>
       {!isLoading && projects?.length === 0 ? (
         <ZeroProject
           listLength={!!projects?.length}
@@ -65,6 +65,6 @@ export const SavedProjectsList: FC<SavedProjectsListProps> = ({
           </div>
         </div>
       )}
-    </Accordion>
+    </div>
   );
 };
