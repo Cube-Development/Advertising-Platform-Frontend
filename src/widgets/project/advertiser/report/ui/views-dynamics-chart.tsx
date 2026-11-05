@@ -1,10 +1,11 @@
-import { IViewsDynamics } from "@entities/project";
-import { FC, useEffect, useId, useMemo, useRef, useState } from "react";
+import { IViewsChart, IViewsChartPoint } from "@entities/project";
+import { FC, useEffect, useId, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Area,
-  AreaChart,
+  Bar,
   CartesianGrid,
+  ComposedChart,
   ResponsiveContainer,
   Tooltip,
   TooltipContentProps,
@@ -14,24 +15,27 @@ import {
 import { formatReportDateTime } from "../lib/format";
 
 interface ViewsDynamicsChartProps {
-  dynamics?: IViewsDynamics | null;
+  /** Готовые точки — собираются маппером при получении ответа */
+  chart?: IViewsChart | null;
   height?: number;
 }
 
-interface IChartPoint {
-  /** Часы после публикации — точка стоит там, где реально снят снимок */
-  hours: number;
-  views: number;
-  taken: string;
-}
-
-const HOUR_MS = 60 * 60 * 1000;
+const VIEWS_COLOR = "#0aa5be";
+const DELTA_COLOR = "#8b5cf6";
 const Y_AXIS_WIDTH = 56;
 const CHART_RIGHT_MARGIN = 12;
 /** Шаги подписей оси X в часах: на широком экране — каждый час, на узком реже */
 const HOUR_STEPS = [1, 2, 3, 4, 6, 8, 12, 24];
 /** Примерная ширина символа подписи относительно размера шрифта */
 const CHAR_WIDTH_RATIO = 0.62;
+/** Ширина столбика прироста, px */
+const BAR_MIN = 2;
+const BAR_MAX = 14;
+/**
+ * Запас справа внутри оси X: столбик последней точки (часто ровно на maxHour)
+ * не вылезает на правую шкалу, у последней подписи появляется место
+ */
+const X_PADDING_RIGHT = Math.ceil(BAR_MAX / 2) + 2;
 
 /** Короткие числа для узкой оси Y: 1 200 → «1,2K», 60 000 → «60K» */
 const shortNumber = (value: number) => {
@@ -44,35 +48,43 @@ const shortNumber = (value: number) => {
 };
 
 /**
- * Оси без прокрутки. Узкий экран: короткие числа на оси Y, ширина оси — по самой
- * длинной подписи. Ось X: шаг подписей (1/2/3/4/6… ч) — по реальной длине подписи
- * с учётом языка, чтобы не слипались; на широком экране — каждый час
+ * Оси без прокрутки. Узкий экран: короткие числа на обеих шкалах.
+ * Ось X: шаг подписей (1/2/3/4/6… ч) — по реальной длине подписи с учётом языка;
+ * на широком экране — каждый час. Ширина столбиков — по минимальному интервалу снимков
  */
 const getAxisLayout = ({
   width,
-  maxHour,
-  maxViews,
+  chart,
   hourUnit,
 }: {
   width: number;
-  maxHour: number;
-  maxViews: number;
+  chart: IViewsChart;
   hourUnit: string;
 }) => {
+  const { maxHour, maxViews, maxDelta, minGapHours } = chart;
   const narrow = width > 0 && width < 420;
   const fontSize = narrow ? 10 : 11;
   const charWidth = fontSize * CHAR_WIDTH_RATIO;
+  const axisWidth = (value: number) =>
+    narrow
+      ? Math.ceil(shortNumber(value).length * charWidth + 10)
+      : Y_AXIS_WIDTH;
 
-  const yLabel = narrow ? shortNumber(maxViews) : maxViews.toLocaleString();
-  const yAxisWidth = narrow
-    ? Math.ceil(yLabel.length * charWidth + 10)
-    : Y_AXIS_WIDTH;
+  const yAxisWidth = axisWidth(maxViews);
+  // Шкала прироста справа — всегда: без неё столбики читаются по левой шкале
+  // накопленных просмотров и выглядят в разы выше. На узком экране — короткие числа
+  const deltaAxisWidth = axisWidth(maxDelta);
 
   // Самая длинная подпись — у последнего часа, плюс зазор между подписями
   const labelWidth = `${maxHour} ${hourUnit}`.length * charWidth + 10;
-  // Последняя подпись центрируется на краю — отступ справа на половину подписи
-  const rightMargin = Math.max(CHART_RIGHT_MARGIN, Math.ceil(labelWidth / 2));
-  const plotWidth = width > 0 ? width - yAxisWidth - rightMargin : maxHour * 40;
+  const plotWidth =
+    width > 0
+      ? width -
+        yAxisWidth -
+        deltaAxisWidth -
+        CHART_RIGHT_MARGIN -
+        X_PADDING_RIGHT
+      : maxHour * 40;
   const hourWidth = plotWidth / Math.max(maxHour, 1);
   const step =
     HOUR_STEPS.find((hours) => hours * hourWidth >= labelWidth) ??
@@ -81,28 +93,18 @@ const getAxisLayout = ({
     { length: Math.floor(maxHour / step) + 1 },
     (_, index) => index * step,
   );
+  const barSize = Math.round(
+    Math.min(BAR_MAX, Math.max(BAR_MIN, hourWidth * minGapHours * 0.6)),
+  );
 
-  return { narrow, fontSize, yAxisWidth, ticks, rightMargin };
-};
-
-const parseTime = (value: string) => new Date(value).getTime();
-
-const toPoints = (dynamics?: IViewsDynamics | null): IChartPoint[] => {
-  if (!dynamics?.published || !dynamics.snapshots?.length) return [];
-  const published = parseTime(dynamics.published);
-  if (Number.isNaN(published)) return [];
-
-  const snapshots = dynamics.snapshots
-    .map((snapshot) => ({
-      hours: (parseTime(snapshot.taken) - published) / HOUR_MS,
-      views: snapshot.views ?? 0,
-      taken: snapshot.taken,
-    }))
-    .filter((point) => Number.isFinite(point.hours) && point.hours >= 0)
-    .sort((a, b) => a.hours - b.hours);
-
-  // Начальная точка — момент публикации с нулём просмотров
-  return [{ hours: 0, views: 0, taken: dynamics.published }, ...snapshots];
+  return {
+    narrow,
+    fontSize,
+    yAxisWidth,
+    deltaAxisWidth,
+    ticks,
+    barSize,
+  };
 };
 
 const ChartTooltip: FC<TooltipContentProps<number, string>> = ({
@@ -110,39 +112,58 @@ const ChartTooltip: FC<TooltipContentProps<number, string>> = ({
   payload,
 }) => {
   const { t } = useTranslation();
-  const point = payload?.[0]?.payload as IChartPoint | undefined;
+  const point = payload?.[0]?.payload as IViewsChartPoint | undefined;
   if (!active || !point) return null;
 
   return (
-    <div className="rounded-xl border border-[var(--Card-separator)] bg-white px-3 py-2 text-xs shadow-lg">
+    <div className="grid gap-1 rounded-xl border border-[var(--Card-separator)] bg-white px-3 py-2 text-xs shadow-lg">
       <p className="text-slate-500">{formatReportDateTime(point.taken)}</p>
-      <p className="mt-1 font-semibold text-[var(--Personal-colors-black)]">
+      <p className="font-semibold text-[var(--Personal-colors-black)]">
         {point.views.toLocaleString()}{" "}
         {t("adv_project_page.report.chart.views")}
       </p>
+      {/* У стартовой точки (момент публикации) прироста нет — не пишем «+0» */}
+      {point.hours > 0 ? (
+        <p className="font-medium" style={{ color: DELTA_COLOR }}>
+          +{point.delta.toLocaleString()}{" "}
+          {t("adv_project_page.report.chart.delta_short")}
+        </p>
+      ) : null}
     </div>
   );
 };
 
+const LegendItem: FC<{ color: string; label: string; bar?: boolean }> = ({
+  color,
+  label,
+  bar,
+}) => (
+  <span className="flex items-center gap-1.5">
+    <span
+      className={bar ? "h-2.5 w-2 rounded-[2px]" : "h-0.5 w-3 rounded-full"}
+      style={{ background: color }}
+    />
+    {label}
+  </span>
+);
+
 /**
- * График динамики просмотров поста. Ось X — часы после публикации, метки через
- * каждый час; точки — реальные снимки. Используется и в модалке, и в табе «Графики»
+ * График динамики просмотров поста: область — накопленные просмотры, столбики —
+ * прирост с предыдущего снимка (своя шкала справа). Ось X — часы после публикации,
+ * точки — реальные снимки. Используется и в модалке, и в табе «Графики»
  */
 export const ViewsDynamicsChart: FC<ViewsDynamicsChartProps> = ({
-  dynamics,
+  chart,
   height = 260,
 }) => {
   const { t } = useTranslation();
   // Уникальный id градиента — графиков на странице несколько
   const gradientId = `viewsDynamicsFill-${useId().replace(/:/g, "")}`;
-  const points = useMemo(() => toPoints(dynamics), [dynamics]);
-
-  const maxHour = Math.max(1, Math.ceil(points[points.length - 1]?.hours ?? 0));
 
   // Ширина контейнера — чтобы ужать подписи вместо горизонтальной прокрутки
   const containerRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(0);
-  const hasChart = points.length >= 2;
+  const hasChart = !!chart && chart.points.length >= 2;
 
   useEffect(() => {
     const element = containerRef.current;
@@ -153,10 +174,6 @@ export const ViewsDynamicsChart: FC<ViewsDynamicsChartProps> = ({
     observer.observe(element);
     return () => observer.disconnect();
   }, [hasChart]);
-
-  const hourUnit = t("adv_project_page.report.chart.hour_short");
-  const maxViews = points.reduce((max, point) => Math.max(max, point.views), 0);
-  const axis = getAxisLayout({ width, maxHour, maxViews, hourUnit });
 
   if (!hasChart) {
     return (
@@ -169,25 +186,35 @@ export const ViewsDynamicsChart: FC<ViewsDynamicsChartProps> = ({
     );
   }
 
+  const hourUnit = t("adv_project_page.report.chart.hour_short");
+  const axis = getAxisLayout({ width, chart, hourUnit });
+  const formatValue = (value: number) =>
+    axis.narrow ? shortNumber(value) : value.toLocaleString();
+
   return (
-    <div className="grid w-full gap-1">
+    <div className="grid w-full gap-2">
       <div ref={containerRef} style={{ height }} className="w-full">
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart
-            data={points}
-            margin={{ top: 10, right: axis.rightMargin, left: 0, bottom: 0 }}
+          <ComposedChart
+            data={chart.points}
+            margin={{ top: 10, right: CHART_RIGHT_MARGIN, left: 0, bottom: 0 }}
           >
             <defs>
               <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#0badc2" stopOpacity={0.35} />
-                <stop offset="100%" stopColor="#0badc2" stopOpacity={0.02} />
+                <stop offset="0%" stopColor={VIEWS_COLOR} stopOpacity={0.3} />
+                <stop
+                  offset="100%"
+                  stopColor={VIEWS_COLOR}
+                  stopOpacity={0.02}
+                />
               </linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="3 3" vertical={false} />
             <XAxis
               type="number"
               dataKey="hours"
-              domain={[0, maxHour]}
+              domain={[0, chart.maxHour]}
+              padding={{ right: X_PADDING_RIGHT }}
               ticks={axis.ticks}
               // Шаг подписей — по доступной ширине, точки остаются реальными снимками
               interval={0}
@@ -197,27 +224,56 @@ export const ViewsDynamicsChart: FC<ViewsDynamicsChartProps> = ({
               axisLine={{ stroke: "#d9d9d9" }}
             />
             <YAxis
-              tickFormatter={(value: number) =>
-                axis.narrow ? shortNumber(value) : value.toLocaleString()
-              }
+              yAxisId="views"
+              tickFormatter={formatValue}
               tick={{ fontSize: axis.fontSize, fill: "#64748b" }}
               tickLine={false}
               axisLine={false}
               width={axis.yAxisWidth}
             />
+            <YAxis
+              yAxisId="delta"
+              orientation="right"
+              tickFormatter={formatValue}
+              tick={{ fontSize: axis.fontSize, fill: DELTA_COLOR }}
+              tickLine={false}
+              axisLine={false}
+              width={axis.deltaAxisWidth}
+            />
             <Tooltip content={ChartTooltip} />
+            <Bar
+              yAxisId="delta"
+              dataKey="delta"
+              fill={DELTA_COLOR}
+              fillOpacity={0.55}
+              barSize={axis.barSize}
+              radius={[3, 3, 0, 0]}
+              isAnimationActive={false}
+            />
             <Area
+              yAxisId="views"
               type="monotone"
               dataKey="views"
-              stroke="#0aa5be"
+              stroke={VIEWS_COLOR}
               strokeWidth={2}
               fill={`url(#${gradientId})`}
-              dot={{ r: 3, fill: "#0aa5be", strokeWidth: 0 }}
+              dot={{ r: 3, fill: VIEWS_COLOR, strokeWidth: 0 }}
               activeDot={{ r: 5 }}
               isAnimationActive={false}
             />
-          </AreaChart>
+          </ComposedChart>
         </ResponsiveContainer>
+      </div>
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-slate-500">
+        <LegendItem
+          color={VIEWS_COLOR}
+          label={t("adv_project_page.report.chart.cumulative")}
+        />
+        <LegendItem
+          color={DELTA_COLOR}
+          label={t("adv_project_page.report.chart.delta")}
+          bar
+        />
       </div>
     </div>
   );

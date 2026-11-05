@@ -3077,7 +3077,10 @@
         "hour_short": "h",
         "empty": "No dynamics data yet",
         "category": "Category",
-        "total_views": "Views"
+        "total_views": "Views",
+        "cumulative": "Total views",
+        "delta": "New views",
+        "delta_short": "new"
       }
     },
     "open": "Details",

@@ -8,13 +8,6 @@ import {
 } from "../lib/format";
 import { ViewsDynamicsChart } from "./views-dynamics-chart";
 
-const lastViews = (order: ICompletedOrder) => {
-  const snapshots = order.views_dynamics?.snapshots ?? [];
-  return snapshots.length
-    ? snapshots[snapshots.length - 1].views
-    : order.real_views;
-};
-
 const Info: FC<{ label: string; value: string }> = ({ label, value }) => (
   <div className="grid gap-1 rounded-[10px] bg-[#f5f5f6] px-3 py-2">
     <p className="text-xs font-medium text-black/45">{label}</p>
@@ -63,16 +56,16 @@ export const OrderChartHeader: FC<{
           value={(order.subscribers ?? 0).toLocaleString()}
         />
         <Info
-          label={t("adv_project_page.report.chart.category")}
-          value={order.category || "—"}
+          label={t("adv_project_page.report.chart.total_views")}
+          value={(order.last_views ?? 0).toLocaleString()}
         />
         <Info
           label={t("adv_project_page.completed_orders.publish_date")}
           value={`${formatReportDate(order.publish_date)} ${formatReportTime(order.publish_time)}`.trim()}
         />
         <Info
-          label={t("adv_project_page.report.chart.total_views")}
-          value={(lastViews(order) ?? 0).toLocaleString()}
+          label={t("adv_project_page.report.chart.category")}
+          value={order.category || "—"}
         />
       </div>
     </div>
@@ -87,7 +80,7 @@ export const OrderChartContent: FC<{
 }> = ({ order, height, wide }) => (
   <div className="grid min-w-0 gap-4">
     <OrderChartHeader order={order} wide={wide} />
-    <ViewsDynamicsChart dynamics={order.views_dynamics} height={height} />
+    <ViewsDynamicsChart chart={order.views_chart} height={height} />
   </div>
 );
 

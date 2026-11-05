@@ -141,8 +141,8 @@ export interface IProjectReports {
   reports: IOrderReportInfo[];
 }
 
-/** Выполненный заказ проекта — GET /report/{project_id}/completed-orders */
-export interface ICompletedOrder {
+/** Выполненный заказ проекта — как приходит с GET /report/{project_id}/completed-orders */
+export interface ICompletedOrderResponse {
   id: string;
   name: string;
   url: string;
@@ -167,6 +167,19 @@ export interface ICompletedOrder {
   region: string;
   /** Динамика просмотров поста: снимки после публикации */
   views_dynamics?: IViewsDynamics | null;
+  /** Точки графика с бэка: минуты после публикации, накопленные просмотры и прирост */
+  views_points?: IViewsPointResponse[] | null;
+}
+
+export interface IViewsPointResponse {
+  /** Минуты после публикации — точная позиция точки */
+  minutes: number;
+  /** Округлённые часы — для графика не используем, только minutes */
+  hours: number;
+  /** Накопленные просмотры */
+  views: number;
+  /** Прирост с предыдущей точки */
+  gain: number;
 }
 
 export interface IViewsSnapshot {
@@ -177,6 +190,36 @@ export interface IViewsSnapshot {
 export interface IViewsDynamics {
   published: string;
   snapshots: IViewsSnapshot[];
+}
+
+/** Точка графика динамики — собирается маппером при получении ответа */
+export interface IViewsChartPoint {
+  /** Часы после публикации — точка стоит там, где реально снят снимок */
+  hours: number;
+  /** Накопленные просмотры на момент снимка */
+  views: number;
+  /** Прирост просмотров с предыдущего снимка */
+  delta: number;
+  /** Время снимка (ISO) */
+  taken: string;
+}
+
+export interface IViewsChart {
+  points: IViewsChartPoint[];
+  /** Длина оси X в целых часах (вверх) */
+  maxHour: number;
+  maxViews: number;
+  maxDelta: number;
+  /** Минимальный интервал между снимками, ч — для ширины столбиков */
+  minGapHours: number;
+}
+
+/** Выполненный заказ для UI: ответ + готовые данные графика */
+export interface ICompletedOrder extends ICompletedOrderResponse {
+  /** null — снимков нет или их меньше одного */
+  views_chart: IViewsChart | null;
+  /** Последний снимок или real_views, если снимков нет */
+  last_views: number;
 }
 
 /** Итоги отчёта — считает бэкенд */
@@ -197,6 +240,13 @@ export interface ICompletedOrdersSummary {
   period_end: string | null;
 }
 
+/** Ответ GET /report/{project_id}/completed-orders */
+export interface ICompletedOrdersResponse {
+  orders: ICompletedOrderResponse[];
+  summary: ICompletedOrdersSummary | null;
+}
+
+/** Ответ после маппера — с готовыми данными графиков */
 export interface ICompletedOrders {
   orders: ICompletedOrder[];
   summary: ICompletedOrdersSummary | null;

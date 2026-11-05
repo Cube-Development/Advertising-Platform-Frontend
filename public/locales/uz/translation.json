@@ -3077,7 +3077,10 @@
         "hour_short": "soat",
         "empty": "Dinamika bo'yicha ma'lumot hali yo'q",
         "category": "Kategoriya",
-        "total_views": "Ko'rishlar"
+        "total_views": "Ko'rishlar",
+        "cumulative": "Jami ko'rishlar",
+        "delta": "Yangi ko'rishlar",
+        "delta_short": "yangi"
       }
     },
     "open": "Batafsil",

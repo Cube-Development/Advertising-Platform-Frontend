@@ -6,6 +6,7 @@ import {
   IAdvSubprojects,
   IAdvProjectCard,
   ICompletedOrders,
+  ICompletedOrdersResponse,
   ICreateDate,
   IFile,
   IOrderReportInfo,
@@ -33,6 +34,7 @@ import {
   VIEWS_MANAGER,
 } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
+import { mapCompletedOrders } from "../lib";
 import { ENUM_LANGUAGES_NUM } from "@shared/languages";
 import { CART, CART_MANAGER, CART_PUB, CART_PUB_SHORT } from "@shared/api";
 
@@ -244,10 +246,9 @@ export const advProjectsAPI = authApi.injectEndpoints({
         url: `/report/${project_id}/completed-orders`,
         method: "GET",
       }),
-      transformResponse: (response: ICompletedOrders) => ({
-        orders: response?.orders ?? [],
-        summary: response?.summary ?? null,
-      }),
+      // Маппер собирает точки графиков (часы, накопленные просмотры, прирост)
+      transformResponse: (response: ICompletedOrdersResponse) =>
+        mapCompletedOrders(response),
       providesTags: [ADV_ORDERS, ADV_TARIFF_ORDERS],
     }),
     /**
