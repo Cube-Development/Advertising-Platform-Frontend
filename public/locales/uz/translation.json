@@ -3051,6 +3051,54 @@
     "create_template_post": "Shablon yaratish",
     "uploading_files": "Fayllarni yuklash..."
   },
+  "adv_project_page": {
+    "report": {
+      "link": "Loyiha hisoboti",
+      "short": "Hisobot",
+      "title": "Hisobot",
+      "to_project": "Loyihaga",
+      "empty": "Hali bajarilgan joylashtirishlar yo'q",
+      "summary": {
+        "placements": "Joylashtirishlar",
+        "total": "QQS bilan jami",
+        "er": "Haqiqiy ER",
+        "cpv": "Haqiqiy CPV",
+        "average": "O'rtacha",
+        "period": "Joylashtirish davri"
+      },
+      "tabs": {
+        "orders": "Joylashtirishlar",
+        "charts": "Grafiklar"
+      },
+      "chart": {
+        "open": "Grafik",
+        "title": "Ko'rishlar dinamikasi",
+        "views": "ko'rish",
+        "hour_short": "soat",
+        "empty": "Dinamika bo'yicha ma'lumot hali yo'q",
+        "category": "Kategoriya",
+        "total_views": "Ko'rishlar"
+      }
+    },
+    "open": "Batafsil",
+    "back": "Loyihalarga qaytish",
+    "orders_title": "Loyiha buyurtmalari",
+    "empty_orders": "Loyihada hali buyurtmalar yo'q",
+    "not_found": "Loyiha topilmadi",
+    "completed_orders": {
+      "title": "Bajarilgan joylashtirishlar",
+      "subscribers": "Obunachilar",
+      "average_views": "O'rtacha ko'rishlar",
+      "real_views": "Haqiqiy ko'rishlar",
+      "publish_date": "Nashr sanasi",
+      "publish_count": "Nashrlar soni",
+      "amount": "Narxi",
+      "vat": "QQS",
+      "total": "Jami",
+      "post": "Postni ochish",
+      "screenshot": "Skrinshot"
+    }
+  },
   "project_page": {
     "top_info": {
       "views": "Post ko'rishlari",

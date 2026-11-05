@@ -140,3 +140,63 @@ export interface IOrderReportInfo {
 export interface IProjectReports {
   reports: IOrderReportInfo[];
 }
+
+/** Выполненный заказ проекта — GET /report/{project_id}/completed-orders */
+export interface ICompletedOrder {
+  id: string;
+  name: string;
+  url: string;
+  subscribers: number;
+  average_views: number;
+  amount: number;
+  VAT: number;
+  total_sum: number;
+  publish_date: string;
+  publish_time: string;
+  publish_count: number;
+  post_url: string;
+  post_screenshot: string | null;
+  real_views: number;
+  ER: number;
+  CPV: number;
+  category: string;
+  male: number;
+  female: number;
+  platform: platformTypesNum;
+  region: string;
+  /** Динамика просмотров поста: снимки после публикации */
+  views_dynamics?: IViewsDynamics | null;
+}
+
+export interface IViewsSnapshot {
+  taken: string;
+  views: number;
+}
+
+export interface IViewsDynamics {
+  published: string;
+  snapshots: IViewsSnapshot[];
+}
+
+/** Итоги отчёта — считает бэкенд */
+export interface ICompletedOrdersSummary {
+  orders_count: number;
+  subscribers: number;
+  real_views: number;
+  amount: number;
+  total_sum: number;
+  average_ER: number;
+  average_CPV: number;
+  planned_views: number;
+  views_plan_percent: number;
+  real_ER: number;
+  real_CPV: number;
+  real_CPM: number;
+  period_start: string | null;
+  period_end: string | null;
+}
+
+export interface ICompletedOrders {
+  orders: ICompletedOrder[];
+  summary: ICompletedOrdersSummary | null;
+}

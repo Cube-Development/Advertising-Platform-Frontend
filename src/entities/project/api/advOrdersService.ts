@@ -4,6 +4,8 @@ import {
   IAdvManagerProjectsDev,
   IAdvProjects,
   IAdvSubprojects,
+  IAdvProjectCard,
+  ICompletedOrders,
   ICreateDate,
   IFile,
   IOrderReportInfo,
@@ -236,6 +238,51 @@ export const advProjectsAPI = authApi.injectEndpoints({
       providesTags: (_result, _error, { project_id }) => [
         { type: ADV_PROJECT_REPORTS, id: project_id },
       ],
+    }),
+    getCompletedOrders: build.query<ICompletedOrders, { project_id: string }>({
+      query: ({ project_id }) => ({
+        url: `/report/${project_id}/completed-orders`,
+        method: "GET",
+      }),
+      transformResponse: (response: ICompletedOrders) => ({
+        orders: response?.orders ?? [],
+        summary: response?.summary ?? null,
+      }),
+      providesTags: [ADV_ORDERS, ADV_TARIFF_ORDERS],
+    }),
+    /**
+     * Один проект для страницы проекта: тот же список, но отдельный кэш —
+     * без merge/serializeQueryArgs, чтобы не перетирать кэш списка проектов
+     */
+    getAdvProjectById: build.query<
+      IAdvProjectCard | null,
+      Omit<getProjectsCardReq, "page" | "elements_on_page"> & {
+        project_id: string;
+      }
+    >({
+      query: (body) => ({
+        url: `/order/project/get/advertiser`,
+        method: `POST`,
+        body: { ...body, page: 1, elements_on_page: 1 },
+      }),
+      transformResponse: (response: IAdvProjects, _meta, arg) =>
+        response?.projects?.find((p) => p.id === arg.project_id) ?? null,
+      providesTags: [ADV_PROJECTS, ADV_ORDERS],
+    }),
+    getAdvManagerProjectById: build.query<
+      IAdvProjectCard | null,
+      Omit<getProjectsCardReq, "page" | "elements_on_page"> & {
+        project_id: string;
+      }
+    >({
+      query: (params) => ({
+        url: `/tariff/advertiser`,
+        method: "GET",
+        params: { ...params, page: 1, elements_on_page: 1 },
+      }),
+      transformResponse: (response: IAdvProjects, _meta, arg) =>
+        response?.projects?.find((p) => p.id === arg.project_id) ?? null,
+      providesTags: [ADV_TARIFF_PROJECTS, ADV_TARIFF_ORDERS],
     }),
     getAdvProjects: build.query<
       IAdvProjects,
@@ -556,4 +603,7 @@ export const {
   useRequestCompletedReportMutation,
   useGetProjectReportsQuery,
   useGetProjectNameQuery,
+  useGetCompletedOrdersQuery,
+  useGetAdvProjectByIdQuery,
+  useGetAdvManagerProjectByIdQuery,
 } = advProjectsAPI;

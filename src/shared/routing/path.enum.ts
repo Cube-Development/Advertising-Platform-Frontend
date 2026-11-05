@@ -17,6 +17,7 @@ export enum ENUM_PATHS {
   FULL_SERVICE = "/fullService",
   ORDERS = "/orders",
   PROJECT_PAGE = "/project/:project_id",
+  PROJECT_REPORT = "/project/:project_id/report",
   GUIDE = "/guide/:guide_id",
   OFFERS = "/offers",
   TRACK_ORDERS = "/track-orders",
