@@ -1,9 +1,9 @@
 import { ICompletedOrder, platformToIcon } from "@entities/project";
 import { BoyIcon, GirlIcon } from "@shared/assets";
 import { Skeleton } from "@shared/ui/shadcn-ui";
-import { formatMoney } from "@shared/utils";
-import { ExternalLink, ImageIcon } from "lucide-react";
-import { FC } from "react";
+import { downloadFileOnDevice, formatMoney } from "@shared/utils";
+import { Download, ExternalLink, Loader } from "lucide-react";
+import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   formatReportDate,
@@ -24,12 +24,63 @@ const Metric: FC<{ label: string; value: string | number }> = ({
   </div>
 );
 
+/** Имя файла скриншота: «канал-screenshot.png», расширение — из ссылки */
+const getScreenshotFileName = (name: string, url: string) => {
+  const ext =
+    new URL(url).pathname.match(/\.(png|jpe?g|webp|gif)$/i)?.[1] ?? "png";
+  const base =
+    name
+      // Символы, запрещённые в именах файлов
+      .replace(/[\\/:*?"<>|]+/g, "")
+      .trim()
+      .replace(/\s+/g, "_") || "post";
+  return `${base}-screenshot.${ext.toLowerCase()}`;
+};
+
+/** Скачивает скриншот на устройство; если хранилище не отдаёт файл (CORS) — открывает в новой вкладке */
+const DownloadScreenshot: FC<{ url: string; name: string }> = ({
+  url,
+  name,
+}) => {
+  const { t } = useTranslation();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleDownload = async () => {
+    if (isLoading) return;
+    setIsLoading(true);
+    try {
+      await downloadFileOnDevice(url, getScreenshotFileName(name, url));
+    } catch (error) {
+      console.error("error: ", error);
+      window.open(url, "_blank", "noopener,noreferrer");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={handleDownload}
+      disabled={isLoading}
+      className="flex items-center justify-center gap-2 rounded-xl border border-[var(--Personal-colors-main)] px-3 py-2.5 text-sm font-medium text-[var(--Personal-colors-main)] transition-opacity hover:opacity-80 disabled:opacity-60"
+    >
+      {isLoading ? (
+        <Loader className="size-4 animate-spin" />
+      ) : (
+        <Download className="size-4" />
+      )}
+      {t("adv_project_page.completed_orders.screenshot")}
+    </button>
+  );
+};
+
 const CompletedOrderCard: FC<{ order: ICompletedOrder }> = ({ order }) => {
   const { t } = useTranslation();
   const PlatformIcon = platformToIcon[order.platform];
   const channelUrl = toExternalUrl(order.url);
   const postUrl = toExternalUrl(order.post_url);
-  const screenshotUrl = toExternalUrl(order.post_screenshot);
+  const screenshotUrl = toExternalUrl(order.post_screenshot_url);
 
   return (
     <div className="grid gap-4 rounded-[20px] border-[1px] border-[var(--Card-separator)] bg-white/80 p-4 shadow-lg md:grid-cols-[minmax(0,1fr)_260px] md:p-5">
@@ -144,15 +195,7 @@ const CompletedOrderCard: FC<{ order: ICompletedOrder }> = ({ order }) => {
             </a>
           ) : null}
           {screenshotUrl ? (
-            <a
-              href={screenshotUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 rounded-xl border border-[var(--Personal-colors-main)] px-3 py-2.5 text-sm font-medium text-[var(--Personal-colors-main)] transition-opacity hover:opacity-80"
-            >
-              <ImageIcon className="size-4" />
-              {t("adv_project_page.completed_orders.screenshot")}
-            </a>
+            <DownloadScreenshot url={screenshotUrl} name={order.name} />
           ) : null}
           <OrderChartModal order={order} />
         </div>

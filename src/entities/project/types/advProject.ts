@@ -155,7 +155,8 @@ export interface ICompletedOrder {
   publish_time: string;
   publish_count: number;
   post_url: string;
-  post_screenshot: string | null;
+  /** Ссылка на скриншот поста */
+  post_screenshot_url: string | null;
   real_views: number;
   ER: number;
   CPV: number;
