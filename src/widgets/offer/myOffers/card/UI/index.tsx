@@ -79,7 +79,7 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
       </div>
       {hasChat && (
         <div className={`${styles.chat__btn} display__hide__min__md`}>
-          <Chat orderId={card.id} toRole={ENUM_ROLES.ADVERTISER} />
+          <Chat orderId={card.id} toRole={ENUM_ROLES.ADVERTISER} isFull />
         </div>
       )}
       <div className={styles.card__info}>
