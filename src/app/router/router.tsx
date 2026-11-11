@@ -5,6 +5,7 @@ import { ALL_APP_ROUTES_LIST } from "./config";
 import { RootAdminLayout, RootLayout } from "@widgets/layouts";
 import { Maintenance } from "@widgets/maintenance";
 import { ChatActions } from "../chat-actions";
+import { AnalyticsRouteTracker } from "../analytics/route-tracker";
 
 const IS_MAINTENANCE = import.meta.env.VITE_IS_MAINTENANCE === "true";
 
@@ -32,6 +33,7 @@ export const router = createBrowserRouter(
             <>
               <RootLayout />
               <ChatActions />
+              <AnalyticsRouteTracker />
             </>
           ),
           children: ROOT_ROUTES_LIST,

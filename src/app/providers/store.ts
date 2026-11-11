@@ -15,6 +15,7 @@ import {
   baseEpcApi,
   baseEpcApi2,
 } from "@shared/api";
+import { analyticsMiddleware } from "../analytics/analytics.middleware";
 
 const rootReducer = combineReducers({
   [baseApi.reducerPath]: baseApi.reducer,
@@ -43,6 +44,8 @@ export const setupStore = () => {
           authEcpApi2.middleware,
           baseEpcApi.middleware,
           baseEpcApi2.middleware,
+          // Аналитика поведения — последней: видит экшены после всех API (спека 005 FR-006)
+          analyticsMiddleware,
         ),
   });
 };

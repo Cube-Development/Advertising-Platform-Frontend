@@ -6,7 +6,8 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  // Копия ядра трекера из blogix-analytics (pnpm sync:tracker), не по правилам проекта
+  ignorePatterns: ['dist', '.eslintrc.cjs', 'src/shared/lib/analytics/core'],
   parser: '@typescript-eslint/parser',
   plugins: ['react-refresh'],
   rules: {

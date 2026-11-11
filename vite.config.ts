@@ -180,9 +180,19 @@ export default defineConfig({
       "@pages": path.resolve(__dirname, "src/pages"),
     },
   },
+  // Аналитика поведения: релиз — время сборки; в разработке /stats-api — локальный collector
+  define: {
+    __BX_RELEASE__: JSON.stringify(new Date().toISOString()),
+  },
   server: {
     allowedHosts: ["blogix.ngrok.dev"],
     host: true,
+    proxy: {
+      "/stats-api": {
+        target: "http://localhost:3001",
+        rewrite: (path) => path.replace(/^\/stats-api/, ""),
+      },
+    },
   },
   test: {
     globals: true,

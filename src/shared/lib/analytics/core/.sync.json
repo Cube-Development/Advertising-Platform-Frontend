@@ -1,0 +1,77 @@
+{
+  "commit": "bb495bc",
+  "files": {
+    "clicks.ts": {
+      "source": "5632a0da15a0d28c53dcf64a89b123535c0799400d429299f074fb80ffdd3ae9",
+      "copy": "8ec9b9e9218997c749d3c66b34259c307369480eb6441a8354734d67b1101da3"
+    },
+    "config.ts": {
+      "source": "0cdf13b52099c96e7e4600165a1bd021df9f838d907e7f44cc90789b72da7eb6",
+      "copy": "40e8b0c04700ac6f451a8eef0f7ff22f1523553a1534cbfe9c595101f982787f"
+    },
+    "debug.ts": {
+      "source": "d89677e3d16aa5767f2e02a1722904bb5eec91c050c9357312bfe3d992618176",
+      "copy": "12e8bcbc7f893f16ff6d3533daf14d9d8cef6afa8a19a22dfa97310e1a3dcc2e"
+    },
+    "env.ts": {
+      "source": "93a94e8874cfe20ec38731ddc1c63ae89cc71b28824df9fdf689eb9d5b970012",
+      "copy": "47ef95e48ef7a05595de6195a0a69cbc1d493bf72b422fb1b9f23c59b9f6ea84"
+    },
+    "generated/contract-lite.ts": {
+      "source": "9b21837f80b773e496155adefc87adca517d867ab47d3eacd274fcb46f8fdffa",
+      "copy": "7c4bdcb6ecd92f6c27a6863392aa7192bc39816db9dd5a8ee9e71208e313035b"
+    },
+    "identity.ts": {
+      "source": "51a5e936276a90461a2937a4d0c56d23701366c98b42dcb0b4adfcf6eac88395",
+      "copy": "16fa03f892aaeacbfdc2132a30bb26bd90953cd94c4a677d5d2075f2bb32861d"
+    },
+    "impressions.ts": {
+      "source": "6de8d2a1621d5384be1424faf240f0f2dc4394843a1edec2a4d6fed58351dc63",
+      "copy": "ac6f6dafa2a2dbf2ef537de1ea4306d192664d6dbee60c1642f91a9725a831d7"
+    },
+    "index.ts": {
+      "source": "a5b63a26e12264c99e158778f1fc97832768bf0b77a11c04ac9d964480768897",
+      "copy": "44740e82d5dc45297c56b49ea1c87cddc0c476df4bce06b910545bd5ddc093a7"
+    },
+    "marks.ts": {
+      "source": "27f488f4ae0e6b1ec526f88213e6557969c8152679f8dcce7718c3f7e505f7ac",
+      "copy": "17c1b58ac2c49328d409c9424179dbd86e9e7b7fca081fae0778bf8c57c72464"
+    },
+    "page.ts": {
+      "source": "f29f923d913cc8b34eb6d4121adefa608892827b193ec684b9e77afd0673ee53",
+      "copy": "6629082eae820758a88de65c424f08643754044e63e12b85f1010bf18df2567c"
+    },
+    "queue.ts": {
+      "source": "857f8ef6c8f9c6d5cd3ff3f30fecc6b8dfe89dec4d49d2255d70d9a8fb831fb5",
+      "copy": "b2052b53d2893e7bdd29c61fdc1d4877c1d6ba71b7a4562e90b88fed9f873dbd"
+    },
+    "session.ts": {
+      "source": "0066c1bd5ee7819267689b2922621312904a39270961de42a4a991cd325964db",
+      "copy": "511816b641b898af4273192317c7074621577b807733a5fb1d25ae07528abbf3"
+    },
+    "source.ts": {
+      "source": "a3cc13f5fa69089d58addae2d00be42ab56f3013d198c8b2fbd310c2e0d8bf03",
+      "copy": "1fb1af5ed116a5b8d5220e9f3c6bd756be344b5c26a9730ef13c916d1daae2e1"
+    },
+    "storage.ts": {
+      "source": "f253bfa64ede3464848cba98a4d89230f7452113927553b563a05224abe00688",
+      "copy": "b1680e122417ba578cea19a26946c2993ed3c23ac38792fe661aea3d87faabb9"
+    },
+    "tracker.ts": {
+      "source": "7bc87aac15aabfb56faf07c4a5438e81dde4c7082551334bd8b1847f5e3494ad",
+      "copy": "efaec781b9a72083af9cef531dceca7ad3ed3295e2cb508fa7b699ede58b6194"
+    },
+    "transport.ts": {
+      "source": "84d6e919e47fd3c9facd3295303ddf9974b5f2c7eaf42e8558d510ee940c37bd",
+      "copy": "f343dc51881c74d93c9a63a1e54dd6f60614c56b379c4c8134672aa394756af3"
+    },
+    "url.ts": {
+      "source": "1a63e3d2073a4953c64fdb7db0dd7a97b11557cda23633662caf51833f2e1019",
+      "copy": "c4dc3f14077bee34dde0f50862c67bea3301bc7e52bc1df14feefaebc2ea4287"
+    },
+    "uuid.ts": {
+      "source": "de854cfc542b08e227a334ae84a6f5fdb33c1e3315d9daf7ca7f988c6896c29c",
+      "copy": "8cbca59fa8bde40c3124aaa4bf911be58a1155f6c35460028234737427d59a9f"
+    }
+  }
+}
