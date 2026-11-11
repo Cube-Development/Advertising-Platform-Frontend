@@ -216,6 +216,20 @@ describe("analyticsMiddleware (спека 005 FR-006)", () => {
     ]);
   });
 
+  it("top-up on the top-up page opened from the wizard (project_id in the query) → src create_order (спека 005 Q18)", () => {
+    window.history.pushState(
+      {},
+      "",
+      "/wallet/topup?project_id=00000000-0000-4000-8000-000000000501&amount=1000",
+    );
+    isolatedStore().dispatch(
+      mutation("fulfilled", "createDepositPayme", { amount: 1 }),
+    );
+    expect(analytics.track.mock.calls.map(([event]) => event)).toEqual([
+      { t: "topup_start", v: "payme", ok: true, src: "create_order" },
+    ]);
+  });
+
   it("createChannel → channel_create; the logout action of userSlice → logout", () => {
     const store = isolatedStore();
     store.dispatch(

@@ -1,4 +1,5 @@
 import i18n from "@shared/config/i18n";
+import { getAnalytics } from "@shared/lib/analytics";
 import { toast } from "@shared/ui";
 
 import { AI_POST_BASE_URL, GENERATE_POST_ENDPOINT } from "../config";
@@ -53,7 +54,7 @@ const showGenerationErrorToast = (status?: number) => {
  * Каждый chunk возвращается через onChunk колбэк.
  * Контракт: `data: "<chunk>"\n\n` ... `data: [DONE]\n\n`.
  */
-export const generatePostStream = async (
+const streamPost = async (
   payload: IGeneratePostRequest,
   { onChunk, onDone, onError, signal }: IGenerationStreamHandlers,
 ): Promise<string> => {
@@ -159,5 +160,27 @@ export const generatePostStream = async (
     showGenerationErrorToast(status);
     onError?.(normalized);
     throw normalized;
+  }
+};
+
+/** Генерация с аналитикой post_ai_generate (спека 005 Q17): итог и длительность, остановка — не событие */
+export const generatePostStream = async (
+  payload: IGeneratePostRequest,
+  handlers: IGenerationStreamHandlers,
+): Promise<string> => {
+  const startedAt = performance.now();
+  const track = (ok: boolean) =>
+    getAnalytics().track({
+      t: "post_ai_generate",
+      ok,
+      num: Math.round(performance.now() - startedAt),
+    });
+  try {
+    const text = await streamPost(payload, handlers);
+    track(true);
+    return text;
+  } catch (error) {
+    if (!(error instanceof PostGenerationAbortError)) track(false);
+    throw error;
   }
 };

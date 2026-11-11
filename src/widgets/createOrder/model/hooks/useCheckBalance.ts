@@ -1,6 +1,7 @@
 import { ENUM_ROLES } from "@entities/user";
 import { ENUM_WALLETS_TYPE } from "@entities/wallet";
 import { useAppSelector } from "@shared/hooks";
+import { getAnalytics } from "@shared/lib/analytics";
 import { useToast } from "@shared/ui";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
@@ -8,6 +9,8 @@ import { useTranslation } from "react-i18next";
 export const useCheckBalance = (
   wallet_type: ENUM_WALLETS_TYPE | undefined,
   amount: number = 0,
+  /** Проект заказа — для `balance_insufficient` (спека 005 Q17) */
+  projectId?: string,
 ) => {
   const { deposit_wallet, profit_wallet, spending_wallet } = useAppSelector(
     (state) => state.wallet,
@@ -30,6 +33,13 @@ export const useCheckBalance = (
 
   const checkBalance = (): boolean => {
     if (current_wallet < amount && role === ENUM_ROLES.ADVERTISER) {
+      if (projectId) {
+        getAnalytics().track({
+          t: "balance_insufficient",
+          e: "project",
+          id: projectId,
+        });
+      }
       toast({
         variant: "error",
         title: t("toasts.create_order.payment.not_enough_balance"),

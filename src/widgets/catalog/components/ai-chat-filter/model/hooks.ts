@@ -2,6 +2,7 @@ import { MESSAGE_SEND_TYPE, notificationsTypes } from "@entities/communication";
 import { ICatalogFilter } from "@entities/project";
 import { useCentrifuge } from "@shared/api";
 import { PERSONAL_CHANNEL_PREFIX } from "@shared/api/centrifuge/model";
+import { getAnalytics } from "@shared/lib/analytics";
 import { ENUM_COOKIES_TYPES } from "@shared/config";
 import { ScrollArea } from "@shared/ui";
 import Cookies from "js-cookie";
@@ -207,10 +208,13 @@ export const useAiChatFilter = (
           PERSONAL_CHANNEL_PREFIX.AI_SAMPLE + userId,
           aiMessage,
         );
+        // ai_filter (спека 005 Q16): промпт ушёл в AI-чат
+        getAnalytics().track({ t: "ai_filter", ok: true, num: payload.length });
       } else {
         throw new Error("Centrifuge instance is not initialized");
       }
     } catch (error) {
+      getAnalytics().track({ t: "ai_filter", ok: false, num: payload.length });
       console.error("Ошибка отправки сообщения AI:", error);
     }
   };

@@ -2,6 +2,7 @@ import { useGetUserMutation, useLazyGoogleCallbackQuery } from "@entities/user";
 import { useHandleAuth } from "@features/useHandleAuth";
 import { getGoogleAuthErrorKey } from "@features/google-auth/getGoogleAuthErrorKey";
 import { useAppSelector } from "@shared/hooks";
+import { getAnalytics, normalizeError } from "@shared/lib/analytics";
 import { ENUM_PATHS } from "@shared/routing";
 import { queryParamKeys } from "@shared/utils";
 import { useToast } from "@shared/ui";
@@ -60,16 +61,28 @@ export const useGoogleAuthCallback = () => {
       navigate(ENUM_PATHS.LOGIN, { replace: true });
     };
 
+    // Вход через Google (спека 005 Q15): успех — когда сессия подтверждена (getUser), иначе ошибка
+    const trackGoogleAuth = (ok: boolean, err?: unknown) =>
+      getAnalytics().track(
+        ok
+          ? { t: "auth", n: "google", ok: true }
+          : { t: "auth", n: "google", ok: false, v: normalizeError(err) },
+      );
+
     const completeAuth = async () => {
       try {
         const data = await getUser().unwrap();
+        trackGoogleAuth(true);
         await handleAuth(data.role, data.id);
       } catch (err) {
+        trackGoogleAuth(false, err);
         handleError(err);
       }
     };
 
     if (error) {
+      // Код ошибки провайдера — строкой в адресе; normalizeError берёт его из detail, как у ответа бэкенда
+      trackGoogleAuth(false, { detail: error });
       handleError();
       return;
     }
@@ -78,11 +91,15 @@ export const useGoogleAuthCallback = () => {
       void googleCallback({ code, state })
         .unwrap()
         .then(completeAuth)
-        .catch(handleError);
+        .catch((err: unknown) => {
+          trackGoogleAuth(false, err);
+          handleError(err);
+        });
 
       return;
     }
 
+    // Бэкенд сам завершил обмен и вернул google_auth=1 — успех считает completeAuth (спека 005 Q15)
     if (googleAuth === "1") {
       void completeAuth();
     }

@@ -63,9 +63,9 @@ export const CatalogCard: FC<CatalogCardProps> = ({
   const isModal = !isAuth || !isPremiumUser;
   const Modal = () =>
     !isAuth ? (
-      <LoginToViewMore />
+      <LoginToViewMore channelId={card.id} />
     ) : !isPremiumUser ? (
-      <LoginPremiumAccess />
+      <LoginPremiumAccess channelId={card.id} />
     ) : null;
 
   let startFormat: IFormat | undefined;

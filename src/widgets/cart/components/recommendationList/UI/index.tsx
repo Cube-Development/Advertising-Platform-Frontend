@@ -2,6 +2,7 @@ import { ICatalogChannel } from "@entities/project";
 import { AddToBasket } from "@features/cart";
 import { CatalogCard, FormatList } from "@features/catalog";
 import { PAGE_ANIMATION } from "@shared/config";
+import { marks } from "@shared/lib/analytics";
 import { motion } from "framer-motion";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -34,10 +35,11 @@ export const RecommendationList: FC<RecommendationListProps> = ({
       </div>
 
       {isVisible && (
-        <div className={styles.cards}>
+        <div className={styles.cards} {...marks.list("recommendations")}>
           {channels.map((card, index) => (
             <motion.div
               key={card.id + index}
+              {...marks.channel(card.id, index + 1)}
               initial="hidden"
               animate="visible"
               custom={Math.min(index, 10)}

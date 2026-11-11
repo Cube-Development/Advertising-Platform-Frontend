@@ -12,15 +12,18 @@ import {
   DialogTrigger,
   MyButton,
 } from "@shared/ui";
-import { type FC, useState, useCallback } from "react";
+import { type FC, useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { useGateEvents } from "../gate-events";
 
 interface ILoginToViewMoreProps {
   trigger?: React.ReactNode;
   className?: string;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
+  /** Канал, о котором окно (аналитика `gate_*`); без канала — пусто */
+  channelId?: string;
 }
 
 export const LoginToViewMore: FC<ILoginToViewMoreProps> = ({
@@ -28,6 +31,7 @@ export const LoginToViewMore: FC<ILoginToViewMoreProps> = ({
   className,
   open: controlledOpen,
   onOpenChange,
+  channelId = "",
 }) => {
   const { t } = useTranslation();
 
@@ -36,6 +40,13 @@ export const LoginToViewMore: FC<ILoginToViewMoreProps> = ({
   const [uncontrolledOpen, setUncontrolledOpen] = useState(false);
 
   const open = isControlled ? controlledOpen : uncontrolledOpen;
+
+  // Аналитика окна (спека 005 Q14): показ — при открытии, клик — по кнопке действия
+  const handleGateClick = useGateEvents({
+    name: "login_to_view",
+    channelId,
+    isShown: Boolean(open),
+  });
 
   const handleOpenChange = useCallback(
     (value: boolean) => {
@@ -84,7 +95,7 @@ export const LoginToViewMore: FC<ILoginToViewMoreProps> = ({
             </MyButton>
           </DialogClose>
 
-          <Link to={ENUM_PATHS.REGISTRATION}>
+          <Link to={ENUM_PATHS.REGISTRATION} onClick={handleGateClick}>
             <MyButton className="text-xs sm:text-sm">
               {t("auth.login_to_view_more.buttons.register")}
             </MyButton>

@@ -6,6 +6,7 @@ import {
   SkeletonCatalogCard,
 } from "@features/catalog";
 import { CartIcon, SadSmileIcon } from "@shared/assets";
+import { marks } from "@shared/lib/analytics";
 import { INTERSECTION_ELEMENTS, PAGE_ANIMATION } from "@shared/config";
 import { ENUM_PAGE_FILTER } from "@shared/routing";
 import { motion } from "framer-motion";
@@ -46,12 +47,13 @@ export const CartList: FC<CartListProps> = ({
       </div>
       <ClearActiveProject projectId={projectId} i18nKey="cart.badge.text" />
       {channels?.length || isLoading ? (
-        <div className={styles.cards}>
+        <div className={styles.cards} {...marks.list("cart")}>
           {channels?.length && !isLoading ? (
             <>
               {channels?.map((card, index) => (
                 <motion.div
                   key={card.id}
+                  {...marks.channel(card.id, index + 1)}
                   initial="hidden"
                   animate="visible"
                   custom={Math.min(index, 10)}

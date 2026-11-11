@@ -48,6 +48,7 @@ import {
   CatalogList,
   CatalogSearch,
 } from "../components";
+import { useCatalogQueryEvent } from "../model";
 import styles from "./styles.module.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { ENUM_PATHS } from "@shared/routing";
@@ -120,41 +121,52 @@ export const CatalogBlock: FC = () => {
     setValue(name, value);
   };
 
+  const authCatalogQuery = useGetAuthCatalogQuery(
+    {
+      ...formState,
+      language: language?.id || USER_LANGUAGES_LIST[0].id,
+      user_id: userId,
+    },
+    {
+      skip: !isAuth || !userId || !!projectId,
+      refetchOnMountOrArgChange: true,
+    },
+  );
+
+  const managerCatalogQuery = useGetAuthCatalogQuery(
+    {
+      ...formState,
+      language: language?.id || USER_LANGUAGES_LIST[0].id,
+      project_id: projectId,
+    },
+    {
+      skip: !isAuth || !projectId,
+      refetchOnMountOrArgChange: true,
+    },
+  );
+
+  const publicCatalogQuery = useGetCatalogQuery(
+    {
+      ...formState,
+      language: language?.id || USER_LANGUAGES_LIST[0].id,
+      guest_id: guestId,
+    },
+    { skip: isAuth || !guestId, refetchOnMountOrArgChange: true },
+  );
+
   const { data: catalogAuth, isFetching: isCatalogAuthLoading } =
-    useGetAuthCatalogQuery(
-      {
-        ...formState,
-        language: language?.id || USER_LANGUAGES_LIST[0].id,
-        user_id: userId,
-      },
-      {
-        skip: !isAuth || !userId || !!projectId,
-        refetchOnMountOrArgChange: true,
-      },
-    );
-
+    authCatalogQuery;
   const { data: catalogManager, isFetching: isCatalogManagerLoading } =
-    useGetAuthCatalogQuery(
-      {
-        ...formState,
-        language: language?.id || USER_LANGUAGES_LIST[0].id,
-        project_id: projectId,
-      },
-      {
-        skip: !isAuth || !projectId,
-        refetchOnMountOrArgChange: true,
-      },
-    );
-
+    managerCatalogQuery;
   const { data: catalogPublic, isFetching: isCatalogLoading } =
-    useGetCatalogQuery(
-      {
-        ...formState,
-        language: language?.id || USER_LANGUAGES_LIST[0].id,
-        guest_id: guestId,
-      },
-      { skip: isAuth || !guestId, refetchOnMountOrArgChange: true },
-    );
+    publicCatalogQuery;
+  // catalog_query — по запросу, чью выдачу показывает каталог (спека 005 Q12)
+  const shownCatalogQuery = !isAuth
+    ? publicCatalogQuery
+    : projectId
+      ? managerCatalogQuery
+      : authCatalogQuery;
+  useCatalogQueryEvent(shownCatalogQuery, formState);
 
   const {
     data: catalogManagerPublic,

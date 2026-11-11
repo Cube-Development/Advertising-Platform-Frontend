@@ -3,6 +3,7 @@ import { ICreateOrderBlur } from "../config";
 import { BREAKPOINT } from "@shared/config";
 import { useWindowWidth } from "@shared/hooks";
 import { useLocation } from "react-router-dom";
+import { useOrderStepEvents } from "./useOrderStepEvents";
 
 const BLUR_ALL: ICreateOrderBlur = {
   post: true,
@@ -63,6 +64,8 @@ export const useChangeBlur = () => {
     },
     [screen],
   );
+
+  useOrderStepEvents(blur, SECTION_IDS);
 
   const handleOnChangeBlur = (key: keyof ICreateOrderBlur) => {
     const newBlur = { ...blur };

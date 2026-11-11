@@ -2,10 +2,9 @@ import { ENUM_LAYOUT_TYPES, ENUM_PATHS } from "@shared/routing";
 import { createBrowserRouter } from "react-router-dom";
 import { ProtectedRoute } from "./protected-route";
 import { ALL_APP_ROUTES_LIST } from "./config";
-import { RootAdminLayout, RootLayout } from "@widgets/layouts";
+import { RootAdminLayout } from "@widgets/layouts";
 import { Maintenance } from "@widgets/maintenance";
-import { ChatActions } from "../chat-actions";
-import { AnalyticsRouteTracker } from "../analytics/route-tracker";
+import { RootElement } from "./root-element";
 
 const IS_MAINTENANCE = import.meta.env.VITE_IS_MAINTENANCE === "true";
 
@@ -29,13 +28,7 @@ export const router = createBrowserRouter(
     : [
         {
           path: ENUM_PATHS.MAIN,
-          element: (
-            <>
-              <RootLayout />
-              <ChatActions />
-              <AnalyticsRouteTracker />
-            </>
-          ),
+          element: <RootElement />,
           children: ROOT_ROUTES_LIST,
         },
         {

@@ -32,6 +32,7 @@ import { FC, useEffect, useRef, useState } from "react";
 import { useForm, UseFormReset, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { AiChatFilter } from "../../ai-chat-filter";
+import { applyAiFilter } from "../../../model";
 import styles from "./styles.module.scss";
 import recomAnimation from "/animated/recom_lottie.gif";
 import { useAppSelector } from "@shared/hooks";
@@ -245,7 +246,7 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
   };
 
   const handleAiFind = (value: ICatalogFilter) => {
-    setValue("filter", { ...formState?.filter, ...value });
+    setValue("filter", applyAiFilter(formState?.filter, value));
   };
 
   return (

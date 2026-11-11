@@ -1,3 +1,4 @@
+import { useGateEvents } from "@features/user";
 import { LockIcon } from "@shared/assets";
 import { useAppSelector } from "@shared/hooks";
 import { ENUM_PATHS } from "@shared/routing";
@@ -15,6 +16,11 @@ import { Link } from "react-router-dom";
 export const CardPremiumAccess: FC = () => {
   const { t } = useTranslation();
   const { premiumBalance } = useAppSelector((state) => state.user);
+  // Баннер премиума над каталогом — окно premium_access, как в blogix (спека 005 Q14)
+  const handleGateClick = useGateEvents({
+    name: "premium_access",
+    isShown: true,
+  });
   return (
     <Card
       className="rounded-xl"
@@ -36,7 +42,7 @@ export const CardPremiumAccess: FC = () => {
             />
           </CardDescription>
         </div>
-        <Link to={ENUM_PATHS.WALLET_TOP_UP}>
+        <Link to={ENUM_PATHS.WALLET_TOP_UP} onClick={handleGateClick}>
           <MyButton
             className="w-full rounded-xl text-[var(--Personal-colors-main)] text-xs"
             buttons_type="button__white"

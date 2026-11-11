@@ -19,6 +19,7 @@ import {
 } from "@features/catalog";
 import { SelectFilter, filterData } from "@features/other";
 import { GridIcon, ListIcon, LockIcon, SadSmileIcon } from "@shared/assets";
+import { marks } from "@shared/lib/analytics";
 import {
   BREAKPOINT,
   INTERSECTION_ELEMENTS,
@@ -236,11 +237,15 @@ export const CatalogList: FC<CatalogListProps> = ({
         )}
       </div>
       {isAuth && !isPremiumUser && <CardPremiumAccess />}
-      <div className={`${styles.card__list} ${isTableView && "!gap-1.5"}`}>
+      <div
+        className={`${styles.card__list} ${isTableView && "!gap-1.5"}`}
+        {...marks.list("catalog")}
+      >
         {(formState.page !== 1 || !isLoading) &&
           channels?.map((card, index) => (
             <motion.div
               key={card.id + index}
+              {...marks.channel(card.id, index + 1)}
               initial="hidden"
               animate="visible"
               custom={index % 12}

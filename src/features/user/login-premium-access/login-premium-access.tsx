@@ -13,15 +13,18 @@ import {
   DialogTrigger,
   MyButton,
 } from "@shared/ui";
-import { useCallback, useState, type FC } from "react";
+import { type FC, useCallback, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { useGateEvents } from "../gate-events";
 
 interface ILoginPremiumAccessProps {
   trigger?: React.ReactNode;
   className?: string;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
+  /** Канал, о котором окно (аналитика `gate_*`); без канала — пусто */
+  channelId?: string;
   channelCount?: number;
 }
 
@@ -30,6 +33,7 @@ export const LoginPremiumAccess: FC<ILoginPremiumAccessProps> = ({
   className,
   open: controlledOpen,
   onOpenChange,
+  channelId = "",
   channelCount,
 }) => {
   const { t } = useTranslation();
@@ -39,6 +43,13 @@ export const LoginPremiumAccess: FC<ILoginPremiumAccessProps> = ({
   const [uncontrolledOpen, setUncontrolledOpen] = useState(false);
 
   const open = isControlled ? controlledOpen : uncontrolledOpen;
+
+  // Аналитика окна (спека 005 Q14): показ — при открытии, клик — по кнопке действия
+  const handleGateClick = useGateEvents({
+    name: "premium_access",
+    channelId,
+    isShown: Boolean(open),
+  });
 
   const handleOpenChange = useCallback(
     (value: boolean) => {
@@ -125,7 +136,7 @@ export const LoginPremiumAccess: FC<ILoginPremiumAccessProps> = ({
               {t("auth.login_premium_access.buttons.cancel")}
             </MyButton>
           </DialogClose>
-          <Link to={ENUM_PATHS.WALLET_TOP_UP}>
+          <Link to={ENUM_PATHS.WALLET_TOP_UP} onClick={handleGateClick}>
             <MyButton className="text-xs sm:text-sm">
               {t("auth.login_premium_access.buttons.balance")}
             </MyButton>

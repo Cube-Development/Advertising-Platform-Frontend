@@ -76,6 +76,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
   const { checkBalance } = useCheckBalance(
     formState?.wallet_type,
     payableAmount,
+    projectId,
   );
 
   const { handleTopUp } = useTopUpFromCreateOrder({

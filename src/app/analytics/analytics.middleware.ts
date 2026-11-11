@@ -3,6 +3,8 @@ import { channelAPI } from "@entities/channel";
 import { authCartAPI, publicCartAPI } from "@entities/project";
 import { authorizationAPI, userSlice } from "@entities/user";
 import { walletAPI } from "@entities/wallet";
+import { queryParamKeys } from "@shared/utils";
+import { ENUM_PATHS } from "@shared/routing";
 import {
   getAnalytics,
   normalizeError,
@@ -63,7 +65,15 @@ const promocodeRule = (endpoint: MutationEndpoint): Rule => [
       : { t: "promocode", ok, v: normalizeError(action.payload) },
 ];
 
-/** Пополнение (спека 005 Q6): с мастера заказа — create_order, иначе кошелёк */
+/**
+ * Пополнение (спека 005 Q6, Q18): из мастера заказа — create_order, иначе кошелёк. Мастер уводит на
+ * страницу пополнения с `project_id` в query (useTopUpFromCreateOrder) — это тоже create_order
+ */
+const isTopUpFromCreateOrder = (): boolean =>
+  window.location.pathname.startsWith(ENUM_PATHS.CREATE_ORDER) ||
+  (window.location.pathname === ENUM_PATHS.WALLET_TOP_UP &&
+    new URLSearchParams(window.location.search).has(queryParamKeys.projectId));
+
 const topUpRule = (
   endpoint: MutationEndpoint,
   v: "payme" | "click" | "request" | "didox",
@@ -73,9 +83,7 @@ const topUpRule = (
     t: "topup_start",
     v,
     ok,
-    src: window.location.pathname.startsWith("/createorder")
-      ? "create_order"
-      : "wallet",
+    src: isTopUpFromCreateOrder() ? "create_order" : "wallet",
   }),
 ];
 

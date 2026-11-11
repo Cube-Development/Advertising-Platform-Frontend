@@ -40,6 +40,7 @@ import {
   ScrollArea,
 } from "@shared/ui";
 import { AiChatFilter } from "@widgets/catalog/components/ai-chat-filter";
+import { applyAiFilter } from "../../../../model";
 import { Loader } from "lucide-react";
 import { FC, useEffect, useRef, useState } from "react";
 import { useForm, UseFormReset, UseFormSetValue } from "react-hook-form";
@@ -234,7 +235,7 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
   const [isOpen, setIsOpen] = useState(false);
 
   const handleAiFind = (value: ICatalogFilter) => {
-    setValue("filter", { ...formState?.filter, ...value });
+    setValue("filter", applyAiFilter(formState?.filter, value));
   };
 
   return (
