@@ -8,6 +8,7 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { ENUM_ROLES } from "@entities/user";
+import { selectIsApplyingPromocode, selectPromocode } from "@entities/wallet";
 import { LoginPremiumAccess, LoginToViewMore } from "@features/user";
 import { Skeleton } from "@shared/ui";
 import { queryParamKeys, QueryParamsUUID } from "@shared/utils";
@@ -22,12 +23,14 @@ export const CreatePost: FC<CreatePostProps> = ({ cart, role, isLoading }) => {
   const { t } = useTranslation();
   const screen = useWindowWidth();
   const { isPremiumUser, isAuth } = useAppSelector((state) => state.user);
-  const { discount } = useAppSelector((state) => state.promocode);
-  /** Промокод — только в общей корзине рекламодателя: не у гостя и не в корзине сохранённого проекта */
-  const hasPromocode =
-    isAuth &&
-    role === ENUM_ROLES.ADVERTISER &&
-    !QueryParamsUUID(queryParamKeys.saveProject);
+  /** Сохранённый проект (`save_project`): скидка считается по его корзине, `null` — общая корзина */
+  const projectId = QueryParamsUUID(queryParamKeys.saveProject) || null;
+  const { discount } = useAppSelector(selectPromocode(projectId));
+  /** Промокод — у рекламодателя: в общей корзине и в корзине сохранённого проекта, не у гостя */
+  const hasPromocode = isAuth && role === ENUM_ROLES.ADVERTISER;
+  /** Идёт «Применить»: «Создать пост» ждёт — иначе проект создастся раньше, чем код ляжет в корзину */
+  const isWaitingPromocode =
+    useAppSelector(selectIsApplyingPromocode) && hasPromocode;
   const hasUnavailableFormat = cart?.channels?.some(
     (channel) => channel.format_unavailable,
   );
@@ -109,7 +112,12 @@ export const CreatePost: FC<CreatePostProps> = ({ cart, role, isLoading }) => {
             )}
             {hasPromocode && (
               <div className={styles.promocode}>
-                <ApplyPromocode amount={cart?.amount} />
+                {/* Смена корзины — новое поле: код другой корзины в нём не остаётся */}
+                <ApplyPromocode
+                  key={projectId ?? "common"}
+                  amount={cart?.amount}
+                  projectId={projectId}
+                />
                 {discount && (
                   <div className={styles.promocode__discount}>
                     <p>{t("cart.promocode.discount")}:</p>
@@ -150,9 +158,12 @@ export const CreatePost: FC<CreatePostProps> = ({ cart, role, isLoading }) => {
           </>
         )}
         <div
-          className={`${styles.button} ${!cart?.channels?.length && "deactive"}`}
+          className={`${styles.button} ${(!cart?.channels?.length || isWaitingPromocode) && "deactive"}`}
         >
-          <CreatePostBtn hasUnavailableFormat={hasUnavailableFormat} />
+          <CreatePostBtn
+            hasUnavailableFormat={hasUnavailableFormat}
+            disabled={isWaitingPromocode}
+          />
         </div>
       </div>
     </motion.div>

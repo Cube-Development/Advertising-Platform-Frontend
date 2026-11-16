@@ -10,9 +10,14 @@ import styles from "./styles.module.scss";
 
 interface CreatePostProps {
   hasUnavailableFormat?: boolean;
+  /** Создавать проект пока нельзя (идёт «Применить» промокода): недоступна и с клавиатуры */
+  disabled?: boolean;
 }
 
-export const CreatePost: FC<CreatePostProps> = ({ hasUnavailableFormat }) => {
+export const CreatePost: FC<CreatePostProps> = ({
+  hasUnavailableFormat,
+  disabled,
+}) => {
   const { t } = useTranslation();
   const { isAuth, role } = useAppSelector((state) => state.user);
   const { toast } = useToast();
@@ -63,6 +68,7 @@ export const CreatePost: FC<CreatePostProps> = ({ hasUnavailableFormat }) => {
       buttons_type="button__green"
       onClick={handleCreateCart}
       className={styles.button}
+      disabled={disabled}
     >
       <p>{t(`cart_btn.create_post`)}</p>
       {isLoadingAdvertiser || isLoadingManager ? (

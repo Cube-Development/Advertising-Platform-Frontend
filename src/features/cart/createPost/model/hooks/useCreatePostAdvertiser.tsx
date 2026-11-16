@@ -3,6 +3,11 @@ import {
   useCreateProjectCartMutation,
 } from "@entities/project";
 import { useFindLanguage } from "@entities/user";
+import {
+  bindPromocodeToProject,
+  selectIsApplyingPromocode,
+} from "@entities/wallet";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { USER_LANGUAGES_LIST } from "@shared/languages";
 import { ENUM_PATHS } from "@shared/routing";
 import { useToast } from "@shared/ui";
@@ -21,10 +26,14 @@ export const useCreatePostAdvertiser = () => {
     useCreateProjectCartMutation();
   const { toast } = useToast();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const projectId = QueryParamsUUID(queryParamKeys.saveProject);
   const language = useFindLanguage();
+  const isApplyingPromocode = useAppSelector(selectIsApplyingPromocode);
   const createPostAdvertiser = async () => {
-    if (isLoadingCreate || isLoadingCreateProject) return;
+    // Код ещё проверяется: проект, созданный сейчас, ушёл бы на оплату без него
+    if (isLoadingCreate || isLoadingCreateProject || isApplyingPromocode)
+      return;
 
     try {
       let finalProjectId = projectId;
@@ -37,6 +46,8 @@ export const useCreatePostAdvertiser = () => {
       } else {
         const data = await createCart().unwrap();
         finalProjectId = data.project_id;
+        // Промокод общей корзины идёт на оплату нового проекта
+        dispatch(bindPromocodeToProject(finalProjectId));
       }
 
       navigate(

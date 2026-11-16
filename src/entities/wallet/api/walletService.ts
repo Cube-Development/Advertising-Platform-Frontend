@@ -1,5 +1,5 @@
 import {
-  ICheckPaymentPromocodeRequest,
+  ICheckProjectPromocodeRequest,
   ICreateDeposit,
   ICreateDepositRequest,
   ICreateDepositResponse,
@@ -110,7 +110,7 @@ export const walletAPI = authApi.injectEndpoints({
     // Ничего не меняет: считает скидку по заказам проекта — ровно то, что спишется при оплате
     checkPaymentPromocode: build.mutation<
       IPromocodeDiscount,
-      ICheckPaymentPromocodeRequest
+      ICheckProjectPromocodeRequest
     >({
       query: (params) => ({
         url: `/wallet/payment/project/promocode`,

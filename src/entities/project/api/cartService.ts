@@ -8,9 +8,12 @@ import {
   CART_SHORT,
   RECOMMEND_CARDS,
 } from "@shared/api";
-import { IPromocodeDiscount } from "@entities/wallet";
+import {
+  ICheckProjectPromocodeRequest,
+  IPromocodeDiscount,
+} from "@entities/wallet";
 import { ENUM_LANGUAGES_NUM } from "@shared/languages";
-import { cartStatusFilter } from "../config";
+import { cartStatusFilter, PROMOCODE_CHECK_TIMEOUT } from "../config";
 import { ICart } from "../types";
 
 interface AddChannelReq {
@@ -124,6 +127,7 @@ export const authCartAPI = authApi.injectEndpoints({
         url: `/cart/common/promocode`,
         method: `GET`,
         params: params,
+        timeout: PROMOCODE_CHECK_TIMEOUT,
       }),
     }),
   }),
@@ -249,6 +253,18 @@ export const managerCartAPI = authApi.injectEndpoints({
       }),
       invalidatesTags: [CART_MANAGER, RECOMMEND_CARDS],
     }),
+    // Корзина сохранённого проекта: ничего не меняет, только считает скидку по её содержимому
+    checkProjectCartPromocode: build.mutation<
+      IPromocodeDiscount,
+      ICheckProjectPromocodeRequest
+    >({
+      query: (params) => ({
+        url: `/cart/project/promocode`,
+        method: `GET`,
+        params: params,
+        timeout: PROMOCODE_CHECK_TIMEOUT,
+      }),
+    }),
     // saveCart: build.mutation<{ success: boolean }, void>({
     //   query: () => ({
     //     url: `/cart/save`,
@@ -263,4 +279,5 @@ export const {
   useAddToManagerCartMutation,
   useRemoveFromManagerCartMutation,
   useClearProjectCartMutation,
+  useCheckProjectCartPromocodeMutation,
 } = managerCartAPI;

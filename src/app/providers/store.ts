@@ -1,6 +1,10 @@
 import { userSlice } from "@entities/user";
 import { catalogFilterSlice } from "@entities/project";
-import { promocodeSlice, walletSlice } from "@entities/wallet";
+import {
+  promocodeListener,
+  promocodeSlice,
+  walletSlice,
+} from "@entities/wallet";
 import { dropdownMenuSlice } from "@shared/slice";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import {
@@ -30,14 +34,16 @@ export const setupStore = () => {
   return configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(
-        authApi.middleware,
-        baseApi.middleware,
-        authEcpApi.middleware,
-        authEcpApi2.middleware,
-        baseEpcApi.middleware,
-        baseEpcApi2.middleware,
-      ),
+      getDefaultMiddleware()
+        .prepend(promocodeListener.middleware)
+        .concat(
+          authApi.middleware,
+          baseApi.middleware,
+          authEcpApi.middleware,
+          authEcpApi2.middleware,
+          baseEpcApi.middleware,
+          baseEpcApi2.middleware,
+        ),
   });
 };
 

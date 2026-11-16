@@ -1,30 +1,58 @@
-import { useCheckCommonCartPromocodeMutation } from "@entities/project";
 import {
+  useCheckCommonCartPromocodeMutation,
+  useCheckProjectCartPromocodeMutation,
+} from "@entities/project";
+import {
+  cancelPromocodeApply,
   getPromocodeError,
+  IPromocodeState,
+  isPromocodeRejected,
   resetPromocode,
+  selectIsPromocodeCurrent,
+  selectPromocode,
   setPromocode,
   setPromocodeDiscount,
+  startPromocodeApply,
 } from "@entities/wallet";
+import { nanoid } from "@reduxjs/toolkit";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { Input, MyButton, useToast } from "@shared/ui";
 import { Loader, X } from "lucide-react";
 import { FC, FormEvent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useStore } from "react-redux";
 import styles from "./styles.module.scss";
 
 interface ApplyPromocodeProps {
   /** Сумма корзины: при её изменении скидка пересчитывается */
   amount?: number;
+  /** Корзина сохранённого проекта: код проверяется по проекту и привязан к нему */
+  projectId?: string | null;
 }
 
-export const ApplyPromocode: FC<ApplyPromocodeProps> = ({ amount }) => {
+/** Код своей корзины; код другой корзины (общей или другого проекта) здесь не виден */
+export const ApplyPromocode: FC<ApplyPromocodeProps> = ({
+  amount,
+  projectId = null,
+}) => {
   const { t } = useTranslation();
   const { toast } = useToast();
   const dispatch = useAppDispatch();
-  const { code } = useAppSelector((state) => state.promocode);
+  // Ответы приходят позже: актуальное состояние читается в момент ответа
+  const store = useStore<{ promocode: IPromocodeState }>();
+  const { code } = useAppSelector(selectPromocode(projectId));
   const [value, setValue] = useState(code ?? "");
 
-  const [checkPromocode, { isLoading }] = useCheckCommonCartPromocodeMutation();
+  const [checkCommonPromocode, { isLoading: isLoadingCommon }] =
+    useCheckCommonCartPromocodeMutation();
+  const [checkProjectPromocode, { isLoading: isLoadingProject }] =
+    useCheckProjectCartPromocodeMutation();
+  const isLoading = isLoadingCommon || isLoadingProject;
+
+  const checkPromocode = (promocode: string) =>
+    projectId
+      ? checkProjectPromocode({ project_id: projectId, promocode })
+      : checkCommonPromocode({ promocode });
 
   const showError = (err: unknown) => {
     const error = err as { data?: { message?: string } };
@@ -40,12 +68,19 @@ export const ApplyPromocode: FC<ApplyPromocodeProps> = ({ amount }) => {
     const promocode = value.trim();
     if (!promocode || isLoading) return;
 
+    // Ответ запишется, только если после него не начали другое применение и не вышли
+    // из аккаунта. После ухода со страницы — запишется: код своей корзины ждёт в ней
+    const applyId = nanoid();
+    dispatch(startPromocodeApply(applyId));
     try {
-      const discount = await checkPromocode({ promocode }).unwrap();
-      dispatch(setPromocode({ code: promocode, discount }));
+      const discount = await checkPromocode(promocode).unwrap();
+      dispatch(setPromocode({ code: promocode, projectId, discount, applyId }));
     } catch (error) {
-      showError(error);
+      const isLatestApply = store.getState().promocode.applyId === applyId;
+      dispatch(cancelPromocodeApply(applyId));
       console.error("Ошибка при применении промокода", error);
+      // Ошибка применения, которое уже сменили другим, — не про текущий код
+      if (isLatestApply) showError(error);
     }
   };
 
@@ -58,13 +93,31 @@ export const ApplyPromocode: FC<ApplyPromocodeProps> = ({ amount }) => {
   useEffect(() => {
     if (!code || amount === undefined) return;
 
-    checkPromocode({ promocode: code })
+    // Ответ после ухода из корзины или нового пересчёта уже не про неё: без тоста и записи
+    let isStale = false;
+    const target = { code, projectId };
+    checkPromocode(code)
       .unwrap()
-      .then((discount) => dispatch(setPromocodeDiscount(discount)))
+      .then((discount) => {
+        if (!isStale) dispatch(setPromocodeDiscount({ ...target, discount }));
+      })
       .catch((error) => {
+        // Код уже убрали крестиком или заменили — тост был бы про чужой код
+        if (isStale || !selectIsPromocodeCurrent(target)(store.getState())) {
+          return;
+        }
+        // Сеть, 5xx, таймаут — код не отвергнут: остаётся, экран оплаты проверит его снова
+        if (!isPromocodeRejected(error)) {
+          dispatch(setPromocodeDiscount({ ...target, discount: null }));
+          return;
+        }
         showError(error);
-        dispatch(resetPromocode());
+        dispatch(resetPromocode(target));
       });
+
+    return () => {
+      isStale = true;
+    };
   }, [amount]);
 
   return (

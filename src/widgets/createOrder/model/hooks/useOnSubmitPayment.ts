@@ -23,11 +23,14 @@ import { useUploadPosts } from "./useUploadPosts";
 import {
   ENUM_WALLETS_TYPE,
   getPromocodeError,
+  IPromocodeState,
   PROMOCODE_ERROR_DEFAULT,
   resetPromocode,
+  selectPromocode,
   useCreatePaymentProjectMutation,
 } from "@entities/wallet";
-import { useAppDispatch, useAppSelector } from "@shared/hooks";
+import { useAppDispatch } from "@shared/hooks";
+import { useStore } from "react-redux";
 
 export const useOnSubmitPayment = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -42,7 +45,8 @@ export const useOnSubmitPayment = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const { code: promocode } = useAppSelector((state) => state.promocode);
+  // Код читается в момент оплаты: пока грузились файлы, экран оплаты мог его сбросить
+  const store = useStore<{ promocode: IPromocodeState }>();
 
   const { uploadPosts } = useUploadPosts();
   const { uploadFilesAndMedia } = useUploadFilesAndMedia();
@@ -149,6 +153,12 @@ export const useOnSubmitPayment = () => {
     role: ENUM_ROLES,
     wallet_type?: ENUM_WALLETS_TYPE,
   ) => {
+    // Код другой корзины (общей или другого проекта) в оплату не уходит
+    const { code: promocode } = selectPromocode(projectId)(store.getState());
+    // Сбрасывается только код этого проекта: код другой корзины остаётся на месте
+    const resetProjectPromocode = () => {
+      if (promocode) dispatch(resetPromocode({ code: promocode, projectId }));
+    };
     try {
       if (role === ENUM_ROLES.ADVERTISER) {
         await createPayment({
@@ -156,7 +166,7 @@ export const useOnSubmitPayment = () => {
           wallet_type: wallet_type!,
           promocode: promocode ?? undefined,
         }).unwrap();
-        dispatch(resetPromocode());
+        resetProjectPromocode();
       } else if (role === ENUM_ROLES.MANAGER) {
         await approveProject({ project_id: projectId }).unwrap();
       } else if (role === ENUM_ROLES.AGENCY) {
@@ -182,7 +192,7 @@ export const useOnSubmitPayment = () => {
       const promocodeError = getPromocodeError(error?.data?.message);
       // Промокод стал недоступен между предпросмотром и оплатой — деньги не списаны, убираем код
       if (promocode && promocodeError.key !== PROMOCODE_ERROR_DEFAULT) {
-        dispatch(resetPromocode());
+        resetProjectPromocode();
         toast({
           variant: "error",
           title: t(promocodeError.key, { amount: promocodeError.amount }),
