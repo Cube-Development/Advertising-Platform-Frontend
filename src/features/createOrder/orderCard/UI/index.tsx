@@ -1,6 +1,7 @@
 import {
   DisplayFeed,
   DisplayShorts,
+  DisplaySite,
   DisplayStories,
   DisplayTelegram,
   DisplayVideos,
@@ -248,6 +249,10 @@ export const OrderCard: FC<PostPlatformProps> = ({
                           orderId={card?.id}
                         />
                       )}
+                    {/* У сайта нет макета — подсказка про ТЗ, как на шаге поста */}
+                    {card?.platform === platformTypesNum.site && (
+                      <DisplaySite />
+                    )}
                   </div>
                 ) : (
                   <EmptyPost />

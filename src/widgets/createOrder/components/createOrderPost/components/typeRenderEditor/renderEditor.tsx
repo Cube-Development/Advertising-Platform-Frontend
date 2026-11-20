@@ -40,8 +40,8 @@ export const renderEditor = ({
       ) : null,
     );
   } else {
-    // Тип поста у разных платформ совпадает (Telegram и сайт — default,
-    // Stories и Shorts — FullHd_vertical): без проверки платформы редактор
+    // Тип поста у разных платформ может совпадать (Stories и Shorts —
+    // FullHd_vertical): без проверки платформы редактор
     // дублировался, и оба экземпляра писали в один пост выбранной платформы
     return formState?.posts?.map((post) =>
       post?.platform === platformId &&

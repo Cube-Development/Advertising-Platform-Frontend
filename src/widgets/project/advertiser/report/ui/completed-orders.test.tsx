@@ -16,6 +16,7 @@ const order = (
   platform: platformTypesNum,
   id: string,
   name: string,
+  post_screenshot_url: string | null,
 ): ICompletedOrder => ({
   id,
   name,
@@ -29,7 +30,7 @@ const order = (
   publish_time: "12:00",
   publish_count: 1,
   post_url: `https://${name}/post`,
-  post_screenshot_url: `https://storage.example.com/${name}.png`,
+  post_screenshot_url,
   real_views: 0,
   ER: 0,
   CPV: 0,
@@ -43,7 +44,8 @@ const order = (
 });
 
 describe("CompletedOrdersList screenshot", () => {
-  test("hidden for a site order, shown for the rest", () => {
+  // Бэкенд отдаёт сайту post_screenshot_url = null, ссылка на статью — в post_url
+  test("shown only when post_screenshot_url is set", () => {
     render(
       <CompletedOrdersList
         isLoading={false}
@@ -52,11 +54,13 @@ describe("CompletedOrdersList screenshot", () => {
             platformTypesNum.site,
             "00000000-0000-4000-8930-000000000001",
             "gazeta.uz",
+            null,
           ),
           order(
             platformTypesNum.telegram,
             "00000000-0000-4000-8930-000000000002",
             "t.me/news",
+            "https://storage.example.com/news.png",
           ),
         ]}
       />,

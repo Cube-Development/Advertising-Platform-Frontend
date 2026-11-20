@@ -5,7 +5,11 @@ import {
   IBloggerOfferCard,
   OFFER_CHAT_LIST,
 } from "@entities/offer";
-import { platformToIcon, useGetPostQuery } from "@entities/project";
+import {
+  isPostNotFound,
+  platformToIcon,
+  useGetPostQuery,
+} from "@entities/project";
 import { ENUM_ROLES } from "@entities/user";
 import { AcceptOffer, RejectOffer, SeePost, SendLink } from "@features/offer";
 import { MoreIcon } from "@shared/assets";
@@ -39,7 +43,8 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
   // Тост — в эффекте, не в рендере: toast() обновляет состояние useToast этого
   // же компонента, и вызов во время рендера зацикливал его («Too many re-renders»)
   useEffect(() => {
-    if (!error) return;
+    // 404 — поста ещё нет: не ошибка, кнопка просмотра просто не показывается
+    if (!error || isPostNotFound(error)) return;
     toast({
       variant: "error",
       title: t("toasts.orders_advertiser.reject_post.error"),

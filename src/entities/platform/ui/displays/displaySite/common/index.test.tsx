@@ -12,7 +12,7 @@ vi.mock("@entities/project", () => ({
 const sitePost = (overrides: Partial<GetPostRes> = {}): GetPostRes => ({
   id: "00000000-0000-4000-8930-000000000001",
   platform: platformTypesNum.site,
-  post_type: PostTypesNum.default,
+  post_type: PostTypesNum.site,
   comment: "Статья до 8 000 символов, фото 900x600",
   files: [
     {

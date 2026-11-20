@@ -5,6 +5,7 @@ import {
   orderStatus,
   platformToIcon,
   projectStatus,
+  isPostNotFound,
   useGetPostQuery,
   ENUM_VIEWER_ROLES,
 } from "@entities/project";
@@ -33,7 +34,8 @@ interface OrderCardProps {
   project_id: string;
   subcard: IAgencyOrderCard;
   CheckBtn: FC<IOrderFeature>;
-  SeePostBtn: FC<{ post: GetPostRes; post_deeplink: string }>;
+  // post нет, пока пост не загружен — кнопка тогда ничего не рисует
+  SeePostBtn: FC<{ post?: GetPostRes; post_deeplink: string }>;
   ReplaceChannelBtn: FC<ReplaceChannelProps>;
   ReplacePostBtn: FC<ReplacePostProps>;
   viewer: ENUM_VIEWER_ROLES;
@@ -58,7 +60,8 @@ export const OrderCard: FC<OrderCardProps> = ({
   // Тост — в эффекте, не в рендере: toast() обновляет состояние useToast этого
   // же компонента, и вызов во время рендера зацикливал его («Too many re-renders»)
   useEffect(() => {
-    if (!error) return;
+    // 404 — поста ещё нет: не ошибка, кнопка просмотра просто не показывается
+    if (!error || isPostNotFound(error)) return;
     toast({
       variant: "error",
       title: t("toasts.orders_advertiser.reject_post.error"),

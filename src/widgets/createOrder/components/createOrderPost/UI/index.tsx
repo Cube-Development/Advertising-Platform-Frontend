@@ -86,8 +86,10 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
   const [postSource, setPostSource] = useState<PostSource>("manual");
   const [isGenerating, setIsGenerating] = useState(false);
   // У сайта нет макета поста — только ТЗ (комментарий + файлы): шаблоны постов
-  // к нему не относятся
+  // и генерация ИИ к нему не относятся
   const isSite = formState.platformFilter?.type === platformTypesStr.site;
+  // Генерация ИИ, выбранная на другой платформе, на сайт не переносится
+  const activePostSource: PostSource = isSite ? "manual" : postSource;
   const [generationDraft, setGenerationDraft] =
     useState<Partial<PostGenerationFormInput>>();
 
@@ -199,19 +201,21 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
               )}
               <div
                 className={clsx(styles.post_data, {
-                  [styles.ai_mode]: postSource === "ai",
+                  [styles.ai_mode]: activePostSource === "ai",
                   [styles.with_telegram_collect]:
-                    postSource === "manual" &&
+                    activePostSource === "manual" &&
                     formState.platformFilter?.type ===
                       platformTypesStr.telegram,
                 })}
               >
-                <PostSourceTabs
-                  value={postSource}
-                  onChange={setPostSource}
-                  disabled={isGenerating}
-                />
-                {postSource === "manual" &&
+                {!isSite && (
+                  <PostSourceTabs
+                    value={postSource}
+                    onChange={setPostSource}
+                    disabled={isGenerating}
+                  />
+                )}
+                {activePostSource === "manual" &&
                   formState.platformFilter?.type ===
                     platformTypesStr.telegram && (
                     <TelegramCollectNotice
@@ -225,7 +229,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                       isSaving={isSaving}
                     />
                   )}
-                {postSource === "manual" ? (
+                {activePostSource === "manual" ? (
                   <>
                     <TypeRenderEditor
                       formState={formState}

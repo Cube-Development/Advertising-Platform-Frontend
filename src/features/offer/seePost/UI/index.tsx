@@ -27,7 +27,8 @@ import styles from "./styles.module.scss";
 import { PostIcon2 } from "@shared/assets";
 
 interface SeePostProps {
-  post: GetPostRes;
+  /** Нет — пост ещё не загружен (GET /post/order → 404) или запрос не ответил */
+  post?: GetPostRes;
   post_deeplink: string;
 }
 
@@ -35,6 +36,9 @@ export const SeePost: FC<SeePostProps> = ({ post, post_deeplink }) => {
   const { t } = useTranslation();
   const screen = useWindowWidth();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  // Смотреть нечего — кнопку не показываем, а не открываем пустой просмотр
+  if (!post) return null;
 
   return (
     <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>

@@ -11,6 +11,7 @@ import {
   orderStatusChat,
   platformToIcon,
   projectStatus,
+  isPostNotFound,
   useGetPostQuery,
   IAgencyProjectCard,
 } from "@entities/project";
@@ -46,7 +47,8 @@ interface ManagerProjectSubcardProps {
   AcceptBtn: FC<IOrderFeature>;
   RejectBtn: FC<IOrderFeature>;
   CheckBtn: FC<IOrderFeature>;
-  SeePostBtn: FC<{ post: GetPostRes; post_deeplink: string }>;
+  // post нет, пока пост не загружен — кнопка тогда ничего не рисует
+  SeePostBtn: FC<{ post?: GetPostRes; post_deeplink: string }>;
   ChangeChannelBtn: FC<ChangeChannelProps>;
   ChangePostBtn: FC<ChangePostProps>;
   SeeCommentBtn: FC;
@@ -76,7 +78,8 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
   // Тост — в эффекте, не в рендере: toast() обновляет состояние useToast этого
   // же компонента, и вызов во время рендера зацикливал его («Too many re-renders»)
   useEffect(() => {
-    if (!error) return;
+    // 404 — поста ещё нет: не ошибка, кнопка просмотра просто не показывается
+    if (!error || isPostNotFound(error)) return;
     toast({
       variant: "error",
       title: t("toasts.orders_advertiser.reject_post.error"),

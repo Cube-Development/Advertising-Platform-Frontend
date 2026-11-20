@@ -29,6 +29,8 @@ export enum PostTypesNum {
   FullHd_vertical = 2,
   feed = 3,
   default = 4,
+  /** Заказы на сайты (форматы site_1 = 100, site_2 = 101) */
+  site = 5,
 }
 
 export enum MatchTypesNum {
@@ -85,7 +87,7 @@ export const platformTypes = [
     ],
   },
   // Сайт добавляет только админ (бэкенд отклоняет верификацию сайта блогером —
-  // platform_not_allowed). Форматы сайта 100/101 бэкенд мапит в post_type default.
+  // platform_not_allowed). Форматы сайта 100/101 бэкенд мапит в post_type site (5).
   {
     name: "filter.site",
     id: platformTypesNum.site,
@@ -94,7 +96,7 @@ export const platformTypes = [
     default_value: "platform_types.site.default_value",
     post_types: [
       {
-        id: PostTypesNum.default,
+        id: PostTypesNum.site,
         name: "create_order.create.post_types.site.default",
       },
     ],
