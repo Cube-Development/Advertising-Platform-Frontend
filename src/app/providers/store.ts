@@ -35,18 +35,16 @@ export const setupStore = () => {
   return configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware()
-        .prepend(promocodeListener.middleware)
-        .concat(
-          authApi.middleware,
-          baseApi.middleware,
-          authEcpApi.middleware,
-          authEcpApi2.middleware,
-          baseEpcApi.middleware,
-          baseEpcApi2.middleware,
-          // Аналитика поведения — последней: видит экшены после всех API (спека 005 FR-006)
-          analyticsMiddleware,
-        ),
+      getDefaultMiddleware().prepend(promocodeListener.middleware).concat(
+        authApi.middleware,
+        baseApi.middleware,
+        authEcpApi.middleware,
+        authEcpApi2.middleware,
+        baseEpcApi.middleware,
+        baseEpcApi2.middleware,
+        // Аналитика поведения — последней: видит экшены после всех API (спека 005 FR-006)
+        analyticsMiddleware,
+      ),
   });
 };
 

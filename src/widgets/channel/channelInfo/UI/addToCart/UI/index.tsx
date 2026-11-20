@@ -24,7 +24,8 @@ export const AddToCart: FC<AddToCartProps> = ({
 }) => {
   const { t } = useTranslation();
   const outdated =
-    Boolean(selectedFormat?.format_unavailable) || selectedFormat?.price == null;
+    Boolean(selectedFormat?.format_unavailable) ||
+    selectedFormat?.price == null;
   const inBasket = Boolean(card?.selected_format);
 
   return (

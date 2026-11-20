@@ -1,4 +1,8 @@
-import { CHANNEL_TAG_I18N, getChannelTagView, IChannelTag } from "@entities/project";
+import {
+  CHANNEL_TAG_I18N,
+  getChannelTagView,
+  IChannelTag,
+} from "@entities/project";
 import { Badge, cn } from "@shared/ui/shadcn-ui";
 import { Check, X } from "lucide-react";
 import { FC } from "react";

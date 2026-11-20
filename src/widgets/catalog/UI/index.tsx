@@ -33,7 +33,6 @@ import {
   BREAKPOINT,
   ENUM_COOKIES_TYPES,
   INTERSECTION_ELEMENTS,
-  MOCK_SITE_CATALOG,
 } from "@shared/config";
 import { useAppDispatch, useAppSelector, useWindowWidth } from "@shared/hooks";
 import { USER_LANGUAGES_LIST } from "@shared/languages";
@@ -337,18 +336,6 @@ export const CatalogBlock: FC = () => {
       return;
     }
 
-    if (formState?.filter?.platform === platformTypesNum.site) {
-      // setMockData(
-      //   // [cartChannel]
-      //   mockData.map((item) =>
-      //     item.id === cartChannel.id
-      //       ? { ...item, selected_format: cartChannel.selected_format }
-      //       : item,
-      //   ),
-      // );
-      return;
-    }
-
     let mutationPromise: Promise<any> | undefined;
     const currentCard = (
       (isAuth && !projectId
@@ -532,10 +519,6 @@ export const CatalogBlock: FC = () => {
     }
   }, [formState?.filter]);
 
-  const [mockData, setMockData] = useState(
-    MOCK_SITE_CATALOG as unknown as ICatalogChannel[],
-  );
-
   return (
     <div className="container">
       <div className={`${styles.wrapper}`}>
@@ -567,26 +550,22 @@ export const CatalogBlock: FC = () => {
                 resetField={resetField}
                 page={formState.page!}
                 channels={
-                  formState?.filter?.platform === platformTypesNum.site
-                    ? mockData
-                    : (isAuth && !projectId
-                        ? catalogAuth?.channels
-                        : isAuth && projectId
-                          ? projectId
-                            ? catalogManager?.channels
-                            : catalogManagerPublic?.channels
-                          : catalogPublic?.channels) || []
+                  (isAuth && !projectId
+                    ? catalogAuth?.channels
+                    : isAuth && projectId
+                      ? projectId
+                        ? catalogManager?.channels
+                        : catalogManagerPublic?.channels
+                      : catalogPublic?.channels) || []
                 }
                 all_channels_count={
-                  formState?.filter?.platform === platformTypesNum.site
-                    ? mockData?.length
-                    : (isAuth && !projectId
-                        ? catalogAuth?.elements
-                        : isAuth && projectId
-                          ? projectId
-                            ? catalogManager?.elements
-                            : catalogManagerPublic?.elements
-                          : catalogPublic?.elements) || 0
+                  (isAuth && !projectId
+                    ? catalogAuth?.elements
+                    : isAuth && projectId
+                      ? projectId
+                        ? catalogManager?.elements
+                        : catalogManagerPublic?.elements
+                      : catalogPublic?.elements) || 0
                 }
                 onChangeCard={handleChangeCards}
                 isLast={

@@ -4384,7 +4384,7 @@
     },
     "catalog": {
       "title": "Find channels",
-      "subtitle": "Telegram, Instagram and YouTube for ads",
+      "subtitle": "Telegram, Instagram, YouTube and websites for ads",
       "empty": "Nothing found — try a different query",
       "cta": "Full catalog",
       "found": "Found: {{count}}",

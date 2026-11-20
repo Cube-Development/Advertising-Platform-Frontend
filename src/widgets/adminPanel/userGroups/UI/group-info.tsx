@@ -39,7 +39,8 @@ export const UserGroupInfo: FC = () => {
     { skip: !groupId },
   );
   const [renameGroup, { isLoading: isRenaming }] = useRenameUserGroupMutation();
-  const [addMembers, { isLoading: isAdding }] = useAddUserGroupMembersMutation();
+  const [addMembers, { isLoading: isAdding }] =
+    useAddUserGroupMembersMutation();
   const [removeMembers, { isLoading: isRemoving }] =
     useRemoveUserGroupMembersMutation();
 
@@ -52,7 +53,10 @@ export const UserGroupInfo: FC = () => {
   const [detachId, setDetachId] = useState<string | null>(null);
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setDebouncedSearch(search.trim()), 300);
+    const timer = window.setTimeout(
+      () => setDebouncedSearch(search.trim()),
+      300,
+    );
     return () => window.clearTimeout(timer);
   }, [search]);
 

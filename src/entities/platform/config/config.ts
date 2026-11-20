@@ -29,9 +29,6 @@ export enum PostTypesNum {
   FullHd_vertical = 2,
   feed = 3,
   default = 4,
-  site = 5,
-  siteAndTelegram = 6,
-  siteAndInstagram = 7,
 }
 
 export enum MatchTypesNum {
@@ -87,25 +84,29 @@ export const platformTypes = [
       },
     ],
   },
-  // {
-  //   name: "filter.site",
-  //   id: platformTypesNum.site,
-  //   type: platformTypesStr.site,
-  //   img: ChromeIcon,
-  //   default_value: "platform_types.site.default_value",
-  //   post_types: [
-  //     {
-  //       id: PostTypesNum.site,
-  //       name: "create_order.create.post_types.site.default",
-  //     },
-  //     {
-  //       id: PostTypesNum.siteAndTelegram,
-  //       name: "create_order.create.post_types.site.telegram",
-  //     },
-  //     {
-  //       id: PostTypesNum.siteAndInstagram,
-  //       name: "create_order.create.post_types.site.instagram",
-  //     },
-  //   ],
-  // },
+  // Сайт добавляет только админ (бэкенд отклоняет верификацию сайта блогером —
+  // platform_not_allowed). Форматы сайта 100/101 бэкенд мапит в post_type default.
+  {
+    name: "filter.site",
+    id: platformTypesNum.site,
+    type: platformTypesStr.site,
+    img: ChromeIcon,
+    default_value: "platform_types.site.default_value",
+    post_types: [
+      {
+        id: PostTypesNum.default,
+        name: "create_order.create.post_types.site.default",
+      },
+    ],
+  },
+];
+
+/**
+ * Платформы, которые блогер подключает сам (верификация кодом). Сайта нет:
+ * бэкенд отклоняет его верификацию (platform_not_allowed), сайт создаёт админ.
+ */
+export const CHANNEL_VERIFIABLE_PLATFORMS: platformTypesNum[] = [
+  platformTypesNum.telegram,
+  platformTypesNum.instagram,
+  platformTypesNum.youtube,
 ];

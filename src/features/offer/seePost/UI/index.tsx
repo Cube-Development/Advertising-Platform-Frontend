@@ -1,6 +1,7 @@
 import {
   DisplayFeed,
   DisplayShorts,
+  DisplaySite,
   DisplayStories,
   DisplayTelegram,
   DisplayVideos,
@@ -111,6 +112,9 @@ export const SeePost: FC<SeePostProps> = ({ post, post_deeplink }) => {
                   platformId={platformTypesNum.youtube}
                 />
               )}
+            {post?.platform === platformTypesNum.site && (
+              <DisplaySite post={post} />
+            )}
             {post_deeplink && <SendToTelegram post_deeplink={post_deeplink} />}
           </div>
         </div>

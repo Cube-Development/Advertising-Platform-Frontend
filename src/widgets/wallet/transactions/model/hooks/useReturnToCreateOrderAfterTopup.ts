@@ -13,7 +13,8 @@ import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 const getDepositBalance = (items?: IGetBalance["items"]) =>
-  items?.find((item) => item.wallet === ENUM_WALLETS_TYPE.DEPOSIT)?.balance ?? 0;
+  items?.find((item) => item.wallet === ENUM_WALLETS_TYPE.DEPOSIT)?.balance ??
+  0;
 
 export const useReturnToCreateOrderAfterTopup = () => {
   const projectId = QueryParamsUUID(queryParamKeys.projectId);

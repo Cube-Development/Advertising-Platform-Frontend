@@ -110,7 +110,7 @@ export const CHAT_ACTIONS: IChatActionDef[] = [
   {
     name: "catalog-search",
     description:
-      "Подобрать Telegram, Instagram или YouTube каналы для рекламы по тематике, охвату и бюджету",
+      "Подобрать Telegram, Instagram или YouTube каналы и сайты для рекламы по тематике, охвату и бюджету",
     roles: ADVERTISER_SIDE,
     Component: lazyAction(() => import("../actions/catalog-search-action")),
   },

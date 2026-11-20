@@ -40,8 +40,7 @@ export const ProjectReportVersions: FC<ProjectReportVersionsProps> = ({
 
   const hasVersions = reports.length > 0;
 
-  const latestReportId =
-    data?.reports?.[0]?.id ?? report?.id ?? reports[0]?.id;
+  const latestReportId = data?.reports?.[0]?.id ?? report?.id ?? reports[0]?.id;
 
   const handleDownload = async (file: IOrderReportInfo) => {
     try {

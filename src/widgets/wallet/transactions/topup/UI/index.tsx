@@ -28,7 +28,10 @@ import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { CreditCard, OrganizationData } from "../../components";
-import { useReturnToCreateOrderAfterTopup, useWalletDeposit } from "../../model";
+import {
+  useReturnToCreateOrderAfterTopup,
+  useWalletDeposit,
+} from "../../model";
 import styles from "./styles.module.scss";
 
 export const Topup: FC = () => {

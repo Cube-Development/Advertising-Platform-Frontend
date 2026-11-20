@@ -274,8 +274,7 @@ export const ChannelPrices: FC<ChannelPricesProps> = ({
               data.formats.map((format) => {
                 const value = groupDrafts[format.format] ?? "";
                 const parsed = parsePrice(value);
-                const below =
-                  parsed != null && parsed < format.blogger_price;
+                const below = parsed != null && parsed < format.blogger_price;
                 return (
                   <div
                     key={format.format}

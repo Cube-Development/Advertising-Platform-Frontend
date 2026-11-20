@@ -1,8 +1,35 @@
+import { ContentType, GetPostRes } from "@entities/project";
 import { FC, useEffect, useRef, useState } from "react";
+import { DownloadAllBtn } from "../../../utils/downloadAllBtn";
+import { TelegramComment } from "../../displayTelegram/UI/comment";
+import { TelegramFile } from "../../displayTelegram/UI/file";
 import { EmptyPost } from "./emptyPost";
 import styles from "./styles.module.scss";
 
-export const DisplaySite: FC = ({}) => {
+/** Вложения ТЗ к заказу на сайт: всё, кроме текста и кнопок */
+const SITE_ATTACHMENT_TYPES = [
+  ContentType.photo,
+  ContentType.video,
+  ContentType.gif,
+  ContentType.file,
+];
+
+interface DisplaySiteProps {
+  /**
+   * Готовый пост заказа. У сайта нет макета: при создании заказа показываем
+   * подсказку про ТЗ, а в просмотре — комментарий и приложенные файлы.
+   */
+  post?: GetPostRes;
+}
+
+export const DisplaySite: FC<DisplaySiteProps> = ({ post }) => {
+  const attachments =
+    post?.files?.filter((file) =>
+      SITE_ATTACHMENT_TYPES.includes(file.content_type),
+    ) || [];
+  const comment = post?.comment || "";
+  const hasContent = !!comment || attachments.length > 0;
+
   const imgRef = useRef<HTMLImageElement>(null);
   const [resizes, setResizes] = useState<{
     borderRadius: number;
@@ -71,9 +98,33 @@ export const DisplaySite: FC = ({}) => {
             paddingBottom: `${resizes?.displayBottomSize}px`,
           }}
         >
-          <EmptyPost />
+          {hasContent ? (
+            <div className={styles.content}>
+              {attachments.map((file, index) => (
+                <TelegramFile
+                  key={`${file.content}-${index}`}
+                  file={file}
+                  fontSize={resizes?.timeSize || 14}
+                />
+              ))}
+              {comment && (
+                <TelegramComment
+                  comment={comment}
+                  fontSize={resizes?.timeSize || 14}
+                />
+              )}
+              <div className={styles.stroke}></div>
+            </div>
+          ) : (
+            <EmptyPost />
+          )}
         </div>
       </div>
+      {attachments.length > 0 && (
+        <section className="grid grid-cols-[1fr_auto] mt-2 ml-2.5 gap-1.5">
+          <DownloadAllBtn post={post} />
+        </section>
+      )}
     </div>
   );
 };

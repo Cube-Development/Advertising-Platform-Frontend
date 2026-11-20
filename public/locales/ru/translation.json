@@ -4386,7 +4386,7 @@
     },
     "catalog": {
       "title": "Подбор каналов",
-      "subtitle": "Telegram, Instagram и YouTube для рекламы",
+      "subtitle": "Telegram, Instagram, YouTube и сайты для рекламы",
       "empty": "Ничего не нашлось — попробуйте изменить запрос",
       "cta": "Весь каталог",
       "found": "Найдено: {{count}}",

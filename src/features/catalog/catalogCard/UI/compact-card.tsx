@@ -143,101 +143,103 @@ export const CompactCatalogCard: FC<CompactCatalogCardProps> = ({
 
             {/* Name / Category / Languages */}
             <div className="min-w-0 flex flex-col gap-0.5 py-2">
-          <Link
-            to={channelPath}
-            className="leading-3 block md:hidden text-[9px] font-semibold text-[--Personal-colors-main] truncate"
-            onClick={stopPropagation}
-          >
-            {card?.name}
-          </Link>
-          <div className="flex items-center gap-1.5 min-w-0">
-            <Link
-              to={channelPath}
-              className="hidden md:block text-[13px] font-semibold text-[--Personal-colors-main] truncate leading-tight"
+              <Link
+                to={channelPath}
+                className="leading-3 block md:hidden text-[9px] font-semibold text-[--Personal-colors-main] truncate"
+                onClick={stopPropagation}
+              >
+                {card?.name}
+              </Link>
+              <div className="flex items-center gap-1.5 min-w-0">
+                <Link
+                  to={channelPath}
+                  className="hidden md:block text-[13px] font-semibold text-[--Personal-colors-main] truncate leading-tight"
+                  onClick={stopPropagation}
+                >
+                  {card?.name}
+                </Link>
+                {card?.channel_languages && (
+                  <div className="flex gap-0.5 items-center bg-none md:bg-[rgba(15,105,201,0.1)] md:rounded md:px-1 md:py-0.5 p-0 shrink-0">
+                    {[...card.channel_languages]
+                      .sort((a, b) => a - b)
+                      .map((lang) => {
+                        const info = CHANNEL_LANGUAGES_LIST.find(
+                          (l) => l.id === lang,
+                        );
+                        if (!info) return null;
+                        return (
+                          <img
+                            key={info.id}
+                            src={`/images/${info.icon}.svg`}
+                            alt={info.name}
+                            className="md:size-2.5 size-2"
+                          />
+                        );
+                      })}
+                  </div>
+                )}
+              </div>
+              <p className="text-[8px] md:text-[11px] text-[--Subtitle-text] font-medium truncate leading-tight">
+                {card?.category}
+              </p>
+              {card?.url && (
+                <p className="text-[8px] md:text-[10px] text-[var(--URL)] font-medium truncate leading-tight">
+                  {card?.url}
+                </p>
+              )}
+              <ChannelCardTags
+                tags={card?.tags}
+                compact
+                className="hidden md:flex"
+              />
+            </div>
+
+            {/* Stats — compact 2x2 grid + gender bar */}
+            <div
+              className="flex flex-col gap-1 bg-[rgba(15,105,201,0.06)] md:rounded-lg rounded-[7px] px-3 py-1.5"
               onClick={stopPropagation}
             >
-              {card?.name}
-            </Link>
-            {card?.channel_languages && (
-              <div className="flex gap-0.5 items-center bg-none md:bg-[rgba(15,105,201,0.1)] md:rounded md:px-1 md:py-0.5 p-0 shrink-0">
-                {[...card.channel_languages]
-                  .sort((a, b) => a - b)
-                  .map((lang) => {
-                    const info = CHANNEL_LANGUAGES_LIST.find(
-                      (l) => l.id === lang,
-                    );
-                    if (!info) return null;
-                    return (
-                      <img
-                        key={info.id}
-                        src={`/images/${info.icon}.svg`}
-                        alt={info.name}
-                        className="md:size-2.5 size-2"
-                      />
-                    );
-                  })}
-              </div>
-            )}
-          </div>
-          <p className="text-[8px] md:text-[11px] text-[--Subtitle-text] font-medium truncate leading-tight">
-            {card?.category}
-          </p>
-          {card?.url && (
-            <p className="text-[8px] md:text-[10px] text-[var(--URL)] font-medium truncate leading-tight">
-              {card?.url}
-            </p>
-          )}
-          <ChannelCardTags
-            tags={card?.tags}
-            compact
-            className="hidden md:flex"
-          />
-        </div>
-
-        {/* Stats — compact 2x2 grid + gender bar */}
-        <div
-          className="flex flex-col gap-1 bg-[rgba(15,105,201,0.06)] md:rounded-lg rounded-[7px] px-3 py-1.5"
-          onClick={stopPropagation}
-        >
-          <div className="grid md:grid-cols-2 grid-cols-1 gap-x-1.5 gap-y-1 items-center">
-            <div className="flex items-center gap-1.5">
-              <div className="[&>svg]:h-[10px] [&>svg]:w-auto">
-                <SubsIcon />
-              </div>
-              <span className="text-[8px] md:text-[11px] font-semibold md:font-medium text-black">
-                {card?.subscribers?.toLocaleString()}
-              </span>
-            </div>
-            {/* Gender bar */}
-            <div className="hidden md:flex items-center gap-1">
-              <div className="[&>svg]:h-[10px] [&>svg]:w-auto">
-                <BoyIcon />
-              </div>
-              <div
-                className="colorline flex-1 !min-h-[4px]"
-                style={{ "--male": `${card?.male}%` } as React.CSSProperties}
-              />
-              <div className="[&>svg]:h-[10px] [&>svg]:w-auto">
-                <GirlIcon />
-              </div>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <div className="[&>svg]:h-[10px] [&>svg]:w-auto">
-                <EyeIcon />
-              </div>
-              <span className="text-[8px] md:text-[11px] font-semibold md:font-medium text-black">
-                {selectedFormat?.views?.toLocaleString()}
-              </span>
-            </div>
-            <div className="hidden md:flex items-center gap-1">
-              <span className="text-[10px] text-black/50 font-semibold">
-                ER:
-              </span>
-              <span className="text-[11px] font-medium text-black">
-                {isModal ? <Modal /> : <>{selectedFormat?.er}%</>}
-              </span>
-            </div>
-            {/* <div className="flex items-center gap-1">
+              <div className="grid md:grid-cols-2 grid-cols-1 gap-x-1.5 gap-y-1 items-center">
+                <div className="flex items-center gap-1.5">
+                  <div className="[&>svg]:h-[10px] [&>svg]:w-auto">
+                    <SubsIcon />
+                  </div>
+                  <span className="text-[8px] md:text-[11px] font-semibold md:font-medium text-black">
+                    {card?.subscribers?.toLocaleString()}
+                  </span>
+                </div>
+                {/* Gender bar */}
+                <div className="hidden md:flex items-center gap-1">
+                  <div className="[&>svg]:h-[10px] [&>svg]:w-auto">
+                    <BoyIcon />
+                  </div>
+                  <div
+                    className="colorline flex-1 !min-h-[4px]"
+                    style={
+                      { "--male": `${card?.male}%` } as React.CSSProperties
+                    }
+                  />
+                  <div className="[&>svg]:h-[10px] [&>svg]:w-auto">
+                    <GirlIcon />
+                  </div>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <div className="[&>svg]:h-[10px] [&>svg]:w-auto">
+                    <EyeIcon />
+                  </div>
+                  <span className="text-[8px] md:text-[11px] font-semibold md:font-medium text-black">
+                    {selectedFormat?.views?.toLocaleString()}
+                  </span>
+                </div>
+                <div className="hidden md:flex items-center gap-1">
+                  <span className="text-[10px] text-black/50 font-semibold">
+                    ER:
+                  </span>
+                  <span className="text-[11px] font-medium text-black">
+                    {isModal ? <Modal /> : <>{selectedFormat?.er}%</>}
+                  </span>
+                </div>
+                {/* <div className="flex items-center gap-1">
               <span className="text-[10px] text-black/50 font-semibold">
                 CPV:
               </span>
@@ -251,16 +253,16 @@ export const CompactCatalogCard: FC<CompactCatalogCardProps> = ({
                 )}
               </span>
             </div> */}
-          </div>
-        </div>
+              </div>
+            </div>
 
-        {/* Match */}
-        <div onClick={stopPropagation}>
-          <ChannelCardMatch
-            match={card.match ? Math.ceil(card.match) : undefined}
-            variant="compact"
-          />
-        </div>
+            {/* Match */}
+            <div onClick={stopPropagation}>
+              <ChannelCardMatch
+                match={card.match ? Math.ceil(card.match) : undefined}
+                variant="compact"
+              />
+            </div>
           </div>
 
           <ChannelCardTags

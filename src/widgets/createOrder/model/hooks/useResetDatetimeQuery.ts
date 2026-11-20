@@ -1,8 +1,4 @@
-import {
-  buildPathWithQuery,
-  QueryParams,
-  queryParamKeys,
-} from "@shared/utils";
+import { buildPathWithQuery, QueryParams, queryParamKeys } from "@shared/utils";
 import { useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 

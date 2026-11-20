@@ -8,7 +8,10 @@ import {
   useChannelVerifyMutation,
   useCreateCodeQuery,
 } from "@entities/channel";
-import { platformTypes, platformTypesNum } from "@entities/platform";
+import {
+  CHANNEL_VERIFIABLE_PLATFORMS,
+  platformTypes,
+} from "@entities/platform";
 import { ArrowLongHorizontalIcon } from "@shared/assets";
 import { PAGE_ANIMATION } from "@shared/config";
 import {
@@ -151,6 +154,15 @@ export const ChannelIdentification: FC<ChannelIdentificationProps> = ({
 
   const [text, setText] = useState(defaultValue || "");
 
+  // Блогер подключает только верифицируемые платформы. При редактировании
+  // сайта, созданного админом, его платформа остаётся видна (кнопки в режиме
+  // редактирования всё равно заблокированы)
+  const platforms = platformTypes.filter(
+    (platform) =>
+      CHANNEL_VERIFIABLE_PLATFORMS.includes(platform.id) ||
+      (isEdit && platform.id === identificationParams.platform?.id),
+  );
+
   useEffect(() => {
     if (defaultValue) {
       setText(defaultValue);
@@ -171,17 +183,13 @@ export const ChannelIdentification: FC<ChannelIdentificationProps> = ({
                   />
                 </div>
                 <div className={styles.choose_platform}>
-                  {platformTypes.map((platform, index) => (
+                  {platforms.map((platform, index) => (
                     <MyButton
                       key={index}
                       type="button"
                       className={`${styles.platform__btn} ${identificationParams.platform.type === platform.type ? styles.active : ""}`}
                       onClick={() => changePlatform(platform)}
-                      disabled={
-                        identificationParams.checked ||
-                        isEdit ||
-                        platformTypesNum.site === platform?.id
-                      }
+                      disabled={identificationParams.checked || isEdit}
                     >
                       {t(platform.name)}
                     </MyButton>

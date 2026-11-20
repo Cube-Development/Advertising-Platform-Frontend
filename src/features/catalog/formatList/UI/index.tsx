@@ -1,4 +1,3 @@
-import { platformTypesNum } from "@entities/platform";
 import { IFormatListProps } from "@entities/project";
 import { BREAKPOINT } from "@shared/config";
 import { useWindowWidth } from "@shared/hooks";
@@ -16,16 +15,12 @@ export const FormatList: FC<IFormatListProps> = ({
 }) => {
   const screen = useWindowWidth();
 
-  const isMultiple = useMemo(() => {
-    if (
-      Array.isArray(selectedFormat) ||
-      card?.platform === platformTypesNum.site
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  }, [selectedFormat, card]);
+  // Сайт выбирает один формат, как и остальные платформы: заказ на сайт бэкенд
+  // всё равно ставит в post_type default
+  const isMultiple = useMemo(
+    () => Array.isArray(selectedFormat),
+    [selectedFormat],
+  );
 
   const options = useMemo(() => {
     if ((screen > BREAKPOINT.SM && !isSmall) || isBig) {

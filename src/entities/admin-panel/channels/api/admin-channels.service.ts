@@ -144,19 +144,20 @@ export const adminChannelsAPI = authApi.injectEndpoints({
         { type: ADMIN_CHANNEL_PRICES, id: channel_id },
       ],
     }),
-    setChannelPrices: build.mutation<{ success: boolean }, ISetChannelPricesReq>(
-      {
-        query: ({ channel_id, group_id, prices }) => ({
-          url: `/adv-admin/channel/${channel_id}/prices`,
-          method: "PUT",
-          body: { group_id, prices },
-        }),
-        invalidatesTags: (_result, _error, { channel_id }) => [
-          { type: ADMIN_CHANNEL_PRICES, id: channel_id },
-          ADMIN_USER_GROUPS,
-        ],
-      },
-    ),
+    setChannelPrices: build.mutation<
+      { success: boolean },
+      ISetChannelPricesReq
+    >({
+      query: ({ channel_id, group_id, prices }) => ({
+        url: `/adv-admin/channel/${channel_id}/prices`,
+        method: "PUT",
+        body: { group_id, prices },
+      }),
+      invalidatesTags: (_result, _error, { channel_id }) => [
+        { type: ADMIN_CHANNEL_PRICES, id: channel_id },
+        ADMIN_USER_GROUPS,
+      ],
+    }),
   }),
 });
 

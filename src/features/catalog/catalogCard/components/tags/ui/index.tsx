@@ -1,4 +1,8 @@
-import { CHANNEL_TAG_I18N, getChannelTagView, IChannelTag } from "@entities/project";
+import {
+  CHANNEL_TAG_I18N,
+  getChannelTagView,
+  IChannelTag,
+} from "@entities/project";
 import { Badge, cn } from "@shared/ui/shadcn-ui";
 import { X } from "lucide-react";
 import { FC } from "react";
@@ -16,7 +20,9 @@ export const ChannelCardTags: FC<ChannelCardTagsProps> = ({
   className,
 }) => {
   const { t } = useTranslation();
-  const forbiddenTags = getChannelTagView(tags).filter(({ allowed }) => !allowed);
+  const forbiddenTags = getChannelTagView(tags).filter(
+    ({ allowed }) => !allowed,
+  );
 
   if (!forbiddenTags.length) return null;
 

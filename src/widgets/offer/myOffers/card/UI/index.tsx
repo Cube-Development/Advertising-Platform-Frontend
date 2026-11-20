@@ -13,7 +13,7 @@ import { ENUM_PATHS } from "@shared/routing";
 import { CountdownTimer, SeeCancelReason, useToast } from "@shared/ui";
 import { Chat } from "@widgets/communication";
 import { CalendarClock, CircleCheckBig, FileText } from "lucide-react";
-import { FC, ReactNode } from "react";
+import { FC, useEffect, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
@@ -36,13 +36,16 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
 
   const { data: post, error } = useGetPostQuery({ order_id: card?.id });
 
-  if (error) {
+  // Тост — в эффекте, не в рендере: toast() обновляет состояние useToast этого
+  // же компонента, и вызов во время рендера зацикливал его («Too many re-renders»)
+  useEffect(() => {
+    if (!error) return;
     toast({
       variant: "error",
       title: t("toasts.orders_advertiser.reject_post.error"),
     });
     console.error("error: ", error);
-  }
+  }, [error]);
   return (
     <div
       className={`${styles.card} ${hasChat ? styles.active__chat : ""} border__gradient`}

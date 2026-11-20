@@ -23,13 +23,18 @@ import {
 } from "../ui";
 import { ActionShell } from "../ui/action-shell";
 
-// Названия платформ не переводятся. Варианта «все платформы» нет намеренно:
-// /sample требует filter.platform, как и страница каталога, где по умолчанию
-// выбран Telegram.
-const PLATFORM_TABS: { value: platformTypesNum; label: string }[] = [
+// Названия соцсетей не переводятся, «Сайт» — переводится (labelKey). Варианта
+// «все платформы» нет намеренно: /sample требует filter.platform, как и
+// страница каталога, где по умолчанию выбран Telegram.
+const PLATFORM_TABS: {
+  value: platformTypesNum;
+  label?: string;
+  labelKey?: string;
+}[] = [
   { value: platformTypesNum.telegram, label: "Telegram" },
   { value: platformTypesNum.instagram, label: "Instagram" },
   { value: platformTypesNum.youtube, label: "YouTube" },
+  { value: platformTypesNum.site, labelKey: "filter.site" },
 ];
 
 /**
@@ -104,7 +109,7 @@ const CatalogSearchAction = () => {
       title={t("chat_actions.catalog.title", "Подбор каналов")}
       subtitle={t(
         "chat_actions.catalog.subtitle",
-        "Telegram, Instagram и YouTube для рекламы",
+        "Telegram, Instagram, YouTube и сайты для рекламы",
       )}
       isLoading={source.isLoading || source.isFetching}
       isError={source.isError}
@@ -145,7 +150,7 @@ const CatalogSearchAction = () => {
             onChange={(value) => setPlatform(Number(value) as platformTypesNum)}
             tabs={PLATFORM_TABS.map((tab) => ({
               value: String(tab.value),
-              label: tab.label,
+              label: tab.labelKey ? t(tab.labelKey) : (tab.label ?? ""),
             }))}
           />
         </>
@@ -156,7 +161,12 @@ const CatalogSearchAction = () => {
           <ActionRow
             key={channel.id}
             title={channel.name}
-            subtitle={`${channel.category} · ${compact(channel.subscribers)}`}
+            subtitle={
+              // У сайта подписчиков может не быть — не показываем «· 0»
+              channel.subscribers
+                ? `${channel.category} · ${compact(channel.subscribers)}`
+                : channel.category
+            }
             meta={
               channel.format?.[0]?.price
                 ? formatMoney(channel.format[0].price)

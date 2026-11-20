@@ -22,17 +22,23 @@ const makePost = (
 
 describe("getPostsHydrationKey", () => {
   it("меняет ключ при замене post при том же количестве элементов", () => {
-    const first = [makePost("post-1", "https://t.me/blogix_posts/1", "order-1")];
+    const first = [
+      makePost("post-1", "https://t.me/blogix_posts/1", "order-1"),
+    ];
     const replaced = [
       makePost("post-1", "https://t.me/blogix_posts/2", "order-1"),
     ];
 
     expect(first).toHaveLength(replaced.length);
-    expect(getPostsHydrationKey(first)).not.toBe(getPostsHydrationKey(replaced));
+    expect(getPostsHydrationKey(first)).not.toBe(
+      getPostsHydrationKey(replaced),
+    );
   });
 
   it("сохраняет ключ если содержимое не изменилось", () => {
-    const posts = [makePost("post-1", "https://t.me/blogix_posts/1", "order-1")];
+    const posts = [
+      makePost("post-1", "https://t.me/blogix_posts/1", "order-1"),
+    ];
     expect(getPostsHydrationKey(posts)).toBe(getPostsHydrationKey([...posts]));
   });
 });

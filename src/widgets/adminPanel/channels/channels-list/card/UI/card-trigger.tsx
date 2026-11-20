@@ -4,7 +4,11 @@ import {
 } from "@entities/admin-panel/channels/config/channels.config";
 import type { IAdminChannelData } from "@entities/admin-panel/channels/types/channels.types";
 import { platformToIcon } from "@entities/project/config/catalog";
-import { ChannelCardMenu, ChannelTagsBadges, ChannelTagsCheckboxes } from "@features/admin-panel";
+import {
+  ChannelCardMenu,
+  ChannelTagsBadges,
+  ChannelTagsCheckboxes,
+} from "@features/admin-panel";
 import { useCopyLink } from "@shared/hooks";
 import { AccordionTrigger, AccountsLoader } from "@shared/ui";
 import { Badge, Card, CardContent, CardHeader } from "@shared/ui/shadcn-ui";

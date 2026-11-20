@@ -80,8 +80,7 @@ export const getChannelTagsSelection = (
 
 export const toChannelTagsPayload = (
   selected: ENUM_CHANNEL_TAG[],
-): ENUM_CHANNEL_TAG[] =>
-  CHANNEL_TAGS.filter((tag) => !selected.includes(tag));
+): ENUM_CHANNEL_TAG[] => CHANNEL_TAGS.filter((tag) => !selected.includes(tag));
 
 export const platformToIcon: any = {
   1: TelegramIcon,

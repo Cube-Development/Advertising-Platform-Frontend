@@ -30,7 +30,7 @@ import {
   SeeCancelReason,
   useToast,
 } from "@shared/ui";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { ENUM_PATHS } from "@shared/routing";
@@ -61,13 +61,16 @@ export const AgencyProjectSubcard: FC<AgencyProjectSubcardProps> = ({
   const [isSubcardOpen, setSubcardOpen] = useState(false);
   const { data: post, error } = useGetPostQuery({ order_id: subcard.id });
 
-  if (error) {
+  // Тост — в эффекте, не в рендере: toast() обновляет состояние useToast этого
+  // же компонента, и вызов во время рендера зацикливал его («Too many re-renders»)
+  useEffect(() => {
+    if (!error) return;
     toast({
       variant: "error",
       title: t("toasts.orders_advertiser.reject_post.error"),
     });
     console.error("error: ", error);
-  }
+  }, [error]);
 
   const handleChangeOpenSubcard = (): void => {
     setSubcardOpen(!isSubcardOpen);

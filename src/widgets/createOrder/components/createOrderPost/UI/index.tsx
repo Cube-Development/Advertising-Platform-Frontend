@@ -85,6 +85,9 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
 
   const [postSource, setPostSource] = useState<PostSource>("manual");
   const [isGenerating, setIsGenerating] = useState(false);
+  // У сайта нет макета поста — только ТЗ (комментарий + файлы): шаблоны постов
+  // к нему не относятся
+  const isSite = formState.platformFilter?.type === platformTypesStr.site;
   const [generationDraft, setGenerationDraft] =
     useState<Partial<PostGenerationFormInput>>();
 
@@ -277,20 +280,24 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                 )}
               </div>
               <div className={styles.display}>
-                <TemplatePostsDialog
-                  setValue={setValue}
-                  formState={formState}
-                />
+                {!isSite && (
+                  <TemplatePostsDialog
+                    setValue={setValue}
+                    formState={formState}
+                  />
+                )}
                 <RenderDisplay formState={formState} />
                 <div className={styles.continue}>
                   <ContinueOrder onClick={handleCheckPosts} />
                 </div>
               </div>
               <div className={styles.continue_mobile}>
-                <TemplatePostsDialog
-                  setValue={setValue}
-                  formState={formState}
-                />
+                {!isSite && (
+                  <TemplatePostsDialog
+                    setValue={setValue}
+                    formState={formState}
+                  />
+                )}
               </div>
               <div className={styles.display_mobile}>
                 <AlertDialog>

@@ -4384,7 +4384,7 @@
     },
     "catalog": {
       "title": "Kanallarni tanlash",
-      "subtitle": "Reklama uchun Telegram, Instagram va YouTube",
+      "subtitle": "Reklama uchun Telegram, Instagram, YouTube va saytlar",
       "empty": "Hech narsa topilmadi — so'rovni o'zgartirib ko'ring",
       "cta": "Butun katalog",
       "found": "Topildi: {{count}}",

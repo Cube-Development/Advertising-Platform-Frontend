@@ -1,3 +1,4 @@
+import { platformTypesNum } from "@entities/platform";
 import { ICompletedOrder, platformToIcon } from "@entities/project";
 import { BoyIcon, GirlIcon } from "@shared/assets";
 import { Skeleton } from "@shared/ui/shadcn-ui";
@@ -80,7 +81,12 @@ const CompletedOrderCard: FC<{ order: ICompletedOrder }> = ({ order }) => {
   const PlatformIcon = platformToIcon[order.platform];
   const channelUrl = toExternalUrl(order.url);
   const postUrl = toExternalUrl(order.post_url);
-  const screenshotUrl = toExternalUrl(order.post_screenshot_url);
+  // У сайта скриншота нет: бэкенд подписывает ссылку на пост как ключ хранилища
+  // и отдаёт ссылку на несуществующий файл. После исправления на бэкенде — вернуть.
+  const screenshotUrl =
+    order.platform === platformTypesNum.site
+      ? undefined
+      : toExternalUrl(order.post_screenshot_url);
 
   return (
     <div className="grid gap-4 rounded-[20px] border-[1px] border-[var(--Card-separator)] bg-white/80 p-4 shadow-lg md:grid-cols-[minmax(0,1fr)_260px] md:p-5">
